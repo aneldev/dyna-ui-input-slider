@@ -1,23 +1,141 @@
-// layout
 .dyna-slider {
   display: flex;
   align-items: center;
-}
+  box-sizing: content-box;
 
-// size
-.dyna-slider {
-  height: 24px;
-  padding-right: 24px;
+  // selected line
+  .rc-slider-track {
+    border-radius: 6px 0 0 6px;
 
-  .rc-slider-rail {
-    width: ~"calc(100% + 24px)";
+    // optical fix, for one pixel on the right of the bar
+    &::after {
+      content: "";
+      width: 2px;
+      height: 100%;
+      background-color: inherit;
+      position: absolute;
+      left: 100%;
+    }
   }
 
-  .rc-slider-handle {
-    width: 24px;
-    height: 24px;
-    margin-left: 0;
-    margin-top: -10px;
+
+  &--size- {
+    &PX12 {
+      // container
+      height: 12px;
+      padding: 0 6px;
+
+      // background line
+      .rc-slider-rail {
+        left: -6px;
+        width: ~"calc(100% + 12px)";
+      }
+
+      // selected line
+      .rc-slider-track {
+      }
+      &.dyna-slider--single-value-mode {
+        .rc-slider-track {
+          left: -6px !important;
+        }
+      }
+
+      // handler
+      .rc-slider-handle {
+        width: 12px;
+        height: 12px;
+        // margin-left: do not define it!
+        margin-top: -4px;
+      }
+    }
+    &PX24 {
+      // container
+      height: 24px;
+      padding: 0 12px;
+
+      // background line
+      .rc-slider-rail {
+        left: -12px;
+        width: ~"calc(100% + 24px)";
+      }
+
+      // selected line
+      .rc-slider-track {
+      }
+      &.dyna-slider--single-value-mode {
+        .rc-slider-track {
+          left: -12px !important;
+        }
+      }
+
+      // handler
+      .rc-slider-handle {
+        width: 24px;
+        height: 24px;
+        margin-left: -12px;
+        margin-top: -10px;
+      }
+    }
+    &PX32 {
+      // container
+      height: 32px;
+      padding: 0 16px;
+
+      // background line
+      .rc-slider-rail {
+        width: ~"calc(100% + 32px)";
+        left: -16px;
+        height: 8px;
+      }
+
+      // selected line
+      .rc-slider-track {
+        height: 8px;
+      }
+      &.dyna-slider--single-value-mode {
+        .rc-slider-track {
+          left: -16px !important;
+        }
+      }
+
+      // handler
+      .rc-slider-handle {
+        width: 32px;
+        height: 32px;
+        margin-left: -16px;
+        margin-top: -14px;
+      }
+    }
+    &PX48 {
+      // container
+      height: 48px;
+      padding: 0 24px;
+
+      // background line
+      .rc-slider-rail {
+        width: ~"calc(100% + 48px)";
+        left: -24px;
+        height: 8px;
+      }
+
+      // selected line
+      .rc-slider-track {
+        height: 8px;
+      }
+      &.dyna-slider--single-value-mode {
+        .rc-slider-track {
+          left: -24px !important;
+        }
+      }
+
+      // handler
+      .rc-slider-handle {
+        width: 48px;
+        height: 48px;
+        margin-left: -24px;
+        margin-top: -22px;
+      }
+    }
   }
 }
 

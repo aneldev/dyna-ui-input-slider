@@ -3,14 +3,17 @@ import "./layout.less";
 import "./colors.less";
 
 export {
-  DynaSlider, IDynaSliderProps,
-} from "./DynaSlider";
+  DynaInputSlider, IDynaInputSliderProps,
+} from "./DynaInputSlider";
 
 export {
-  DynaRangeSlider, IDynaRangeSliderProps,
-} from "./DynaRangeSlider";
-
+  DynaInputRangeSlider, IDynaInputRangeSliderProps,
+} from "./DynaInputRangeSlider";
 
 export {
   EColor,
 } from "dyna-ui-styles";
+
+export {
+  ESize,
+} from "./interfaces";

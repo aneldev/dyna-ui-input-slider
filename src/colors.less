@@ -2,66 +2,79 @@
 @import (reference) "~dyna-ui-styles/styles/WHITE_RED";
 @import (reference) "~dyna-ui-styles/styles/RED_WHITE";
 @import (reference) "~dyna-ui-styles/styles/WHITE_ORANGE";
+@import (reference) "~dyna-ui-styles/styles/TRANSPARENT_ORANGE";
 @import (reference) "~dyna-ui-styles/styles/BLACK_WHITE";
+@import (reference) "~dyna-ui-styles/styles/TRANSPARENT_WHITE";
 @import (reference) "~dyna-ui-styles/styles/BLACK_ORANGE";
 @import (reference) "~dyna-ui-styles/styles/GREY_WHITE";
 @import (reference) "~dyna-ui-styles/styles/ORANGE_WHITE";
 @import (reference) "~dyna-ui-styles/colors/pantone-coated";
 
 .dyna-slider {
-	&--color- {
+  &--color- {
+    .color-slider(blue, yellow); // fallback
 
-		&BLACK_WHITE {
-			.color-slider(@color-BLACK_WHITE-foreground-1, @color-BLACK_WHITE-foreground-2)
-		}
-		&BLACK_ORANGE {
-			.color-slider(@color-BLACK_ORANGE-foreground-1, @color-BLACK_ORANGE-foreground-2)
-		}
-		&TRANSPARENT_ORANGE {
-			.color-slider(@color-BLACK_ORANGE-foreground-1, @color-BLACK_ORANGE-foreground-2)
-		}
-		&TRANSPARENT_WHITE {
-			.color-slider(@color-BLACK_WHITE-foreground-1, @color-BLACK_WHITE-foreground-2)
-		}
-		&ORANGE_WHITE {
-			.color-slider(@color-ORANGE_WHITE-foreground-1, @color-ORANGE_WHITE-foreground-2)
-		}
-		&RED_WHITE {
-			.color-slider(@color-RED_WHITE-foreground-1, @color-RED_WHITE-foreground-2)
-		}
-		&GREY_WHITE {
-			.color-slider(@color-GREY_WHITE-foreground-1, @color-GREY_WHITE-foreground-2)
-		}
-		&WHITE_BLACK {
-			.color-slider(@color-WHITE_BLACK-foreground-1, @color-WHITE_BLACK-foreground-2)
-		}
-		&WHITE_RED {
-			.color-slider(@color-WHITE_RED-foreground-1, @color-WHITE_RED-foreground-2)
-		}
-		&WHITE_ORANGE {
-			.color-slider(@color-WHITE_ORANGE-foreground-1, @color-WHITE_ORANGE-foreground-2)
-		}
-	}
+    &BLACK_WHITE {
+      .color-slider(@color-BLACK_WHITE-foreground-1, @color-BLACK_WHITE-background-2);
+    }
+    &BLACK_ORANGE {
+      .color-slider(@color-BLACK_ORANGE-foreground-1, @color-BLACK_ORANGE-background-2);
+    }
+    &TRANSPARENT_ORANGE {
+      .color-slider(@color-TRANSPARENT_ORANGE-foreground-1, @color-TRANSPARENT_ORANGE-white-1);
+    }
+    &TRANSPARENT_WHITE {
+      .color-slider(@color-BLACK_WHITE-foreground-1, @color-TRANSPARENT_WHITE-black-1);
+    }
+    &ORANGE_WHITE {
+      .color-slider(@color-ORANGE_WHITE-foreground-1, @color-ORANGE_WHITE-background-2);
+    }
+    &RED_WHITE {
+      .color-slider(@color-RED_WHITE-foreground-1, @color-RED_WHITE-background-2);
+    }
+    &GREY_WHITE {
+      .color-slider(@color-GREY_WHITE-foreground-1, @color-GREY_WHITE-background-2);
+    }
+    &WHITE_BLACK {
+      .color-slider(@color-WHITE_BLACK-foreground-1, @color-WHITE_BLACK-background-2);
+    }
+    &WHITE_RED {
+      .color-slider(@color-WHITE_RED-foreground-1, @color-WHITE_RED-background-2);
+    }
+    &WHITE_ORANGE {
+      .color-slider(@color-WHITE_ORANGE-foreground-1, @color-WHITE_ORANGE-background-2);
+    }
+  }
 }
 
-.color-slider(@slider-color,@line-color) {
-	.rc-slider-handle {
-		border-color: @slider-color;
-		background-color: @slider-color;
+.color-slider(@unselected-color, @selected-color) {
+  // handler
+  .rc-slider-handle {
+    border-color: darken(@unselected-color, 10%);
+    background-color: @unselected-color;
+    transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;
 
-		&:active {
-			border-color: @slider-color;
-			box-shadow: none;
-		}
+    &:active {
+      border-color: darken(@unselected-color, 30%) !important;
+      background-color: darken(@unselected-color, 15%) !important;
+      box-shadow: none;
+    }
 
-		&:hover {
-			border-color: @slider-color;
-		}
-	}
+    &:hover {
+      border-color: darken(@unselected-color, 20%);
+      background-color: darken(@unselected-color, 10%);
+    }
+  }
 
-	.rc-slider-track {
-		background-color: @line-color;
-	}
+  // selected line
+  .rc-slider-rail {
+    background-color: lighten(@selected-color, 10%);
+  }
+
+  // unselected line
+  .rc-slider-track {
+    background-color: @unselected-color;
+  }
 
 }
 

@@ -1,4 +1,4 @@
-declare let global: any, jasmine: any, describe: any, clearTest: any, it: any, expect: any;
+import "jest";
 
 import { configure } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
@@ -7,7 +7,7 @@ configure({ adapter: new Adapter() });
 import * as React from 'react';
 import * as enzyme from 'enzyme';
 
-import {DynaButton} from '../../src';
+import {DynaInputSlider} from '../../src';
 
 describe('Home', () => {
   let wrapper;
@@ -15,7 +15,13 @@ describe('Home', () => {
   it('has expected content with deep render', () => {
     wrapper = enzyme.shallow(
       (
-        <DynaButton onClick={() => console.log('I am clicked')}>My button</DynaButton>
+        <DynaInputSlider
+          name="power"
+          min={0}
+          max={100}
+          value={50}
+          onChange={() => undefined}
+        />
       ),
       {}
     );
