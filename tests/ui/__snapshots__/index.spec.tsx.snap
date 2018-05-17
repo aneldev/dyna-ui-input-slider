@@ -1,13 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Home has expected content with deep render 1`] = `
-<a
-  className="my-button my-button--style-ROUNDED my-button--color-WHITE_BLACK my-button--size-MEDIUM"
-  href={null}
-  onClick={[Function]}
+<div
+  className="dyna-slider  dyna-slider--single-value-mode dyna-slider--color-WHITE_BLACK dyna-slider--size-PX24"
 >
-  <button>
-    My button
-  </button>
-</a>
+  <ComponentEnhancer(undefined)
+    activeDotStyle={Object {}}
+    className=""
+    disabled={false}
+    dotStyle={Object {}}
+    dots={false}
+    handle={[Function]}
+    handleStyle={
+      Array [
+        Object {},
+      ]
+    }
+    included={true}
+    marks={Object {}}
+    max={100}
+    min={0}
+    onAfterChange={[Function]}
+    onBeforeChange={[Function]}
+    onChange={[Function]}
+    prefixCls="rc-slider"
+    railStyle={Object {}}
+    step={1}
+    trackStyle={
+      Array [
+        Object {},
+      ]
+    }
+    value={50}
+    vertical={false}
+  />
+</div>
 `;
