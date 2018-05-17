@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"));
+		module.exports = factory(require("dyna-ui-styles"), require("react"), require("rc-slider"));
 	else if(typeof define === 'function' && define.amd)
-		define("dyna-ts-react-module-boilerplate", ["react"], factory);
+		define("dyna-ui-input-slider", ["dyna-ui-styles", "react", "rc-slider"], factory);
 	else if(typeof exports === 'object')
-		exports["dyna-ts-react-module-boilerplate"] = factory(require("react"));
+		exports["dyna-ui-input-slider"] = factory(require("dyna-ui-styles"), require("react"), require("rc-slider"));
 	else
-		root["dyna-ts-react-module-boilerplate"] = factory(root["react"]);
-})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_3__) {
+		root["dyna-ui-input-slider"] = factory(root["dyna-ui-styles"], root["react"], root["rc-slider"]);
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -70,149 +70,11 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(1);
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var DynaButton_1 = __webpack_require__(2);
-exports.DynaButton = DynaButton_1.DynaButton;
-exports.EStyle = DynaButton_1.EStyle;
-exports.EColor = DynaButton_1.EColor;
-exports.ESize = DynaButton_1.ESize;
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(3);
-__webpack_require__(4);
-var EStyle;
-(function (EStyle) {
-    EStyle["ROUNDED"] = "ROUNDED";
-})(EStyle = exports.EStyle || (exports.EStyle = {}));
-var EColor;
-(function (EColor) {
-    EColor["WHITE_BLACK"] = "WHITE_BLACK";
-    EColor["WHITE_RED"] = "WHITE_RED";
-    EColor["BLACK_WHITE"] = "BLACK_WHITE";
-    EColor["TRANSPARENT_WHITE"] = "TRANSPARENT_WHITE";
-})(EColor = exports.EColor || (exports.EColor = {}));
-var ESize;
-(function (ESize) {
-    ESize["SMALL"] = "SMALL";
-    ESize["MEDIUM"] = "MEDIUM";
-    ESize["LARGE"] = "LARGE";
-    ESize["XLARGE"] = "XLARGE";
-})(ESize = exports.ESize || (exports.ESize = {}));
-var DynaButton = /** @class */ (function (_super) {
-    __extends(DynaButton, _super);
-    function DynaButton() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    DynaButton.prototype.render = function () {
-        var _a = this.props, children = _a.children, style = _a.style, color = _a.color, size = _a.size, href = _a.href, onClick = _a.onClick;
-        var className = [
-            'dyna-button',
-            "dnbtn-style-" + style,
-            "dnbtn-color-" + color,
-            "dnbtn-size-" + size,
-        ].join(' ').trim();
-        return (React.createElement("a", { className: className, href: href, onClick: onClick },
-            React.createElement("button", null, children)));
-    };
-    DynaButton.defaultProps = {
-        children: null,
-        style: EStyle.ROUNDED,
-        color: EColor.WHITE_BLACK,
-        size: ESize.MEDIUM,
-        href: null,
-        onClick: function () { return undefined; },
-    };
-    return DynaButton;
-}(React.Component));
-exports.DynaButton = DynaButton;
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(5);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(7)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/postcss-loader/lib/index.js??ref--4-2!../node_modules/less-loader/dist/cjs.js!./dyna-button.less", function() {
-			var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/postcss-loader/lib/index.js??ref--4-2!../node_modules/less-loader/dist/cjs.js!./dyna-button.less");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(6)(false);
-// imports
-
-
-// module
-exports.push([module.i, ".dyna-button {\n  outline: none;\n}\n.dyna-button.dnbtn-style-ROUNDED {\n  font-size: 0;\n}\n.dyna-button.dnbtn-style-ROUNDED button {\n  outline: none;\n  border-style: solid;\n  cursor: pointer;\n  -webkit-transition: background-color 200ms ease-out;\n  transition: background-color 200ms ease-out;\n}\n.dyna-button.dnbtn-style-ROUNDED.dnbtn-size-SMALL button {\n  padding: 2px 8px;\n  font-size: 8px;\n  line-height: 10px;\n  border-width: 1px;\n  border-radius: 8px;\n  font-weight: bold;\n}\n.dyna-button.dnbtn-style-ROUNDED.dnbtn-size-SMALL button:active {\n  position: relative;\n  top: 1px;\n  left: 1px;\n}\n.dyna-button.dnbtn-style-ROUNDED.dnbtn-size-MEDIUM button {\n  padding: 4px 16px;\n  font-size: 14px;\n  line-height: 22px;\n  border-width: 1px;\n  border-radius: 16px;\n  font-weight: bold;\n}\n.dyna-button.dnbtn-style-ROUNDED.dnbtn-size-MEDIUM button:active {\n  position: relative;\n  top: 1px;\n  left: 1px;\n}\n.dyna-button.dnbtn-style-ROUNDED.dnbtn-size-LARGE button {\n  padding: 8px 32px;\n  font-size: 26px;\n  line-height: 46px;\n  border-width: 1px;\n  border-radius: 32px;\n  font-weight: bold;\n}\n.dyna-button.dnbtn-style-ROUNDED.dnbtn-size-LARGE button:active {\n  position: relative;\n  top: 2px;\n  left: 2px;\n}\n.dyna-button.dnbtn-style-ROUNDED.dnbtn-size-XLARGE button {\n  padding: 16px 64px;\n  font-size: 40px;\n  line-height: 92px;\n  border-width: 2px;\n  border-radius: 64px;\n  font-weight: bold;\n}\n.dyna-button.dnbtn-style-ROUNDED.dnbtn-size-XLARGE button:active {\n  position: relative;\n  top: 2px;\n  left: 2px;\n}\n.dyna-button.dnbtn-color-WHITE_BLACK button {\n  border-color: black;\n  background: white;\n  color: black;\n}\n.dyna-button.dnbtn-color-WHITE_BLACK button:hover {\n  background-color: #e6e6e6;\n}\n.dyna-button.dnbtn-color-WHITE_BLACK button:active {\n  background-color: #d1d1d1;\n}\n.dyna-button.dnbtn-color-WHITE_RED button {\n  border-color: red;\n  background: white;\n  color: red;\n}\n.dyna-button.dnbtn-color-WHITE_RED button:hover {\n  background-color: #e6e6e6;\n}\n.dyna-button.dnbtn-color-WHITE_RED button:active {\n  background-color: #d1d1d1;\n}\n.dyna-button.dnbtn-color-BLACK_WHITE button {\n  border-color: black;\n  background: black;\n  color: white;\n}\n.dyna-button.dnbtn-color-BLACK_WHITE button:hover {\n  background-color: #333333;\n}\n.dyna-button.dnbtn-color-BLACK_WHITE button:active {\n  background-color: #525252;\n}\n.dyna-button.dnbtn-color-TRANSPARENT_WHITE button {\n  border-color: white;\n  background: transparent;\n  color: white;\n}\n.dyna-button.dnbtn-color-TRANSPARENT_WHITE button:hover {\n  border-color: #e6e6e6;\n  color: #e6e6e6;\n}\n.dyna-button.dnbtn-color-TRANSPARENT_WHITE button:active {\n  border-color: #d1d1d1;\n  color: #d1d1d1;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -294,7 +156,7 @@ function toComment(sourceMap) {
 }
 
 /***/ }),
-/* 7 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -340,7 +202,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(8);
+var	fixUrls = __webpack_require__(10);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -653,7 +515,113 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var ESize;
+(function (ESize) {
+    ESize["PX12"] = "PX12";
+    ESize["PX24"] = "PX24";
+    ESize["PX32"] = "PX32";
+    ESize["PX48"] = "PX48";
+})(ESize = exports.ESize || (exports.ESize = {}));
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(7);
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(8);
+__webpack_require__(11);
+__webpack_require__(13);
+var DynaInputSlider_1 = __webpack_require__(15);
+exports.DynaInputSlider = DynaInputSlider_1.DynaInputSlider;
+var DynaInputRangeSlider_1 = __webpack_require__(16);
+exports.DynaInputRangeSlider = DynaInputRangeSlider_1.DynaInputRangeSlider;
+var dyna_ui_styles_1 = __webpack_require__(2);
+exports.EColor = dyna_ui_styles_1.EColor;
+var interfaces_1 = __webpack_require__(3);
+exports.ESize = interfaces_1.ESize;
+
+
+/***/ }),
 /* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(9);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(1)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../css-loader/index.js!./index.css", function() {
+			var newContent = require("!!../../css-loader/index.js!./index.css");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".rc-slider {\n  position: relative;\n  height: 14px;\n  padding: 5px 0;\n  width: 100%;\n  border-radius: 6px;\n  -ms-touch-action: none;\n      touch-action: none;\n  box-sizing: border-box;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.rc-slider * {\n  box-sizing: border-box;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.rc-slider-rail {\n  position: absolute;\n  width: 100%;\n  background-color: #e9e9e9;\n  height: 4px;\n  border-radius: 6px;\n}\n.rc-slider-track {\n  position: absolute;\n  left: 0;\n  height: 4px;\n  border-radius: 6px;\n  background-color: #abe2fb;\n}\n.rc-slider-handle {\n  position: absolute;\n  margin-left: -7px;\n  margin-top: -5px;\n  width: 14px;\n  height: 14px;\n  cursor: pointer;\n  cursor: -webkit-grab;\n  cursor: grab;\n  border-radius: 50%;\n  border: solid 2px #96dbfa;\n  background-color: #fff;\n  -ms-touch-action: pan-x;\n      touch-action: pan-x;\n}\n.rc-slider-handle:hover {\n  border-color: #57c5f7;\n}\n.rc-slider-handle:active {\n  border-color: #57c5f7;\n  box-shadow: 0 0 5px #57c5f7;\n  cursor: -webkit-grabbing;\n  cursor: grabbing;\n}\n.rc-slider-handle:focus {\n  border-color: #57c5f7;\n  box-shadow: 0 0 0 5px #96dbfa;\n  outline: none;\n}\n.rc-slider-mark {\n  position: absolute;\n  top: 18px;\n  left: 0;\n  width: 100%;\n  font-size: 12px;\n}\n.rc-slider-mark-text {\n  position: absolute;\n  display: inline-block;\n  vertical-align: middle;\n  text-align: center;\n  cursor: pointer;\n  color: #999;\n}\n.rc-slider-mark-text-active {\n  color: #666;\n}\n.rc-slider-step {\n  position: absolute;\n  width: 100%;\n  height: 4px;\n  background: transparent;\n}\n.rc-slider-dot {\n  position: absolute;\n  bottom: -2px;\n  margin-left: -4px;\n  width: 8px;\n  height: 8px;\n  border: 2px solid #e9e9e9;\n  background-color: #fff;\n  cursor: pointer;\n  border-radius: 50%;\n  vertical-align: middle;\n}\n.rc-slider-dot-active {\n  border-color: #96dbfa;\n}\n.rc-slider-disabled {\n  background-color: #e9e9e9;\n}\n.rc-slider-disabled .rc-slider-track {\n  background-color: #ccc;\n}\n.rc-slider-disabled .rc-slider-handle,\n.rc-slider-disabled .rc-slider-dot {\n  border-color: #ccc;\n  box-shadow: none;\n  background-color: #fff;\n  cursor: not-allowed;\n}\n.rc-slider-disabled .rc-slider-mark-text,\n.rc-slider-disabled .rc-slider-dot {\n  cursor: not-allowed !important;\n}\n.rc-slider-vertical {\n  width: 14px;\n  height: 100%;\n  padding: 0 5px;\n}\n.rc-slider-vertical .rc-slider-rail {\n  height: 100%;\n  width: 4px;\n}\n.rc-slider-vertical .rc-slider-track {\n  left: 5px;\n  bottom: 0;\n  width: 4px;\n}\n.rc-slider-vertical .rc-slider-handle {\n  margin-left: -5px;\n  margin-bottom: -7px;\n  -ms-touch-action: pan-y;\n      touch-action: pan-y;\n}\n.rc-slider-vertical .rc-slider-mark {\n  top: 0;\n  left: 18px;\n  height: 100%;\n}\n.rc-slider-vertical .rc-slider-step {\n  height: 100%;\n  width: 4px;\n}\n.rc-slider-vertical .rc-slider-dot {\n  left: 2px;\n  margin-bottom: -4px;\n}\n.rc-slider-vertical .rc-slider-dot:first-child {\n  margin-bottom: -4px;\n}\n.rc-slider-vertical .rc-slider-dot:last-child {\n  margin-bottom: -4px;\n}\n.rc-slider-tooltip-zoom-down-enter,\n.rc-slider-tooltip-zoom-down-appear {\n  animation-duration: .3s;\n  animation-fill-mode: both;\n  display: block !important;\n  animation-play-state: paused;\n}\n.rc-slider-tooltip-zoom-down-leave {\n  animation-duration: .3s;\n  animation-fill-mode: both;\n  display: block !important;\n  animation-play-state: paused;\n}\n.rc-slider-tooltip-zoom-down-enter.rc-slider-tooltip-zoom-down-enter-active,\n.rc-slider-tooltip-zoom-down-appear.rc-slider-tooltip-zoom-down-appear-active {\n  animation-name: rcSliderTooltipZoomDownIn;\n  animation-play-state: running;\n}\n.rc-slider-tooltip-zoom-down-leave.rc-slider-tooltip-zoom-down-leave-active {\n  animation-name: rcSliderTooltipZoomDownOut;\n  animation-play-state: running;\n}\n.rc-slider-tooltip-zoom-down-enter,\n.rc-slider-tooltip-zoom-down-appear {\n  transform: scale(0, 0);\n  animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);\n}\n.rc-slider-tooltip-zoom-down-leave {\n  animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n}\n@keyframes rcSliderTooltipZoomDownIn {\n  0% {\n    opacity: 0;\n    transform-origin: 50% 100%;\n    transform: scale(0, 0);\n  }\n  100% {\n    transform-origin: 50% 100%;\n    transform: scale(1, 1);\n  }\n}\n@keyframes rcSliderTooltipZoomDownOut {\n  0% {\n    transform-origin: 50% 100%;\n    transform: scale(1, 1);\n  }\n  100% {\n    opacity: 0;\n    transform-origin: 50% 100%;\n    transform: scale(0, 0);\n  }\n}\n.rc-slider-tooltip {\n  position: absolute;\n  left: -9999px;\n  top: -9999px;\n  visibility: visible;\n  box-sizing: border-box;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.rc-slider-tooltip * {\n  box-sizing: border-box;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.rc-slider-tooltip-hidden {\n  display: none;\n}\n.rc-slider-tooltip-placement-top {\n  padding: 4px 0 8px 0;\n}\n.rc-slider-tooltip-inner {\n  padding: 6px 2px;\n  min-width: 24px;\n  height: 24px;\n  font-size: 12px;\n  line-height: 1;\n  color: #fff;\n  text-align: center;\n  text-decoration: none;\n  background-color: #6c6c6c;\n  border-radius: 6px;\n  box-shadow: 0 0 4px #d9d9d9;\n}\n.rc-slider-tooltip-arrow {\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-color: transparent;\n  border-style: solid;\n}\n.rc-slider-tooltip-placement-top .rc-slider-tooltip-arrow {\n  bottom: 4px;\n  left: 50%;\n  margin-left: -4px;\n  border-width: 4px 4px 0;\n  border-top-color: #6c6c6c;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -746,6 +714,214 @@ module.exports = function (css) {
 	// send back the fixed css
 	return fixedCss;
 };
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(12);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(1)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/postcss-loader/lib/index.js??ref--4-2!../node_modules/less-loader/dist/cjs.js!./layout.less", function() {
+			var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/postcss-loader/lib/index.js??ref--4-2!../node_modules/less-loader/dist/cjs.js!./layout.less");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".dyna-slider {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-sizing: content-box;\n          box-sizing: content-box;\n}\n.dyna-slider .rc-slider-track {\n  border-radius: 6px 0 0 6px;\n}\n.dyna-slider .rc-slider-track::after {\n  content: \"\";\n  width: 2px;\n  height: 100%;\n  background-color: inherit;\n  position: absolute;\n  left: 100%;\n}\n.dyna-slider--size-PX12 {\n  height: 12px;\n  padding: 0 6px;\n}\n.dyna-slider--size-PX12 .rc-slider-rail {\n  left: -6px;\n  width: calc(100% + 12px);\n}\n.dyna-slider--size-PX12.dyna-slider--single-value-mode .rc-slider-track {\n  left: -6px !important;\n}\n.dyna-slider--size-PX12 .rc-slider-handle {\n  width: 12px;\n  height: 12px;\n  margin-top: -4px;\n}\n.dyna-slider--size-PX24 {\n  height: 24px;\n  padding: 0 12px;\n}\n.dyna-slider--size-PX24 .rc-slider-rail {\n  left: -12px;\n  width: calc(100% + 24px);\n}\n.dyna-slider--size-PX24.dyna-slider--single-value-mode .rc-slider-track {\n  left: -12px !important;\n}\n.dyna-slider--size-PX24 .rc-slider-handle {\n  width: 24px;\n  height: 24px;\n  margin-left: -12px;\n  margin-top: -10px;\n}\n.dyna-slider--size-PX32 {\n  height: 32px;\n  padding: 0 16px;\n}\n.dyna-slider--size-PX32 .rc-slider-rail {\n  width: calc(100% + 32px);\n  left: -16px;\n  height: 8px;\n}\n.dyna-slider--size-PX32 .rc-slider-track {\n  height: 8px;\n}\n.dyna-slider--size-PX32.dyna-slider--single-value-mode .rc-slider-track {\n  left: -16px !important;\n}\n.dyna-slider--size-PX32 .rc-slider-handle {\n  width: 32px;\n  height: 32px;\n  margin-left: -16px;\n  margin-top: -14px;\n}\n.dyna-slider--size-PX48 {\n  height: 48px;\n  padding: 0 24px;\n}\n.dyna-slider--size-PX48 .rc-slider-rail {\n  width: calc(100% + 48px);\n  left: -24px;\n  height: 8px;\n}\n.dyna-slider--size-PX48 .rc-slider-track {\n  height: 8px;\n}\n.dyna-slider--size-PX48.dyna-slider--single-value-mode .rc-slider-track {\n  left: -24px !important;\n}\n.dyna-slider--size-PX48 .rc-slider-handle {\n  width: 48px;\n  height: 48px;\n  margin-left: -24px;\n  margin-top: -22px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(14);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(1)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/postcss-loader/lib/index.js??ref--4-2!../node_modules/less-loader/dist/cjs.js!./colors.less", function() {
+			var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/postcss-loader/lib/index.js??ref--4-2!../node_modules/less-loader/dist/cjs.js!./colors.less");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".dyna-slider--color- .rc-slider-handle {\n  border-color: #0000cc;\n  background-color: blue;\n  -webkit-transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n  transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n}\n.dyna-slider--color- .rc-slider-handle:active {\n  border-color: #000066 !important;\n  background-color: #0000b3 !important;\n  -webkit-box-shadow: none;\n          box-shadow: none;\n}\n.dyna-slider--color- .rc-slider-handle:hover {\n  border-color: #000099;\n  background-color: #0000cc;\n}\n.dyna-slider--color- .rc-slider-rail {\n  background-color: #ffff33;\n}\n.dyna-slider--color- .rc-slider-track {\n  background-color: blue;\n}\n.dyna-slider--color-BLACK_WHITE .rc-slider-handle {\n  border-color: #b5babc;\n  background-color: #D0D3D4;\n  -webkit-transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n  transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n}\n.dyna-slider--color-BLACK_WHITE .rc-slider-handle:active {\n  border-color: #80888b !important;\n  background-color: #a8aeaf !important;\n  -webkit-box-shadow: none;\n          box-shadow: none;\n}\n.dyna-slider--color-BLACK_WHITE .rc-slider-handle:hover {\n  border-color: #9ba1a3;\n  background-color: #b5babc;\n}\n.dyna-slider--color-BLACK_WHITE .rc-slider-rail {\n  background-color: #213142;\n}\n.dyna-slider--color-BLACK_WHITE .rc-slider-track {\n  background-color: #D0D3D4;\n}\n.dyna-slider--color-BLACK_ORANGE .rc-slider-handle {\n  border-color: #cc5400;\n  background-color: #FF6900;\n  -webkit-transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n  transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n}\n.dyna-slider--color-BLACK_ORANGE .rc-slider-handle:active {\n  border-color: #662a00 !important;\n  background-color: #b34900 !important;\n  -webkit-box-shadow: none;\n          box-shadow: none;\n}\n.dyna-slider--color-BLACK_ORANGE .rc-slider-handle:hover {\n  border-color: #993f00;\n  background-color: #cc5400;\n}\n.dyna-slider--color-BLACK_ORANGE .rc-slider-rail {\n  background-color: #213142;\n}\n.dyna-slider--color-BLACK_ORANGE .rc-slider-track {\n  background-color: #FF6900;\n}\n.dyna-slider--color-TRANSPARENT_ORANGE .rc-slider-handle {\n  border-color: #cc5400;\n  background-color: #FF6900;\n  -webkit-transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n  transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n}\n.dyna-slider--color-TRANSPARENT_ORANGE .rc-slider-handle:active {\n  border-color: #662a00 !important;\n  background-color: #b34900 !important;\n  -webkit-box-shadow: none;\n          box-shadow: none;\n}\n.dyna-slider--color-TRANSPARENT_ORANGE .rc-slider-handle:hover {\n  border-color: #993f00;\n  background-color: #cc5400;\n}\n.dyna-slider--color-TRANSPARENT_ORANGE .rc-slider-rail {\n  background-color: #ffffff;\n}\n.dyna-slider--color-TRANSPARENT_ORANGE .rc-slider-track {\n  background-color: #FF6900;\n}\n.dyna-slider--color-TRANSPARENT_WHITE .rc-slider-handle {\n  border-color: #b5babc;\n  background-color: #D0D3D4;\n  -webkit-transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n  transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n}\n.dyna-slider--color-TRANSPARENT_WHITE .rc-slider-handle:active {\n  border-color: #80888b !important;\n  background-color: #a8aeaf !important;\n  -webkit-box-shadow: none;\n          box-shadow: none;\n}\n.dyna-slider--color-TRANSPARENT_WHITE .rc-slider-handle:hover {\n  border-color: #9ba1a3;\n  background-color: #b5babc;\n}\n.dyna-slider--color-TRANSPARENT_WHITE .rc-slider-rail {\n  background-color: #49423d;\n}\n.dyna-slider--color-TRANSPARENT_WHITE .rc-slider-track {\n  background-color: #D0D3D4;\n}\n.dyna-slider--color-ORANGE_WHITE .rc-slider-handle {\n  border-color: #c0c0bc;\n  background-color: #D9D9D6;\n  -webkit-transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n  transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n}\n.dyna-slider--color-ORANGE_WHITE .rc-slider-handle:active {\n  border-color: #8f8f87 !important;\n  background-color: #b4b4ae !important;\n  -webkit-box-shadow: none;\n          box-shadow: none;\n}\n.dyna-slider--color-ORANGE_WHITE .rc-slider-handle:hover {\n  border-color: #a8a8a1;\n  background-color: #c0c0bc;\n}\n.dyna-slider--color-ORANGE_WHITE .rc-slider-rail {\n  background-color: #ffa84f;\n}\n.dyna-slider--color-ORANGE_WHITE .rc-slider-track {\n  background-color: #D9D9D6;\n}\n.dyna-slider--color-RED_WHITE .rc-slider-handle {\n  border-color: #b5babc;\n  background-color: #D0D3D4;\n  -webkit-transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n  transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n}\n.dyna-slider--color-RED_WHITE .rc-slider-handle:active {\n  border-color: #80888b !important;\n  background-color: #a8aeaf !important;\n  -webkit-box-shadow: none;\n          box-shadow: none;\n}\n.dyna-slider--color-RED_WHITE .rc-slider-handle:hover {\n  border-color: #9ba1a3;\n  background-color: #b5babc;\n}\n.dyna-slider--color-RED_WHITE .rc-slider-rail {\n  background-color: #df4c55;\n}\n.dyna-slider--color-RED_WHITE .rc-slider-track {\n  background-color: #D0D3D4;\n}\n.dyna-slider--color-GREY_WHITE .rc-slider-handle {\n  border-color: #b5babc;\n  background-color: #D0D3D4;\n  -webkit-transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n  transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n}\n.dyna-slider--color-GREY_WHITE .rc-slider-handle:active {\n  border-color: #80888b !important;\n  background-color: #a8aeaf !important;\n  -webkit-box-shadow: none;\n          box-shadow: none;\n}\n.dyna-slider--color-GREY_WHITE .rc-slider-handle:hover {\n  border-color: #9ba1a3;\n  background-color: #b5babc;\n}\n.dyna-slider--color-GREY_WHITE .rc-slider-rail {\n  background-color: #808174;\n}\n.dyna-slider--color-GREY_WHITE .rc-slider-track {\n  background-color: #D0D3D4;\n}\n.dyna-slider--color-WHITE_BLACK .rc-slider-handle {\n  border-color: #090909;\n  background-color: #222223;\n  -webkit-transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n  transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n}\n.dyna-slider--color-WHITE_BLACK .rc-slider-handle:active {\n  border-color: #000000 !important;\n  background-color: #000000 !important;\n  -webkit-box-shadow: none;\n          box-shadow: none;\n}\n.dyna-slider--color-WHITE_BLACK .rc-slider-handle:hover {\n  border-color: #000000;\n  background-color: #090909;\n}\n.dyna-slider--color-WHITE_BLACK .rc-slider-rail {\n  background-color: #dcdfe0;\n}\n.dyna-slider--color-WHITE_BLACK .rc-slider-track {\n  background-color: #222223;\n}\n.dyna-slider--color-WHITE_RED .rc-slider-handle {\n  border-color: #ad2116;\n  background-color: #DA291C;\n  -webkit-transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n  transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n}\n.dyna-slider--color-WHITE_RED .rc-slider-handle:active {\n  border-color: #520f0b !important;\n  background-color: #961c13 !important;\n  -webkit-box-shadow: none;\n          box-shadow: none;\n}\n.dyna-slider--color-WHITE_RED .rc-slider-handle:hover {\n  border-color: #801810;\n  background-color: #ad2116;\n}\n.dyna-slider--color-WHITE_RED .rc-slider-rail {\n  background-color: #dcdfe0;\n}\n.dyna-slider--color-WHITE_RED .rc-slider-track {\n  background-color: #DA291C;\n}\n.dyna-slider--color-WHITE_ORANGE .rc-slider-handle {\n  border-color: #cc5400;\n  background-color: #FF6900;\n  -webkit-transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n  transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;\n}\n.dyna-slider--color-WHITE_ORANGE .rc-slider-handle:active {\n  border-color: #662a00 !important;\n  background-color: #b34900 !important;\n  -webkit-box-shadow: none;\n          box-shadow: none;\n}\n.dyna-slider--color-WHITE_ORANGE .rc-slider-handle:hover {\n  border-color: #993f00;\n  background-color: #cc5400;\n}\n.dyna-slider--color-WHITE_ORANGE .rc-slider-rail {\n  background-color: #e9e9e8;\n}\n.dyna-slider--color-WHITE_ORANGE .rc-slider-track {\n  background-color: #FF6900;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(4);
+var rc_slider_1 = __webpack_require__(5);
+var dyna_ui_styles_1 = __webpack_require__(2);
+var interfaces_1 = __webpack_require__(3);
+var DynaInputSlider = /** @class */ (function (_super) {
+    __extends(DynaInputSlider, _super);
+    function DynaInputSlider() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    DynaInputSlider.prototype.handleChange = function (value) {
+        var _a = this.props, name = _a.name, onChange = _a.onChange;
+        onChange(name, value);
+    };
+    DynaInputSlider.prototype.render = function () {
+        var _a = this.props, userClassName = _a.className, disabled = _a.disabled, color = _a.color, size = _a.size, min = _a.min, max = _a.max, step = _a.step, value = _a.value;
+        var className = [
+            "dyna-slider",
+            userClassName,
+            "dyna-slider--single-value-mode",
+            color ? "dyna-slider--color-" + color : '',
+            "dyna-slider--size-" + size,
+        ].join(' ').trim();
+        return (React.createElement("div", { className: className },
+            React.createElement(rc_slider_1.default, { disabled: disabled, min: min, max: max, step: step, value: value, onChange: this.handleChange.bind(this) })));
+    };
+    DynaInputSlider.defaultProps = {
+        className: '',
+        name: null,
+        color: dyna_ui_styles_1.EColor.WHITE_BLACK,
+        size: interfaces_1.ESize.PX24,
+        disabled: false,
+        min: 0,
+        max: 100,
+        step: 1,
+        value: 50,
+        onChange: function () { return undefined; },
+    };
+    return DynaInputSlider;
+}(React.Component));
+exports.DynaInputSlider = DynaInputSlider;
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(4);
+var rc_slider_1 = __webpack_require__(5);
+var dyna_ui_styles_1 = __webpack_require__(2);
+var interfaces_1 = __webpack_require__(3);
+var DynaInputRangeSlider = /** @class */ (function (_super) {
+    __extends(DynaInputRangeSlider, _super);
+    function DynaInputRangeSlider() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    DynaInputRangeSlider.prototype.handleChange = function (value) {
+        var _a = this.props, name = _a.name, onChange = _a.onChange;
+        onChange(name, value);
+    };
+    DynaInputRangeSlider.prototype.render = function () {
+        var _a = this.props, userClassName = _a.className, disabled = _a.disabled, color = _a.color, size = _a.size, min = _a.min, max = _a.max, step = _a.step, pushable = _a.pushable, value = _a.value;
+        var className = [
+            "dyna-slider",
+            userClassName,
+            color ? "dyna-slider--color-" + color : '',
+            "dyna-slider--size-" + size,
+        ].join(' ').trim();
+        return (React.createElement("div", { className: className },
+            React.createElement(rc_slider_1.Range, { disabled: disabled, min: min, max: max, step: step, pushable: pushable, value: value, count: value.length, onChange: this.handleChange.bind(this) })));
+    };
+    DynaInputRangeSlider.defaultProps = {
+        className: '',
+        name: null,
+        disabled: false,
+        color: dyna_ui_styles_1.EColor.WHITE_BLACK,
+        size: interfaces_1.ESize.PX24,
+        min: 0,
+        max: 100,
+        step: 1,
+        pushable: false,
+        value: [],
+        onChange: function () { return undefined; },
+    };
+    return DynaInputRangeSlider;
+}(React.Component));
+exports.DynaInputRangeSlider = DynaInputRangeSlider;
+
 
 /***/ })
 /******/ ]);
