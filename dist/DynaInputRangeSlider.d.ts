@@ -16,6 +16,6 @@ export interface IDynaInputRangeSliderProps {
 }
 export declare class DynaInputRangeSlider extends React.Component<IDynaInputRangeSliderProps> {
     static defaultProps: IDynaInputRangeSliderProps;
-    private handleChange(value);
+    private handleChange;
     render(): JSX.Element;
 }
