@@ -43,6 +43,7 @@ export default {
                   console.debug('onChange value', name, value);
                   this.setState({value});
                 }}
+                {...this.props}
               />
             );
           }
@@ -53,6 +54,21 @@ export default {
       wrapperStyle: {
         width: "50%",
       },
+      props: [
+        {
+          slug:"with no background",
+          title:"with no background",
+          props: {},
+        },
+        {
+          slug:"with background",
+          title:"with top/bottom background",
+          props: {
+            topBackground: <div style={{height:"100%", boxShadow: "inset 0 0 4px 4px green"}}/>,
+            bottomBackground: <div style={{height:"100%", boxShadow: "inset 0 0 4px 4px blue"}}/>,
+          } as IDynaInputRangeSliderProps,
+        },
+      ],
     },
     {
       slug: 'range',

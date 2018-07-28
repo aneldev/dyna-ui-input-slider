@@ -8,6 +8,8 @@ import {ESize} from "./interfaces";
 export interface IDynaInputSliderProps {
   className?: string;
   name: string;
+  topBackground?: JSX.Element;
+  bottomBackground?: JSX.Element;
   disabled?: boolean;
   color?: EColor;
   size?: ESize;
@@ -22,6 +24,8 @@ export class DynaInputSlider extends React.Component<IDynaInputSliderProps> {
   static defaultProps: IDynaInputSliderProps = {
     className: '',
     name: null,
+    topBackground: null,
+    bottomBackground: null,
     color: EColor.WHITE_BLACK,
     size: ESize.PX24,
     disabled: false,
@@ -41,6 +45,8 @@ export class DynaInputSlider extends React.Component<IDynaInputSliderProps> {
     const {
       className: userClassName,
       disabled,
+      topBackground,
+      bottomBackground,
       color,
       size,
       min,
@@ -59,6 +65,8 @@ export class DynaInputSlider extends React.Component<IDynaInputSliderProps> {
 
     return (
       <div className={className}>
+        <div className="dyna-slider__top-background">{topBackground}</div>
+        <div className="dyna-slider__bottom-background">{bottomBackground}</div>
         <Slider
           disabled={disabled}
           min={min}
