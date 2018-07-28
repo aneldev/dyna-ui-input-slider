@@ -8,6 +8,8 @@ import {ESize} from "./interfaces";
 export interface IDynaInputRangeSliderProps {
   className?: string;
   name: string;
+  topBackground?: JSX.Element;
+  bottomBackground?: JSX.Element;
   disabled?: boolean;
   color?: EColor;
   size?: ESize;
@@ -23,6 +25,8 @@ export class DynaInputRangeSlider extends React.Component<IDynaInputRangeSliderP
   static defaultProps: IDynaInputRangeSliderProps = {
     className: '',
     name: null,
+    topBackground: null,
+    bottomBackground: null,
     disabled: false,
     color: EColor.WHITE_BLACK,
     size: ESize.PX24,
@@ -43,6 +47,8 @@ export class DynaInputRangeSlider extends React.Component<IDynaInputRangeSliderP
     const {
       className: userClassName,
       disabled,
+      topBackground,
+      bottomBackground,
       color,
       size,
       min,
@@ -61,6 +67,8 @@ export class DynaInputRangeSlider extends React.Component<IDynaInputRangeSliderP
 
     return (
       <div className={className}>
+        <div className="dyna-slider__top-background">{topBackground}</div>
+        <div className="dyna-slider__bottom-background">{bottomBackground}</div>
         <Range
           disabled={disabled}
           min={min}
