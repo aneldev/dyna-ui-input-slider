@@ -1,11 +1,7 @@
 import * as React from "react";
 import { EColor } from "dyna-ui-styles";
-import { ESize } from "./interfaces";
+import { ESize, IHourRange } from "./interfaces";
 import "./DynaInput0024Slider.less";
-export interface IHourRange {
-    from: number;
-    to: number;
-}
 export interface IDynaInput0024SliderProps {
     className?: string;
     name?: string;

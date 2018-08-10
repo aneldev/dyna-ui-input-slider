@@ -4,3 +4,7 @@ export declare enum ESize {
     PX32 = "PX32",
     PX48 = "PX48"
 }
+export interface IHourRange {
+    from: number;
+    to: number;
+}
