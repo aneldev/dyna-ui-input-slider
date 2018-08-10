@@ -3,6 +3,14 @@ import "./layout.less";
 import "./colors.less";
 
 export {
+  ESize,
+} from "./interfaces";
+
+export {
+  EColor,
+} from "dyna-ui-styles";
+
+export {
   DynaInputSlider, IDynaInputSliderProps,
 } from "./DynaInputSlider";
 
@@ -11,9 +19,5 @@ export {
 } from "./DynaInputRangeSlider";
 
 export {
-  EColor,
-} from "dyna-ui-styles";
-
-export {
-  ESize,
-} from "./interfaces";
+  DynaInput0024Slider, IHourRange,
+} from "./DynaInput0024Slider";

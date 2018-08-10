@@ -2,7 +2,19 @@ import * as React from 'react';
 import {IShowcase, IShowcaseViewProps} from "dyna-showcase";
 
 import {Logo} from "../logo";
-import {DynaInputSlider, DynaInputRangeSlider, EColor, ESize, IDynaInputRangeSliderProps} from "../../src";
+
+import {demoHours} from "./data";
+
+// Component
+import {
+  EColor, ESize,
+  DynaInputSlider,
+  DynaInputRangeSlider, IDynaInputRangeSliderProps,
+  DynaInput0024Slider, IHourRange,
+} from "../../src";
+
+// Internal Helper Components
+import {StatsBar} from "../../src/components/StatsBar";
 
 import "./showcase.less";
 
@@ -118,19 +130,79 @@ export default {
       },
       props: [
         {
-          slug:"with no background",
-          title:"with no background",
+          slug: "with no background",
+          title: "with no background",
           props: {},
         },
         {
-          slug:"with background",
-          title:"with top/bottom background",
+          slug: "with background",
+          title: "with top/bottom background",
           props: {
-            topBackground: <div style={{height:"100%", boxShadow: "inset 0 0 4px 4px green"}}/>,
-            bottomBackground: <div style={{height:"100%", boxShadow: "inset 0 0 4px 4px blue"}}/>,
+            topBackground: <div style={{height: "100%", boxShadow: "inset 0 0 4px 4px green"}}/>,
+            bottomBackground: <div style={{height: "100%", boxShadow: "inset 0 0 4px 4px blue"}}/>,
           } as IDynaInputRangeSliderProps,
         },
       ],
+    },
+    {
+      slug: 'stats-bar',
+      title: 'Stats bar',
+      center: true,
+      wrapperStyle: {
+        width: "50%",
+        height: "32px",
+      },
+      component: (
+        <StatsBar
+          stats={demoHours.concat(demoHours, demoHours, demoHours, demoHours, demoHours)}
+        />
+      ),
+    },
+    {
+      slug: 'DynaInput0024Slider',
+      title: 'Dyna input 00-24 slider',
+      center: true,
+      component: (() => {
+        interface IMyAppProps {
+        }
+
+        interface IMyAppState {
+          value: IHourRange;
+        }
+
+        const myDemoHours = demoHours.concat(demoHours, demoHours, demoHours, demoHours, demoHours);
+
+        class MyApp extends React.Component<IMyAppProps, IMyAppState> {
+          constructor(props: IMyAppProps) {
+            super(props);
+
+            this.state = {
+              value: {from: 6, to: 24},
+            }
+          }
+
+          public render(): JSX.Element {
+            return (
+              <DynaInput0024Slider
+                color={EColor.WHITE_ORANGE}
+                size={ESize.PX32}
+                value={this.state.value}
+                statsHours={myDemoHours}
+                onChange={(name: string, value: IHourRange) => {
+                  console.debug('onChange value', name, value);
+                  this.setState({value});
+                }}
+                {...this.props}
+              />
+            );
+          }
+        }
+
+        return <MyApp/>;
+      })(),
+      wrapperStyle: {
+        width: "50%",
+      },
     },
     {
       slug: 'slider-color-size',
