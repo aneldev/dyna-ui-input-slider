@@ -8,9 +8,11 @@ import {demoHours} from "./data";
 // Component
 import {
   EColor, ESize,
+  IHourRange,
   DynaInputSlider,
   DynaInputRangeSlider, IDynaInputRangeSliderProps,
-  DynaInput0024Slider, IHourRange,
+  DynaInput0024Slider,
+  DynaInputDurationSlider,
 } from "../../src";
 
 // Internal Helper Components
@@ -189,6 +191,54 @@ export default {
                 value={this.state.value}
                 statsHours={myDemoHours}
                 onChange={(name: string, value: IHourRange) => {
+                  console.debug('onChange value', name, value);
+                  this.setState({value});
+                }}
+                {...this.props}
+              />
+            );
+          }
+        }
+
+        return <MyApp/>;
+      })(),
+      wrapperStyle: {
+        width: "50%",
+      },
+    },
+    {
+      slug: 'DynaInputDurationSlider',
+      title: 'Dyna input duration slider',
+      center: true,
+      component: (() => {
+        interface IMyAppProps {
+        }
+
+        interface IMyAppState {
+          value: number;
+        }
+
+        const myDemoHours = demoHours.concat(demoHours, demoHours, demoHours, demoHours, demoHours);
+
+        class MyApp extends React.Component<IMyAppProps, IMyAppState> {
+          constructor(props: IMyAppProps) {
+            super(props);
+
+            this.state = {
+              value: 7,
+            }
+          }
+
+          public render(): JSX.Element {
+            return (
+              <DynaInputDurationSlider
+                color={EColor.WHITE_ORANGE}
+                size={ESize.PX32}
+                value={this.state.value}
+                stats={myDemoHours}
+                min={3}
+                max={27}
+                onChange={(name: string, value: number) => {
                   console.debug('onChange value', name, value);
                   this.setState({value});
                 }}

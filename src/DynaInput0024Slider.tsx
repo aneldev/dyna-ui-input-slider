@@ -3,17 +3,12 @@ import {dynaClassName, DynaClassName} from "dyna-class-name"
 import {EColor} from "dyna-ui-styles";
 
 import {DynaInputRangeSlider} from "./DynaInputRangeSlider";
-import {ESize} from "./interfaces";
+import {ESize, IHourRange} from "./interfaces";
 
 import {StatsBar} from "./components/StatsBar";
 import {Daylight} from "./components/Daylight";
 
 import "./DynaInput0024Slider.less";
-
-export interface IHourRange {
-  from: number;
-  to: number;
-}
 
 export interface IDynaInput0024SliderProps {
   className?: string;
@@ -100,7 +95,8 @@ export class DynaInput0024Slider extends React.Component<IDynaInput0024SliderPro
           min={0}
           max={24}
           pushable
-          value={[from, to]} onChange={this.handleChange.bind(this)}/>
+          value={[from, to]}
+          onChange={this.handleChange.bind(this)}/>
       </div>
     );
   }

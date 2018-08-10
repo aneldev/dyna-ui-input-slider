@@ -1,9 +1,10 @@
 import 'rc-slider/assets/index.css';
 import "./layout.less";
 import "./colors.less";
+import {DynaInputDurationSlider} from "./DynaInputDurationSlider";
 
 export {
-  ESize,
+  ESize, IHourRange,
 } from "./interfaces";
 
 export {
@@ -19,5 +20,9 @@ export {
 } from "./DynaInputRangeSlider";
 
 export {
-  DynaInput0024Slider, IHourRange,
+  DynaInput0024Slider,
 } from "./DynaInput0024Slider";
+
+export {
+  DynaInputDurationSlider,
+} from "./DynaInputDurationSlider";

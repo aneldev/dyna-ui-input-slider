@@ -66,6 +66,24 @@ IDynaInput0024SliderProps {
 }
 ```
 
+# DynaInputDurationSlider
+
+```
+IDynaInputDurationSliderProps {
+  className?: string
+  name?: string;
+  color?: EColor;
+  size?: ESize;
+  suffix?: string;
+  label?: JSX.Element;
+  stats?: number[];
+  min: number;
+  max: number;
+  value: number;
+  onChange: (name: string, value: number) => void;
+}
+```
+
 # Supported Sizes
 
 ```
