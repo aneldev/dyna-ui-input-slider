@@ -59,7 +59,7 @@ export class DynaInput0024Slider extends React.Component<IDynaInput0024SliderPro
     const {statsHours} = this.props;
     return (
       <StatsBar
-        stats={statsHours}
+        ticks={statsHours}
       />
     );
   }

@@ -3,16 +3,17 @@ import {IShowcase, IShowcaseViewProps} from "dyna-showcase";
 
 import {Logo} from "../logo";
 
-import {demoHours} from "./data";
+import {demoHours, demoPrices} from "./data";
 
-// Component
+// Components
 import {
-  EColor, ESize,
+  EColor, ESize, EMin,
   IHourRange,
   DynaInputSlider,
   DynaInputRangeSlider, IDynaInputRangeSliderProps,
   DynaInput0024Slider,
   DynaInputDurationSlider,
+  DynaInputPriceSlider,
 } from "../../src";
 
 // Internal Helper Components
@@ -54,7 +55,7 @@ export default {
                 max={200}
                 value={this.state.value}
                 onChange={(name: string, value: number) => {
-                  console.debug('onChange value', name, value);
+                  console.log('onChange value', name, value);
                   this.setState({value});
                 }}
                 {...this.props}
@@ -116,7 +117,7 @@ export default {
                 pushable
                 value={this.state.value}
                 onChange={(name: string, value: number[]) => {
-                  console.debug('onChange value', name, value);
+                  console.log('onChange value', name, value);
                   this.setState({value});
                 }}
                 {...this.props}
@@ -156,7 +157,7 @@ export default {
       },
       component: (
         <StatsBar
-          stats={demoHours.concat(demoHours, demoHours, demoHours, demoHours, demoHours)}
+          ticks={demoHours.concat(demoHours, demoHours, demoHours, demoHours, demoHours)}
         />
       ),
     },
@@ -191,7 +192,7 @@ export default {
                 value={this.state.value}
                 statsHours={myDemoHours}
                 onChange={(name: string, value: IHourRange) => {
-                  console.debug('onChange value', name, value);
+                  console.log('onChange value', name, value);
                   this.setState({value});
                 }}
                 {...this.props}
@@ -235,11 +236,58 @@ export default {
                 color={EColor.WHITE_ORANGE}
                 size={ESize.PX32}
                 value={this.state.value}
-                stats={myDemoHours}
-                min={3}
+                hours={myDemoHours}
+                min={EMin.MIN}
                 max={27}
                 onChange={(name: string, value: number) => {
-                  console.debug('onChange value', name, value);
+                  console.log('onChange value', name, value);
+                  this.setState({value});
+                }}
+                {...this.props}
+              />
+            );
+          }
+        }
+
+        return <MyApp/>;
+      })(),
+      wrapperStyle: {
+        width: "50%",
+      },
+    },
+    {
+      slug: 'DynaInputPriceSlider',
+      title: 'Dyna input Price slider',
+      center: true,
+      component: (() => {
+        interface IMyAppProps {
+        }
+
+        interface IMyAppState {
+          value: number;
+        }
+
+        const myDemoHours = demoHours.concat(demoHours, demoHours, demoHours, demoHours, demoHours);
+
+        class MyApp extends React.Component<IMyAppProps, IMyAppState> {
+          constructor(props: IMyAppProps) {
+            super(props);
+
+            this.state = {
+              value: 234.11,
+            }
+          }
+
+          public render(): JSX.Element {
+            return (
+              <DynaInputPriceSlider
+                color={EColor.WHITE_ORANGE}
+                size={ESize.PX32}
+                value={this.state.value}
+                prices={demoPrices}
+                min={EMin.MIN}
+                onChange={(name: string, value: number) => {
+                  console.log('onChange value', name, value);
                   this.setState({value});
                 }}
                 {...this.props}
@@ -291,7 +339,7 @@ export default {
                 max={200}
                 value={this.state.value}
                 onChange={(name: string, value: number) => {
-                  console.debug('onChange value', name, value);
+                  console.log('onChange value', name, value);
                   this.setState({value});
                 }}
               />
@@ -356,7 +404,7 @@ export default {
                 pushable
                 value={this.state.value}
                 onChange={(name: string, value: number[]) => {
-                  console.debug('onChange value', name, value);
+                  console.log('onChange value', name, value);
                   this.setState({value});
                 }}
               />

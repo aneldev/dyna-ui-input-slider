@@ -1,84 +1,71 @@
 import * as React from "react";
 import {dynaClassName} from "dyna-class-name";
-
 import {EColor} from "dyna-ui-styles";
+import {round} from "dyna-loops";
+
 import {EMin, ESize} from "./interfaces";
 
 import {DynaInputSlider} from "./DynaInputSlider";
 import {StatsBar} from "./components/StatsBar";
-import {getMinValue} from "./utils";
 
-import "./DynaInputDurationSlider.less";
+import {getMaxValue, getMinValue, getTicks} from "./utils";
 
-export interface IDynaInputDurationSliderProps {
+import "./DynaInputPriceSlider.less";
+
+export interface IDynaInputPriceSliderProps {
   className?: string
   name?: string;
   color?: EColor;
   size?: ESize;
-  suffix?: string;
   label?: JSX.Element;
-  hours?: number[];
+  prices: number[];
+  step?: number;
+  statTicksCount?: number;
   min: EMin;
-  max: number;
   value: number;
+  formatPrice?: (value: number) => string;
   onChange: (name: string, value: number) => void;
 }
 
-export class DynaInputDurationSlider extends React.Component<IDynaInputDurationSliderProps> {
-  static defaultProps: IDynaInputDurationSliderProps = {
+export class DynaInputPriceSlider extends React.Component<IDynaInputPriceSliderProps> {
+  static defaultProps: IDynaInputPriceSliderProps = {
     className: "",
     name: null,
-    suffix: 'h',
     label: null,
     color: EColor.WHITE_BLACK,
     size: ESize.PX24,
-    hours: [],
+    prices: [],
+    step: 10,
+    statTicksCount: 24,
     min: EMin.ZERO,
-    max: 32,
     value: 0,
+    formatPrice: (value: number) => `$${value}`,
     onChange: (name: string, value: number) => undefined,
   };
 
-  private readonly className = dynaClassName("dyna-input-duration-slider");
+  private readonly className = dynaClassName("dyna-input-price-slider");
 
   private handleChange(name: string, value: number): void {
     const {onChange} = this.props;
     onChange(name, value)
   }
 
-  private getStatTicks():number[]{
-    const {hours, min, max} = this.props;
-    const minValue: number = getMinValue(min, hours);
-    const ticks: number[] =
-      hours
-        .filter((hour: number) => hour >= minValue && hour <= max)
-        .reduce((acc: number[], hour: number) => {
-          if (!acc[hour]) acc[hour] = 0;
-          acc[hour]++;
-          return acc;
-        }, [])
-    ;
-    for (let i: number = minValue; i <= max; i++) {
-      if (!ticks[i]) ticks[i] = 0;
-    }
-    return ticks;
-  }
-
   private renderTopBackground(): JSX.Element {
-    return <StatsBar ticks={this.getStatTicks()}/>;
+    const {prices, statTicksCount} = this.props;
+    return <StatsBar ticks={getTicks(prices, statTicksCount)}/>;
   }
 
   private renderLabel(): JSX.Element {
     const {
       label,
-      suffix,
+      formatPrice,
       value,
     } = this.props;
 
     return (
       <div className={this.className("__label")}>
         <div className={this.className("__label__content")}>{label}</div>
-        <div className={this.className("__label__value")}>{`${value}${suffix}`}</div>
+        <div className={this.className("__label__value")}>{formatPrice(round(value, -1))}</div>
       </div>
     );
   }
@@ -87,7 +74,8 @@ export class DynaInputDurationSlider extends React.Component<IDynaInputDurationS
     const {
       className: userClassName,
       name, color, size,
-      min, max, hours, value,
+      step,
+      min, value, prices,
     } = this.props;
 
     const className: string = this.className(
@@ -102,10 +90,11 @@ export class DynaInputDurationSlider extends React.Component<IDynaInputDurationS
           name={name}
           color={color}
           size={size}
-          min={getMinValue(min, hours)}
-          max={max}
+          step={step}
+          min={Math.floor(getMinValue(min, prices))}
+          max={Math.ceil(getMaxValue(prices) + step)}
           topBackground={this.renderTopBackground()}
-          value={value}
+          value={round(value, -1)}
           onChange={this.handleChange.bind(this)}
         />
       </div>

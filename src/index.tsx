@@ -4,7 +4,9 @@ import "./colors.less";
 import {DynaInputDurationSlider} from "./DynaInputDurationSlider";
 
 export {
-  ESize, IHourRange,
+  ESize,
+  IHourRange,
+  EMin,
 } from "./interfaces";
 
 export {
@@ -20,9 +22,13 @@ export {
 } from "./DynaInputRangeSlider";
 
 export {
-  DynaInput0024Slider,
+  DynaInput0024Slider, IDynaInput0024SliderProps,
 } from "./DynaInput0024Slider";
 
 export {
-  DynaInputDurationSlider,
+  DynaInputDurationSlider, IDynaInputDurationSliderProps,
 } from "./DynaInputDurationSlider";
+
+export {
+  DynaInputPriceSlider, IDynaInputPriceSliderProps,
+} from "./DynaInputPriceSlider";

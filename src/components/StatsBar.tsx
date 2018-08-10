@@ -6,31 +6,28 @@ import "./StatsBar.less";
 
 export interface IStatsBarProps {
   className?: string;
-  stats: number[];
+  ticks: number[];
 }
 
 export class StatsBar extends React.Component<IStatsBarProps> {
   static defaultProps: IStatsBarProps = {
     className: "",
-    stats: [],
+    ticks: [],
   };
 
   private readonly className: DynaClassName = dynaClassName('dyna-slider-stats-bar');
 
-  private get stats(): number[] {
-    const {stats} = this.props;
-    let max: number = 0;
-    let output: number[] = stats
-      .reduce((acc: number[], value: number) => {
-        if (acc[value] === undefined) acc[value] = 0;
-        acc[value]++;
-        if (max < acc[value]) max = acc[value];
-        return acc;
-      }, []);
+  private get percentageTicks(): number[] {
+    const {ticks} = this.props;
+    let output: number [] = ticks.concat();
+    let max: number = output.reduce((acc: number, value: number) => {
+      if (acc === null || acc < value) acc = value;
+      return acc;
+    }, null);
+
     for (let i = 0; i < output.length; i++) if (!output[i]) output[i] = 0;
-    output = output.map((v:number)=>{
-      return 100 * v / max ;
-    });
+    output = output.map((v: number) => 100 * v / max);
+
     return output;
   }
 
@@ -40,11 +37,10 @@ export class StatsBar extends React.Component<IStatsBarProps> {
     } = this.props;
 
     const className: string = this.className("", userClassName && "/" + userClassName);
-    console.debug('render stats', this.stats);
 
     return (
       <div className={className}>
-        {this.stats.map((value: number, index: number) => (
+        {this.percentageTicks.map((value: number, index: number) => (
           <div
             key={index}
             className={this.className("__item")}

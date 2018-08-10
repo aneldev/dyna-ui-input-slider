@@ -64,6 +64,11 @@ IDynaInput0024SliderProps {
   statsHours?: number [];   // for stats, numbers 0-24
   onChange?: (name: string, value: IHourRange) => void;
 }
+
+interface IHourRange {
+  from: number;
+  to: number;
+}
 ```
 
 # DynaInputDurationSlider
@@ -81,6 +86,30 @@ IDynaInputDurationSliderProps {
   max: number;
   value: number;
   onChange: (name: string, value: number) => void;
+}
+```
+
+# DynaInputPriceSlider
+
+```
+IDynaInputPriceSliderProps {
+  className?: string
+  name?: string;
+  color?: EColor;
+  size?: ESize;
+  label?: JSX.Element;
+  prices: number[];
+  step?: number;
+  statTicksCount?: number;
+  min: EMin;
+  value: number;
+  formatPrice?: (value: number) => string;
+  onChange: (name: string, value: number) => void;
+}
+
+export enum EMin {
+  MIN = "MIN",
+  ZERO = "ZERO",
 }
 ```
 
