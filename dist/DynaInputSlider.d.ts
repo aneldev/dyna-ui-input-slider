@@ -4,6 +4,8 @@ import { ESize } from "./interfaces";
 export interface IDynaInputSliderProps {
     className?: string;
     name: string;
+    topBackground?: JSX.Element;
+    bottomBackground?: JSX.Element;
     disabled?: boolean;
     color?: EColor;
     size?: ESize;

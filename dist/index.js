@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("dyna-ui-styles"), require("react"), require("rc-slider"));
+		module.exports = factory(require("react"), require("dyna-ui-styles"), require("rc-slider"), require("dyna-class-name"), require("dyna-loops"));
 	else if(typeof define === 'function' && define.amd)
-		define("dyna-ui-input-slider", ["dyna-ui-styles", "react", "rc-slider"], factory);
+		define("dyna-ui-input-slider", ["react", "dyna-ui-styles", "rc-slider", "dyna-class-name", "dyna-loops"], factory);
 	else if(typeof exports === 'object')
-		exports["dyna-ui-input-slider"] = factory(require("dyna-ui-styles"), require("react"), require("rc-slider"));
+		exports["dyna-ui-input-slider"] = factory(require("react"), require("dyna-ui-styles"), require("rc-slider"), require("dyna-class-name"), require("dyna-loops"));
 	else
-		root["dyna-ui-input-slider"] = factory(root["dyna-ui-styles"], root["react"], root["rc-slider"]);
-})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__) {
+		root["dyna-ui-input-slider"] = factory(root["react"], root["dyna-ui-styles"], root["rc-slider"], root["dyna-class-name"], root["dyna-loops"]);
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_20__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -70,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/dist/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -202,7 +202,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(10);
+var	fixUrls = __webpack_require__(12);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -552,37 +552,108 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(7);
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(2);
+var rc_slider_1 = __webpack_require__(5);
+var dyna_ui_styles_1 = __webpack_require__(4);
+var interfaces_1 = __webpack_require__(3);
+var DynaInputRangeSlider = /** @class */ (function (_super) {
+    __extends(DynaInputRangeSlider, _super);
+    function DynaInputRangeSlider() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    DynaInputRangeSlider.prototype.handleChange = function (value) {
+        var _a = this.props, name = _a.name, onChange = _a.onChange;
+        onChange(name, value);
+    };
+    DynaInputRangeSlider.prototype.render = function () {
+        var _a = this.props, userClassName = _a.className, disabled = _a.disabled, topBackground = _a.topBackground, bottomBackground = _a.bottomBackground, color = _a.color, size = _a.size, min = _a.min, max = _a.max, step = _a.step, pushable = _a.pushable, value = _a.value;
+        var className = [
+            "dyna-slider",
+            userClassName,
+            color ? "dyna-slider--color-" + color : '',
+            "dyna-slider--size-" + size,
+        ].join(' ').trim();
+        return (React.createElement("div", { className: className },
+            React.createElement("div", { className: "dyna-slider__top-background" }, topBackground),
+            React.createElement("div", { className: "dyna-slider__bottom-background" }, bottomBackground),
+            React.createElement(rc_slider_1.Range, { disabled: disabled, min: min, max: max, step: step, pushable: pushable, value: value, count: value.length, onChange: this.handleChange.bind(this) })));
+    };
+    DynaInputRangeSlider.defaultProps = {
+        className: '',
+        name: null,
+        topBackground: null,
+        bottomBackground: null,
+        disabled: false,
+        color: dyna_ui_styles_1.EColor.WHITE_BLACK,
+        size: interfaces_1.ESize.PX24,
+        min: 0,
+        max: 100,
+        step: 1,
+        pushable: false,
+        value: [],
+        onChange: function () { return undefined; },
+    };
+    return DynaInputRangeSlider;
+}(React.Component));
+exports.DynaInputRangeSlider = DynaInputRangeSlider;
 
 
 /***/ }),
 /* 7 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(8);
-__webpack_require__(11);
-__webpack_require__(13);
-var DynaInputSlider_1 = __webpack_require__(15);
-exports.DynaInputSlider = DynaInputSlider_1.DynaInputSlider;
-var DynaInputRangeSlider_1 = __webpack_require__(16);
-exports.DynaInputRangeSlider = DynaInputRangeSlider_1.DynaInputRangeSlider;
-var dyna_ui_styles_1 = __webpack_require__(2);
-exports.EColor = dyna_ui_styles_1.EColor;
-var interfaces_1 = __webpack_require__(3);
-exports.ESize = interfaces_1.ESize;
-
+module.exports = __WEBPACK_EXTERNAL_MODULE_7__;
 
 /***/ }),
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__(9);
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(10);
+__webpack_require__(13);
+__webpack_require__(15);
+var interfaces_1 = __webpack_require__(3);
+exports.ESize = interfaces_1.ESize;
+var dyna_ui_styles_1 = __webpack_require__(4);
+exports.EColor = dyna_ui_styles_1.EColor;
+var DynaInputSlider_1 = __webpack_require__(17);
+exports.DynaInputSlider = DynaInputSlider_1.DynaInputSlider;
+var DynaInputRangeSlider_1 = __webpack_require__(6);
+exports.DynaInputRangeSlider = DynaInputRangeSlider_1.DynaInputRangeSlider;
+var DynaInput0024Slider_1 = __webpack_require__(18);
+exports.DynaInput0024Slider = DynaInput0024Slider_1.DynaInput0024Slider;
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(9);
+var content = __webpack_require__(11);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -607,7 +678,7 @@ if(false) {
 }
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -621,7 +692,7 @@ exports.push([module.i, ".rc-slider {\n  position: relative;\n  height: 14px;\n 
 
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -716,13 +787,13 @@ module.exports = function (css) {
 };
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(12);
+var content = __webpack_require__(14);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -747,7 +818,7 @@ if(false) {
 }
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -755,19 +826,19 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, ".dyna-slider {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-sizing: content-box;\n          box-sizing: content-box;\n}\n.dyna-slider .rc-slider-track {\n  border-radius: 6px 0 0 6px;\n}\n.dyna-slider .rc-slider-track::after {\n  content: \"\";\n  width: 2px;\n  height: 100%;\n  background-color: inherit;\n  position: absolute;\n  left: 100%;\n}\n.dyna-slider--size-PX12 {\n  height: 12px;\n  padding: 0 6px;\n}\n.dyna-slider--size-PX12 .rc-slider-rail {\n  left: -6px;\n  width: calc(100% + 12px);\n}\n.dyna-slider--size-PX12.dyna-slider--single-value-mode .rc-slider-track {\n  left: -6px !important;\n}\n.dyna-slider--size-PX12 .rc-slider-handle {\n  width: 12px;\n  height: 12px;\n  margin-top: -4px;\n}\n.dyna-slider--size-PX24 {\n  height: 24px;\n  padding: 0 12px;\n}\n.dyna-slider--size-PX24 .rc-slider-rail {\n  left: -12px;\n  width: calc(100% + 24px);\n}\n.dyna-slider--size-PX24.dyna-slider--single-value-mode .rc-slider-track {\n  left: -12px !important;\n}\n.dyna-slider--size-PX24 .rc-slider-handle {\n  width: 24px;\n  height: 24px;\n  margin-left: -12px;\n  margin-top: -10px;\n}\n.dyna-slider--size-PX32 {\n  height: 32px;\n  padding: 0 16px;\n}\n.dyna-slider--size-PX32 .rc-slider-rail {\n  width: calc(100% + 32px);\n  left: -16px;\n  height: 8px;\n}\n.dyna-slider--size-PX32 .rc-slider-track {\n  height: 8px;\n}\n.dyna-slider--size-PX32.dyna-slider--single-value-mode .rc-slider-track {\n  left: -16px !important;\n}\n.dyna-slider--size-PX32 .rc-slider-handle {\n  width: 32px;\n  height: 32px;\n  margin-left: -16px;\n  margin-top: -14px;\n}\n.dyna-slider--size-PX48 {\n  height: 48px;\n  padding: 0 24px;\n}\n.dyna-slider--size-PX48 .rc-slider-rail {\n  width: calc(100% + 48px);\n  left: -24px;\n  height: 8px;\n}\n.dyna-slider--size-PX48 .rc-slider-track {\n  height: 8px;\n}\n.dyna-slider--size-PX48.dyna-slider--single-value-mode .rc-slider-track {\n  left: -24px !important;\n}\n.dyna-slider--size-PX48 .rc-slider-handle {\n  width: 48px;\n  height: 48px;\n  margin-left: -24px;\n  margin-top: -22px;\n}\n", ""]);
+exports.push([module.i, ".dyna-slider {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-sizing: content-box;\n          box-sizing: content-box;\n  position: relative;\n}\n.dyna-slider__top-background {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: calc(50% - 2px);\n}\n.dyna-slider__bottom-background {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  height: calc(50% - 2px);\n}\n.dyna-slider .rc-slider-track {\n  border-radius: 6px 0 0 6px;\n}\n.dyna-slider .rc-slider-track::after {\n  content: \"\";\n  width: 2px;\n  height: 100%;\n  background-color: inherit;\n  position: absolute;\n  left: 100%;\n}\n.dyna-slider--size-PX12 {\n  height: 12px;\n  padding: 0 6px;\n}\n.dyna-slider--size-PX12 .rc-slider-rail {\n  left: -6px;\n  width: calc(100% + 12px);\n}\n.dyna-slider--size-PX12.dyna-slider--single-value-mode .rc-slider-track {\n  left: -6px !important;\n}\n.dyna-slider--size-PX12 .rc-slider-handle {\n  width: 12px;\n  height: 12px;\n  margin-top: -4px;\n}\n.dyna-slider--size-PX24 {\n  height: 24px;\n  padding: 0 12px;\n}\n.dyna-slider--size-PX24 .rc-slider-rail {\n  left: -12px;\n  width: calc(100% + 24px);\n}\n.dyna-slider--size-PX24.dyna-slider--single-value-mode .rc-slider-track {\n  left: -12px !important;\n}\n.dyna-slider--size-PX24 .rc-slider-handle {\n  width: 24px;\n  height: 24px;\n  margin-left: -12px;\n  margin-top: -10px;\n}\n.dyna-slider--size-PX32 {\n  height: 32px;\n  padding: 0 16px;\n}\n.dyna-slider--size-PX32 .rc-slider-rail {\n  width: calc(100% + 32px);\n  left: -16px;\n  height: 8px;\n}\n.dyna-slider--size-PX32 .rc-slider-track {\n  height: 8px;\n}\n.dyna-slider--size-PX32.dyna-slider--single-value-mode .rc-slider-track {\n  left: -16px !important;\n}\n.dyna-slider--size-PX32 .rc-slider-handle {\n  width: 32px;\n  height: 32px;\n  margin-left: -16px;\n  margin-top: -14px;\n}\n.dyna-slider--size-PX48 {\n  height: 48px;\n  padding: 0 24px;\n}\n.dyna-slider--size-PX48 .rc-slider-rail {\n  width: calc(100% + 48px);\n  left: -24px;\n  height: 8px;\n}\n.dyna-slider--size-PX48 .rc-slider-track {\n  height: 8px;\n}\n.dyna-slider--size-PX48.dyna-slider--single-value-mode .rc-slider-track {\n  left: -24px !important;\n}\n.dyna-slider--size-PX48 .rc-slider-handle {\n  width: 48px;\n  height: 48px;\n  margin-left: -24px;\n  margin-top: -22px;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(14);
+var content = __webpack_require__(16);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -792,7 +863,7 @@ if(false) {
 }
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -806,7 +877,7 @@ exports.push([module.i, ".dyna-slider--color- .rc-slider-handle {\n  border-colo
 
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -822,9 +893,9 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(4);
+var React = __webpack_require__(2);
 var rc_slider_1 = __webpack_require__(5);
-var dyna_ui_styles_1 = __webpack_require__(2);
+var dyna_ui_styles_1 = __webpack_require__(4);
 var interfaces_1 = __webpack_require__(3);
 var DynaInputSlider = /** @class */ (function (_super) {
     __extends(DynaInputSlider, _super);
@@ -836,7 +907,7 @@ var DynaInputSlider = /** @class */ (function (_super) {
         onChange(name, value);
     };
     DynaInputSlider.prototype.render = function () {
-        var _a = this.props, userClassName = _a.className, disabled = _a.disabled, color = _a.color, size = _a.size, min = _a.min, max = _a.max, step = _a.step, value = _a.value;
+        var _a = this.props, userClassName = _a.className, disabled = _a.disabled, topBackground = _a.topBackground, bottomBackground = _a.bottomBackground, color = _a.color, size = _a.size, min = _a.min, max = _a.max, step = _a.step, value = _a.value;
         var className = [
             "dyna-slider",
             userClassName,
@@ -845,11 +916,15 @@ var DynaInputSlider = /** @class */ (function (_super) {
             "dyna-slider--size-" + size,
         ].join(' ').trim();
         return (React.createElement("div", { className: className },
+            React.createElement("div", { className: "dyna-slider__top-background" }, topBackground),
+            React.createElement("div", { className: "dyna-slider__bottom-background" }, bottomBackground),
             React.createElement(rc_slider_1.default, { disabled: disabled, min: min, max: max, step: step, value: value, onChange: this.handleChange.bind(this) })));
     };
     DynaInputSlider.defaultProps = {
         className: '',
         name: null,
+        topBackground: null,
+        bottomBackground: null,
         color: dyna_ui_styles_1.EColor.WHITE_BLACK,
         size: interfaces_1.ESize.PX24,
         disabled: false,
@@ -865,7 +940,7 @@ exports.DynaInputSlider = DynaInputSlider;
 
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -881,46 +956,278 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(4);
-var rc_slider_1 = __webpack_require__(5);
-var dyna_ui_styles_1 = __webpack_require__(2);
+var React = __webpack_require__(2);
+var dyna_class_name_1 = __webpack_require__(7);
+var dyna_ui_styles_1 = __webpack_require__(4);
+var DynaInputRangeSlider_1 = __webpack_require__(6);
 var interfaces_1 = __webpack_require__(3);
-var DynaInputRangeSlider = /** @class */ (function (_super) {
-    __extends(DynaInputRangeSlider, _super);
-    function DynaInputRangeSlider() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var StatsBar_1 = __webpack_require__(19);
+var Daylight_1 = __webpack_require__(23);
+__webpack_require__(26);
+var DynaInput0024Slider = /** @class */ (function (_super) {
+    __extends(DynaInput0024Slider, _super);
+    function DynaInput0024Slider() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.className = dyna_class_name_1.dynaClassName("dyna-input-0024-slider");
+        return _this;
     }
-    DynaInputRangeSlider.prototype.handleChange = function (value) {
-        var _a = this.props, name = _a.name, onChange = _a.onChange;
-        onChange(name, value);
+    DynaInput0024Slider.prototype.handleChange = function (name, values) {
+        var onChange = this.props.onChange;
+        onChange(name, { from: values[0], to: values[1] });
     };
-    DynaInputRangeSlider.prototype.render = function () {
-        var _a = this.props, userClassName = _a.className, disabled = _a.disabled, color = _a.color, size = _a.size, min = _a.min, max = _a.max, step = _a.step, pushable = _a.pushable, value = _a.value;
-        var className = [
-            "dyna-slider",
-            userClassName,
-            color ? "dyna-slider--color-" + color : '',
-            "dyna-slider--size-" + size,
-        ].join(' ').trim();
+    DynaInput0024Slider.prototype.renderLabel = function () {
+        var _a = this.props, label = _a.label, _b = _a.value, from = _b.from, to = _b.to;
+        return (React.createElement("div", { className: this.className("__label") },
+            React.createElement("div", { className: this.className("__label__content") }, label),
+            React.createElement("div", { className: this.className("__label__value") }, from + ":00 - " + to + ":00")));
+    };
+    DynaInput0024Slider.prototype.renderTopBackground = function () {
+        var statsHours = this.props.statsHours;
+        return (React.createElement(StatsBar_1.StatsBar, { stats: statsHours }));
+    };
+    DynaInput0024Slider.prototype.renderBottomBackground = function () {
+        return (React.createElement(Daylight_1.Daylight, null));
+    };
+    DynaInput0024Slider.prototype.render = function () {
+        var _a = this.props, userClassName = _a.className, name = _a.name, color = _a.color, size = _a.size, _b = _a.value, from = _b.from, to = _b.to;
+        var className = this.className("", userClassName && '/' + userClassName || "");
         return (React.createElement("div", { className: className },
-            React.createElement(rc_slider_1.Range, { disabled: disabled, min: min, max: max, step: step, pushable: pushable, value: value, count: value.length, onChange: this.handleChange.bind(this) })));
+            this.renderLabel(),
+            React.createElement(DynaInputRangeSlider_1.DynaInputRangeSlider, { name: name, color: color, size: size, topBackground: this.renderTopBackground(), bottomBackground: this.renderBottomBackground(), min: 0, max: 24, pushable: true, value: [from, to], onChange: this.handleChange.bind(this) })));
     };
-    DynaInputRangeSlider.defaultProps = {
-        className: '',
+    DynaInput0024Slider.defaultProps = {
+        className: "",
         name: null,
-        disabled: false,
+        label: null,
         color: dyna_ui_styles_1.EColor.WHITE_BLACK,
         size: interfaces_1.ESize.PX24,
-        min: 0,
-        max: 100,
-        step: 1,
-        pushable: false,
-        value: [],
-        onChange: function () { return undefined; },
+        value: { from: 0, to: 24 },
+        onChange: function (name, value) { return undefined; },
     };
-    return DynaInputRangeSlider;
+    return DynaInput0024Slider;
 }(React.Component));
-exports.DynaInputRangeSlider = DynaInputRangeSlider;
+exports.DynaInput0024Slider = DynaInput0024Slider;
+
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(2);
+var dyna_class_name_1 = __webpack_require__(7);
+var dyna_loops_1 = __webpack_require__(20);
+__webpack_require__(21);
+var StatsBar = /** @class */ (function (_super) {
+    __extends(StatsBar, _super);
+    function StatsBar() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.className = dyna_class_name_1.dynaClassName('dyna-slider-stats-bar');
+        return _this;
+    }
+    Object.defineProperty(StatsBar.prototype, "stats", {
+        get: function () {
+            var stats = this.props.stats;
+            var max = 0;
+            var output = stats
+                .reduce(function (acc, value) {
+                if (acc[value] === undefined)
+                    acc[value] = 0;
+                acc[value]++;
+                if (max < acc[value])
+                    max = acc[value];
+                return acc;
+            }, []);
+            for (var i = 0; i < output.length; i++)
+                if (!output[i])
+                    output[i] = 0;
+            output = output.map(function (v) {
+                return 100 * v / max;
+            });
+            return output;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    StatsBar.prototype.render = function () {
+        var _this = this;
+        var userClassName = this.props.className;
+        var className = this.className("", userClassName && "/" + userClassName);
+        console.debug('render stats', this.stats);
+        return (React.createElement("div", { className: className }, this.stats.map(function (value, index) { return (React.createElement("div", { key: index, className: _this.className("__item"), style: { minHeight: dyna_loops_1.round(value, 1).toString() + "%" } })); })));
+    };
+    StatsBar.defaultProps = {
+        className: "",
+        stats: [],
+    };
+    return StatsBar;
+}(React.Component));
+exports.StatsBar = StatsBar;
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_20__;
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(22);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(1)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/postcss-loader/lib/index.js??ref--4-2!../../node_modules/less-loader/dist/cjs.js!./StatsBar.less", function() {
+			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/postcss-loader/lib/index.js??ref--4-2!../../node_modules/less-loader/dist/cjs.js!./StatsBar.less");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".dyna-slider-stats-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 100%;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end;\n}\n.dyna-slider-stats-bar__item {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1;\n          flex: 1 1;\n  background-color: gray;\n  margin: 0 0.5px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(2);
+__webpack_require__(24);
+exports.Daylight = function (props) { return React.createElement("div", { className: "dyna-slider-daylight" }); };
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(25);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(1)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/postcss-loader/lib/index.js??ref--4-2!../../node_modules/less-loader/dist/cjs.js!./Daylight.less", function() {
+			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/postcss-loader/lib/index.js??ref--4-2!../../node_modules/less-loader/dist/cjs.js!./Daylight.less");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".dyna-slider-daylight {\n  height: 70%;\n  background: -webkit-gradient(linear, left top, right top, from(darkblue), color-stop(darkblue), color-stop(orange), color-stop(yellow), color-stop(yellow), color-stop(orange), color-stop(blue), to(darkblue));\n  background: linear-gradient(0.25turn, darkblue, darkblue, orange, yellow, yellow, orange, blue, darkblue);\n  border-radius: 0 0 16px 16px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(27);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(1)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/postcss-loader/lib/index.js??ref--4-2!../node_modules/less-loader/dist/cjs.js!./DynaInput0024Slider.less", function() {
+			var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/postcss-loader/lib/index.js??ref--4-2!../node_modules/less-loader/dist/cjs.js!./DynaInput0024Slider.less");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".dyna-input-0024-slider__label {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin-bottom: 4px;\n}\n.dyna-input-0024-slider__label__content {\n  -webkit-box-flex: 1;\n      -ms-flex: auto;\n          flex: auto;\n}\n.dyna-input-0024-slider__label__value {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0;\n          flex: 0 0;\n  white-space: nowrap;\n  font-weight: bold;\n  font-size: 21px;\n  margin-left: 8px;\n}\n", ""]);
+
+// exports
 
 
 /***/ })
