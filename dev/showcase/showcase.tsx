@@ -157,7 +157,7 @@ export default {
       },
       component: (
         <StatsBar
-          ticks={demoHours.concat(demoHours, demoHours, demoHours, demoHours, demoHours)}
+          ticks={[100, 2000, 800, 1300, 1000, 400, 100]}
         />
       ),
     },
