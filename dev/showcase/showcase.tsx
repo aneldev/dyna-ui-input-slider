@@ -206,6 +206,17 @@ export default {
       wrapperStyle: {
         width: "50%",
       },
+      props: (() => {
+        const props: IShowcaseViewProps[] = [];
+        Object.keys(ESize).forEach((size: ESize) => {
+          props.push({
+            slug: `size-${size}`,
+            title: `${size.toLowerCase()}`,
+            props: {size},
+          });
+        });
+        return props;
+      })(),
     },
     {
       slug: 'DynaInputDurationSlider',
@@ -254,6 +265,17 @@ export default {
       wrapperStyle: {
         width: "50%",
       },
+      props: (() => {
+        const props: IShowcaseViewProps[] = [];
+        Object.keys(ESize).forEach((size: ESize) => {
+          props.push({
+            slug: `size-${size}`,
+            title: `${size.toLowerCase()}`,
+            props: {size},
+          });
+        });
+        return props;
+      })(),
     },
     {
       slug: 'DynaInputPriceSlider',
@@ -301,6 +323,17 @@ export default {
       wrapperStyle: {
         width: "50%",
       },
+      props: (() => {
+        const props: IShowcaseViewProps[] = [];
+        Object.keys(ESize).forEach((size: ESize) => {
+            props.push({
+              slug: `size-${size}`,
+              title: `${size.toLowerCase()}`,
+              props: {size},
+          });
+        });
+        return props;
+      })(),
     },
     {
       slug: 'slider-color-size',

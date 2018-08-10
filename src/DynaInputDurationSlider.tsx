@@ -91,6 +91,7 @@ export class DynaInputDurationSlider extends React.Component<IDynaInputDurationS
     const className: string = this.className(
       "",
       userClassName && "/" + userClassName,
+      `--size-${size}`,
     );
 
     return (

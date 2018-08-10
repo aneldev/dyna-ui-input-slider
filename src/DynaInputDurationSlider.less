@@ -17,7 +17,7 @@
 
   &__min-max-container {
     display: flex;
-    font-size: 0.8rem;
+    font-size: 14px;
     font-weight: bold;
     color: gray;
 
@@ -29,5 +29,21 @@
       flex: 1 1;
       text-align: right;
     }
+  }
+
+  // size
+  &--size-PX12 &__min-max-container {
+    display: none;
+  }
+  &--size-PX24 &__min-max-container {
+    display: none;
+  }
+  &--size-PX32 &__min-max-container {
+    position: relative;
+    top: -1px;
+    font-size: 12px;
+  }
+  &--size-PX48 &__min-max-container {
+    font-size: 16px;
   }
 }

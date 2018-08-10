@@ -4,20 +4,38 @@
   box-sizing: content-box;
   position: relative;
 
+  // top bottom containers
   &__top-background {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: ~"calc(50% - 2px)";
   }
-
   &__bottom-background {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    top: ~"calc(50% + 4px)";
+  }
+  &--size-PX12 &__top-background,
+  &--size-PX12 &__bottom-background {
+    height: ~"calc(50% - 1px)";
+  }
+  &--size-PX24 &__top-background,
+  &--size-PX24 &__bottom-background {
+    height: ~"calc(50% - 2px)";
+  }
+  &--size-PX32 &__top-background {
+    height: ~"calc(50% - 2px)";
+  }
+  &--size-PX32 &__bottom-background {
+    height: ~"calc(50% - 5px)";
+  }
+  &--size-PX48 &__top-background {
+    height: ~"calc(50% - 2px)";
+  }
+  &--size-PX48 &__bottom-background {
+    height: ~"calc(50% - 6px)";
   }
 
   // selected line
@@ -35,6 +53,7 @@
     }
   }
 
+  // size
   &--size- {
     &PX12 {
       // container

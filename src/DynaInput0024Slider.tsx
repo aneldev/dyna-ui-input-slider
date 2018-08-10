@@ -80,7 +80,11 @@ export class DynaInput0024Slider extends React.Component<IDynaInput0024SliderPro
       },
     } = this.props;
 
-    const className: string = this.className("", userClassName && '/' + userClassName || "")
+    const className: string = this.className(
+      "",
+      userClassName && '/' + userClassName || "",
+      `--size-${size}`,
+    );
 
     return (
       <div className={className}>
