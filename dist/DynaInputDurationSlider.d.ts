@@ -1,6 +1,6 @@
 import * as React from "react";
 import { EColor } from "dyna-ui-styles";
-import { ESize } from "./interfaces";
+import { EMin, ESize } from "./interfaces";
 import "./DynaInputDurationSlider.less";
 export interface IDynaInputDurationSliderProps {
     className?: string;
@@ -9,8 +9,8 @@ export interface IDynaInputDurationSliderProps {
     size?: ESize;
     suffix?: string;
     label?: JSX.Element;
-    stats?: number[];
-    min: number;
+    hours?: number[];
+    minType: EMin;
     max: number;
     value: number;
     onChange: (name: string, value: number) => void;
@@ -19,7 +19,9 @@ export declare class DynaInputDurationSlider extends React.Component<IDynaInputD
     static defaultProps: IDynaInputDurationSliderProps;
     private readonly className;
     private handleChange;
+    private getStatTicks;
     private renderTopBackground;
+    private renderBottomBackground;
     private renderLabel;
     render(): JSX.Element;
 }

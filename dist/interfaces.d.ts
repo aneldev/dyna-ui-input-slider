@@ -8,3 +8,7 @@ export interface IHourRange {
     from: number;
     to: number;
 }
+export declare enum EMin {
+    MIN = "MIN",
+    ZERO = "ZERO"
+}

@@ -15,6 +15,7 @@ export interface IDynaInput0024SliderProps {
 export declare class DynaInput0024Slider extends React.Component<IDynaInput0024SliderProps> {
     static defaultProps: IDynaInput0024SliderProps;
     private readonly className;
+    private getStatTicks;
     private handleChange;
     private renderLabel;
     private renderTopBackground;
