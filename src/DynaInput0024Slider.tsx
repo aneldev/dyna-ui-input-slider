@@ -3,7 +3,8 @@ import {dynaClassName, DynaClassName} from "dyna-class-name"
 import {EColor} from "dyna-ui-styles";
 
 import {DynaInputRangeSlider} from "./DynaInputRangeSlider";
-import {ESize, IHourRange} from "./interfaces";
+import {EMin, ESize, IHourRange} from "./interfaces";
+import {getHourTicks} from "./utils";
 
 import {StatsBar} from "./components/StatsBar";
 import {Daylight} from "./components/Daylight";
@@ -34,6 +35,11 @@ export class DynaInput0024Slider extends React.Component<IDynaInput0024SliderPro
 
   private readonly className: DynaClassName = dynaClassName("dyna-input-0024-slider");
 
+  private getStatTicks(): number[] {
+    const {statsHours} = this.props;
+    return getHourTicks(statsHours, EMin.ZERO, 24);
+  }
+
   private handleChange(name: string, values: number[]): void {
     const {onChange} = this.props;
     onChange(name, {from: values[0], to: values[1]})
@@ -56,18 +62,11 @@ export class DynaInput0024Slider extends React.Component<IDynaInput0024SliderPro
   }
 
   private renderTopBackground(): JSX.Element {
-    const {statsHours} = this.props;
-    return (
-      <StatsBar
-        ticks={statsHours}
-      />
-    );
+    return <StatsBar ticks={this.getStatTicks()}/>;
   }
 
   private renderBottomBackground(): JSX.Element{
-    return (
-      <Daylight />
-    );
+    return <Daylight/>;
   }
 
   public render(): JSX.Element {

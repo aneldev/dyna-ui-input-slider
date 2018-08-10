@@ -1,5 +1,5 @@
 import * as React from "react";
-import {dynaClassName} from "dyna-class-name";
+import {DynaClassName, dynaClassName} from "dyna-class-name";
 import {EColor} from "dyna-ui-styles";
 import {round} from "dyna-loops";
 
@@ -21,7 +21,7 @@ export interface IDynaInputPriceSliderProps {
   prices: number[];
   step?: number;
   statTicksCount?: number;
-  min: EMin;
+  minType: EMin;
   value: number;
   formatPrice?: (value: number) => string;
   onChange: (name: string, value: number) => void;
@@ -37,13 +37,23 @@ export class DynaInputPriceSlider extends React.Component<IDynaInputPriceSliderP
     prices: [],
     step: 10,
     statTicksCount: 24,
-    min: EMin.ZERO,
+    minType: EMin.ZERO,
     value: 0,
     formatPrice: (value: number) => `$${value}`,
     onChange: (name: string, value: number) => undefined,
   };
 
   private readonly className = dynaClassName("dyna-input-price-slider");
+
+  private get minPrice(): number {
+    const {minType, prices} = this.props;
+    return Math.floor(getMinValue(minType, prices))
+  }
+
+  private get maxPrice(): number {
+    const {step, prices} = this.props;
+    return Math.ceil(getMaxValue(prices) + step);
+  }
 
   private handleChange(name: string, value: number): void {
     const {onChange} = this.props;
@@ -53,6 +63,17 @@ export class DynaInputPriceSlider extends React.Component<IDynaInputPriceSliderP
   private renderTopBackground(): JSX.Element {
     const {prices, statTicksCount} = this.props;
     return <StatsBar ticks={getTicks(prices, statTicksCount)}/>;
+  }
+
+  private renderBottomBackground(): JSX.Element {
+    const {formatPrice} = this.props;
+    const csMinMax: DynaClassName = dynaClassName(this.className("__min-max-container"));
+    return (
+      <div className={csMinMax("")}>
+        <div className={csMinMax("__min")}>{formatPrice(this.minPrice)}</div>
+        <div className={csMinMax("__max")}>{formatPrice(this.maxPrice)}</div>
+      </div>
+    );
   }
 
   private renderLabel(): JSX.Element {
@@ -73,9 +94,10 @@ export class DynaInputPriceSlider extends React.Component<IDynaInputPriceSliderP
   public render(): JSX.Element {
     const {
       className: userClassName,
-      name, color, size,
+      name,
+      color, size,
       step,
-      min, value, prices,
+      value,
     } = this.props;
 
     const className: string = this.className(
@@ -91,9 +113,10 @@ export class DynaInputPriceSlider extends React.Component<IDynaInputPriceSliderP
           color={color}
           size={size}
           step={step}
-          min={Math.floor(getMinValue(min, prices))}
-          max={Math.ceil(getMaxValue(prices) + step)}
+          min={this.minPrice}
+          max={this.maxPrice}
           topBackground={this.renderTopBackground()}
+          bottomBackground={this.renderBottomBackground()}
           value={round(value, -1)}
           onChange={this.handleChange.bind(this)}
         />

@@ -237,7 +237,7 @@ export default {
                 size={ESize.PX32}
                 value={this.state.value}
                 hours={myDemoHours}
-                min={EMin.MIN}
+                minType={EMin.MIN}
                 max={27}
                 onChange={(name: string, value: number) => {
                   console.log('onChange value', name, value);
@@ -285,7 +285,7 @@ export default {
                 size={ESize.PX32}
                 value={this.state.value}
                 prices={demoPrices}
-                min={EMin.MIN}
+                minType={EMin.MIN}
                 onChange={(name: string, value: number) => {
                   console.log('onChange value', name, value);
                   this.setState({value});

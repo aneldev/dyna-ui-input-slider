@@ -10,7 +10,7 @@ export interface IDynaInputDurationSliderProps {
     suffix?: string;
     label?: JSX.Element;
     hours?: number[];
-    min: EMin;
+    minType: EMin;
     max: number;
     value: number;
     onChange: (name: string, value: number) => void;
@@ -21,6 +21,7 @@ export declare class DynaInputDurationSlider extends React.Component<IDynaInputD
     private handleChange;
     private getStatTicks;
     private renderTopBackground;
+    private renderBottomBackground;
     private renderLabel;
     render(): JSX.Element;
 }

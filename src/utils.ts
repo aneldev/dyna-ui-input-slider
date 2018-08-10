@@ -22,6 +22,25 @@ export const getStepValue = (min: number, max: number, steps: number): number =>
   return (max - min) / steps;
 };
 
+
+export const getHourTicks = (hours: number[], minType: EMin, max: number): number[] => {
+  const minValue: number = getMinValue(minType, hours);
+  const ticks: number[] =
+    hours
+      .filter((hour: number) => hour >= minValue && hour <= max)
+      .reduce((acc: number[], hour: number) => {
+        if (!acc[hour]) acc[hour] = 0;
+        acc[hour]++;
+        return acc;
+      }, [])
+  ;
+  for (let i: number = minValue; i <= max; i++) {
+    if (!ticks[i]) ticks[i] = 0;
+  }
+  return ticks;
+};
+
+
 export const getTicks = (values:number[], ticksCount:number): number[] =>{
   let min: number = null;
   let max: number = null;
