@@ -51,14 +51,46 @@ IDynaInputRangeSliderProps {
 }
 ```
 
+# DynaInput0024Slider
+
+```
+IDynaInput0024SliderProps {
+  className?: string;
+  name?: string;
+  color?: EColor;
+  size?: ESize;
+  label?: JSX.Element;
+  value: IHourRange;        // hour: 00-24
+  statsHours?: number [];   // for stats, numbers 0-24
+  onChange?: (name: string, value: IHourRange) => void;
+}
+```
+
 # Supported Sizes
 
 ```
-export enum ESize {
+enum ESize {
   PX12 = "PX12",
   PX24 = "PX24",
   PX32 = "PX32",
   PX48 = "PX48",
+}
+```
+
+# Supported Colors
+
+```
+EColor {
+  BLACK_WHITE = "BLACK_WHITE",
+  BLACK_ORANGE = "BLACK_ORANGE",
+  TRANSPARENT_ORANGE = "TRANSPARENT_ORANGE",
+  TRANSPARENT_WHITE = "TRANSPARENT_WHITE",
+  ORANGE_WHITE = "ORANGE_WHITE",
+  RED_WHITE = "RED_WHITE",
+  GREY_WHITE = "GREY_WHITE",
+  WHITE_BLACK = "WHITE_BLACK",
+  WHITE_RED = "WHITE_RED",
+  WHITE_ORANGE = "WHITE_ORANGE",
 }
 ```
 
