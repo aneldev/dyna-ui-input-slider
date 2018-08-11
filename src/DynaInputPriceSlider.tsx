@@ -19,7 +19,7 @@ export interface IDynaInputPriceSliderProps {
   size?: ESize;
   label?: JSX.Element;
   prices: number[];
-  step?: number;
+  step?: number;    // integer, >= 1
   statTicksCount?: number;
   minType: EMin;
   value: number;
@@ -35,7 +35,7 @@ export class DynaInputPriceSlider extends React.Component<IDynaInputPriceSliderP
     color: EColor.WHITE_BLACK,
     size: ESize.PX24,
     prices: [],
-    step: 10,
+    step: 1,
     statTicksCount: 24,
     minType: EMin.ZERO,
     value: 0,
@@ -80,13 +80,15 @@ export class DynaInputPriceSlider extends React.Component<IDynaInputPriceSliderP
     const {
       label,
       formatPrice,
+      step,
       value,
     } = this.props;
+    const precision: number = -(step.toString().length - 1) || 0;
 
     return (
       <div className={this.className("__label")}>
         <div className={this.className("__label__content")}>{label}</div>
-        <div className={this.className("__label__value")}>{formatPrice(round(value, -1))}</div>
+        <div className={this.className("__label__value")}>{formatPrice(round(value, precision))}</div>
       </div>
     );
   }

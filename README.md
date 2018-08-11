@@ -99,7 +99,7 @@ IDynaInputPriceSliderProps {
   size?: ESize;
   label?: JSX.Element;
   prices: number[];
-  step?: number;
+  step?: number;            // integer, >= 1
   statTicksCount?: number;
   min: EMin;
   value: number;
