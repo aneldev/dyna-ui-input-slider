@@ -2,12 +2,12 @@ import * as React from "react";
 import {dynaClassName, DynaClassName} from "dyna-class-name"
 import {EColor} from "dyna-ui-styles";
 
-import {DynaInputRangeSlider} from "./DynaInputRangeSlider";
 import {EMin, ESize, IHourRange} from "./interfaces";
-import {getHourTicks} from "./utils";
+import {DynaInputRangeSlider} from "./DynaInputRangeSlider";
 
 import {StatsBar} from "./components/StatsBar";
 import {Daylight} from "./components/Daylight";
+import {StatsHelper} from "./utils/StatsHelper";
 
 import "./DynaInput0024Slider.less";
 
@@ -18,7 +18,7 @@ export interface IDynaInput0024SliderProps {
   size?: ESize;
   label?: JSX.Element;
   value: IHourRange;        // hour: 00-24
-  statsHours?: number [];   // for stats, numbers 0-24
+  hours?: number [];        // for stats, numbers 0-24
   onChange?: (name: string, value: IHourRange) => void;
 }
 
@@ -33,11 +33,20 @@ export class DynaInput0024Slider extends React.Component<IDynaInput0024SliderPro
     onChange: (name: String, value: IHourRange) => undefined,
   };
 
+  constructor(props:IDynaInput0024SliderProps){
+    super(props);
+    this.statsHelper.setData(props.hours);
+  }
+
   private readonly className: DynaClassName = dynaClassName("dyna-input-0024-slider");
+  private readonly statsHelper: StatsHelper = new StatsHelper();
+
+  public componentWillReceiveProps(nextProps:IDynaInput0024SliderProps):void{
+    this.statsHelper.setData(nextProps.hours);
+  }
 
   private getStatTicks(): number[] {
-    const {statsHours} = this.props;
-    return getHourTicks(statsHours, EMin.ZERO, 24);
+    return this.statsHelper.getIntegerTicks(EMin.ZERO);
   }
 
   private handleChange(name: string, values: number[]): void {

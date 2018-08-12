@@ -7,8 +7,7 @@ import {EMin, ESize} from "./interfaces";
 
 import {DynaInputSlider} from "./DynaInputSlider";
 import {StatsBar} from "./components/StatsBar";
-
-import {getMaxValue, getMinValue, getTicks} from "./utils";
+import {StatsHelper} from "./utils/StatsHelper";
 
 import "./DynaInputPriceSlider.less";
 
@@ -43,16 +42,26 @@ export class DynaInputPriceSlider extends React.Component<IDynaInputPriceSliderP
     onChange: (name: string, value: number) => undefined,
   };
 
+  constructor(props: IDynaInputPriceSliderProps) {
+    super(props);
+    this.statsHelper.setData(props.prices);
+  }
+
   private readonly className = dynaClassName("dyna-input-price-slider");
+  private readonly statsHelper: StatsHelper = new StatsHelper();
+
+  public componentWillReceiveProps(nextProps:IDynaInputPriceSliderProps):void{
+    this.statsHelper.setData(nextProps.prices);
+  }
 
   private get minPrice(): number {
     const {minType, prices} = this.props;
-    return Math.floor(getMinValue(minType, prices))
+    return Math.floor(this.statsHelper.getMinValue(minType))
   }
 
   private get maxPrice(): number {
     const {step, prices} = this.props;
-    return Math.ceil(getMaxValue(prices) + step);
+    return Math.ceil(this.statsHelper.getMaxValue() + step);
   }
 
   private handleChange(name: string, value: number): void {
@@ -61,8 +70,8 @@ export class DynaInputPriceSlider extends React.Component<IDynaInputPriceSliderP
   }
 
   private renderTopBackground(): JSX.Element {
-    const {prices, statTicksCount} = this.props;
-    return <StatsBar ticks={getTicks(prices, statTicksCount)}/>;
+    const {statTicksCount} = this.props;
+    return <StatsBar ticks={this.statsHelper.getFloatGroupTicks(statTicksCount)}/>;
   }
 
   private renderBottomBackground(): JSX.Element {

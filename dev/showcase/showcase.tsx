@@ -190,7 +190,7 @@ export default {
                 color={EColor.WHITE_ORANGE}
                 size={ESize.PX32}
                 value={this.state.value}
-                statsHours={myDemoHours}
+                hours={myDemoHours}
                 onChange={(name: string, value: IHourRange) => {
                   console.log('onChange value', name, value);
                   this.setState({value});
@@ -249,7 +249,6 @@ export default {
                 value={this.state.value}
                 hours={myDemoHours}
                 minType={EMin.MIN}
-                max={27}
                 onChange={(name: string, value: number) => {
                   console.log('onChange value', name, value);
                   this.setState({value});
