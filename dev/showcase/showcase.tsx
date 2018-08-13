@@ -11,9 +11,9 @@ import {
   IHourRange,
   DynaInputSlider,
   DynaInputRangeSlider, IDynaInputRangeSliderProps,
-  DynaInput0024Slider,
-  DynaInputDurationSlider,
-  DynaInputPriceSlider,
+  DynaInput0024Slider, IDynaInput0024SliderProps,
+  DynaInputDurationSlider, IDynaInputDurationSliderProps,
+  DynaInputPriceSlider, IDynaInputPriceSliderProps,
 } from "../../src";
 
 // Internal Helper Components
@@ -173,8 +173,6 @@ export default {
           value: IHourRange;
         }
 
-        const myDemoHours = demoHours.concat(demoHours, demoHours, demoHours, demoHours, demoHours);
-
         class MyApp extends React.Component<IMyAppProps, IMyAppState> {
           constructor(props: IMyAppProps) {
             super(props);
@@ -190,7 +188,6 @@ export default {
                 color={EColor.WHITE_ORANGE}
                 size={ESize.PX32}
                 value={this.state.value}
-                hours={myDemoHours}
                 onChange={(name: string, value: IHourRange) => {
                   console.log('onChange value', name, value);
                   this.setState({value});
@@ -212,7 +209,15 @@ export default {
           props.push({
             slug: `size-${size}`,
             title: `${size.toLowerCase()}`,
-            props: {size},
+            props: {size} as IDynaInput0024SliderProps,
+          });
+          props.push({
+            slug: `size-${size}-with-stats`,
+            title: `${size.toLowerCase()} with stats`,
+            props: {
+              size,
+              hours: demoHours.concat(demoHours, demoHours, demoHours, demoHours, demoHours),
+            } as IDynaInput0024SliderProps,
           });
         });
         return props;
@@ -230,8 +235,6 @@ export default {
           value: number;
         }
 
-        const myDemoHours = demoHours.concat(demoHours, demoHours, demoHours, demoHours, demoHours);
-
         class MyApp extends React.Component<IMyAppProps, IMyAppState> {
           constructor(props: IMyAppProps) {
             super(props);
@@ -247,8 +250,8 @@ export default {
                 color={EColor.WHITE_ORANGE}
                 size={ESize.PX32}
                 value={this.state.value}
-                values={myDemoHours}
-                minType={EMin.MIN}
+                values={[0, 24]}
+                minType={EMin.ZERO}
                 onChange={(name: string, value: number) => {
                   console.log('onChange value', name, value);
                   this.setState({value});
@@ -270,7 +273,15 @@ export default {
           props.push({
             slug: `size-${size}`,
             title: `${size.toLowerCase()}`,
-            props: {size},
+            props: {size} as IDynaInputDurationSliderProps,
+          });
+          props.push({
+            slug: `size-${size}-ws`,
+            title: `${size.toLowerCase()} with stats`,
+            props: {
+              size,
+              values: demoHours.concat(demoHours, demoHours, demoHours, demoHours, demoHours),
+            } as IDynaInputDurationSliderProps,
           });
         });
         return props;
@@ -288,8 +299,6 @@ export default {
           value: number;
         }
 
-        const myDemoHours = demoHours.concat(demoHours, demoHours, demoHours, demoHours, demoHours);
-
         class MyApp extends React.Component<IMyAppProps, IMyAppState> {
           constructor(props: IMyAppProps) {
             super(props);
@@ -304,9 +313,9 @@ export default {
               <DynaInputPriceSlider
                 color={EColor.WHITE_ORANGE}
                 size={ESize.PX32}
+                prices={[0, 533]}
                 value={this.state.value}
-                prices={demoPrices}
-                minType={EMin.MIN}
+                minType={EMin.ZERO}
                 onChange={(name: string, value: number) => {
                   console.log('onChange value', name, value);
                   this.setState({value});
@@ -329,6 +338,14 @@ export default {
               slug: `size-${size}`,
               title: `${size.toLowerCase()}`,
               props: {size},
+          });
+          props.push({
+            slug: `size-${size}-ws`,
+            title: `${size.toLowerCase()} with stats`,
+            props: {
+              size,
+              prices: demoPrices.concat(demoPrices, demoPrices, demoPrices, demoPrices, demoPrices),
+            } as IDynaInputPriceSliderProps,
           });
         });
         return props;

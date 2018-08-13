@@ -1170,7 +1170,7 @@ var DynaInput0024Slider = /** @class */ (function (_super) {
     };
     DynaInput0024Slider.prototype.renderTopBackground = function () {
         var hours = this.props.hours;
-        if (hours.length < 3)
+        if (!hours || hours.length < 3)
             return null;
         return React.createElement(StatsBar_1.StatsBar, { ticks: this.getStatTicks() });
     };

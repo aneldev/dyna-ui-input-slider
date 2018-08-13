@@ -35,6 +35,8 @@ interface IDynaInputSliderProps {
 
 Select multiple values from a from - to range.
 
+_**?** == optional_
+
 ```
 IDynaInputRangeSliderProps {
   className?: string;
@@ -52,6 +54,8 @@ IDynaInputRangeSliderProps {
 ```
 
 # DynaInput0024Slider
+
+_**?** == optional_
 
 ```
 IDynaInput0024SliderProps {
@@ -80,6 +84,8 @@ If you don't have `values`, in order to set the min/max, apply an array of 2 ite
 
 For instance, to set min/max 120/240, apply: `values={[120, 250]}`
 
+_**?** == optional_
+
 ```
 IDynaInputDurationSliderProps {
   className?: string;
@@ -87,7 +93,7 @@ IDynaInputDurationSliderProps {
   label?: JSX.Element | string;
   color?: EColor;
   size?: ESize;
-  values?: number[];      // for stats and to get the min/max
+  values: number[];       // for stats and to get the min/max
   unitSuffix?: string;    // unit suffix, used for ui only
   minType: EMin;
   value: number;

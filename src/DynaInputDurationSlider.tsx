@@ -16,7 +16,7 @@ export interface IDynaInputDurationSliderProps {
   label?: JSX.Element | string;
   color?: EColor;
   size?: ESize;
-  values?: number[];      // for stats and to get the min/max
+  values: number[];       // for stats and to get the min/max
   unitSuffix?: string;    // unit suffix, used for ui only
   minType: EMin;
   value: number;
@@ -31,7 +31,7 @@ export class DynaInputDurationSlider extends React.Component<IDynaInputDurationS
     label: null,
     color: EColor.WHITE_BLACK,
     size: ESize.PX24,
-    values: [],
+    values: [0, 200],
     minType: EMin.ZERO,
     value: 0,
     onChange: (name: string, value: number) => undefined,
@@ -60,8 +60,7 @@ export class DynaInputDurationSlider extends React.Component<IDynaInputDurationS
   }
 
   private renderTopBackground(): JSX.Element {
-    const {values} = this.props;
-    if (values.length < 3) return null;
+    if (!this.statsHelper.hasValues) return null;
     return <StatsBar ticks={this.getStatTicks()}/>;
   }
 

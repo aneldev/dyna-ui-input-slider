@@ -19,7 +19,17 @@ export class StatsHelper {
 
   private isInputSame(inputData: number[]): boolean {
     // not the best comparison to find this, lodash is a nice solution, but this is fast
-    return inputData === this.inputData && inputData.length === this.inputData.length;
+    return (
+      inputData === this.inputData &&
+      (
+        !inputData ||
+        (inputData.length === this.inputData.length)
+      )
+    );
+  }
+
+  public get hasValues(): boolean {
+    return this.inputData && this.inputData.length > 2;
   }
 
   public getMinValue = (minType: EMin) => {

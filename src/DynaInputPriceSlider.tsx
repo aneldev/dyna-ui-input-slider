@@ -33,7 +33,7 @@ export class DynaInputPriceSlider extends React.Component<IDynaInputPriceSliderP
     label: null,
     color: EColor.WHITE_BLACK,
     size: ESize.PX24,
-    prices: [],
+    prices: [0, 2000],
     step: 1,
     statTicksCount: 24,
     minType: EMin.ZERO,
