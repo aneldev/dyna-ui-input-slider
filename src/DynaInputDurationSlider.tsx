@@ -16,7 +16,7 @@ export interface IDynaInputDurationSliderProps {
   color?: EColor;
   size?: ESize;
   suffix?: string;
-  label?: JSX.Element;
+  label?: JSX.Element | string;
   hours?: number[];
   minType: EMin;
   value: number;

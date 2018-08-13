@@ -7,7 +7,7 @@ export interface IDynaInputPriceSliderProps {
     name?: string;
     color?: EColor;
     size?: ESize;
-    label?: JSX.Element;
+    label?: JSX.Element | string;
     prices: number[];
     step?: number;
     statTicksCount?: number;
@@ -18,7 +18,10 @@ export interface IDynaInputPriceSliderProps {
 }
 export declare class DynaInputPriceSlider extends React.Component<IDynaInputPriceSliderProps> {
     static defaultProps: IDynaInputPriceSliderProps;
+    constructor(props: IDynaInputPriceSliderProps);
     private readonly className;
+    private readonly statsHelper;
+    componentWillReceiveProps(nextProps: IDynaInputPriceSliderProps): void;
     private readonly minPrice;
     private readonly maxPrice;
     private handleChange;

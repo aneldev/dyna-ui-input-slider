@@ -622,73 +622,6 @@ exports.DynaInputSlider = DynaInputSlider;
 
 "use strict";
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var interfaces_1 = __webpack_require__(2);
-exports.getMinValue = function (minType, values) {
-    if (minType === interfaces_1.EMin.ZERO)
-        return 0;
-    return values.reduce(function (acc, value) {
-        if (acc === null || value < acc)
-            acc = value;
-        return acc;
-    }, null);
-};
-exports.getMaxValue = function (values) {
-    return values.reduce(function (acc, value) {
-        if (acc === null || value > acc)
-            acc = value;
-        return acc;
-    }, null);
-};
-exports.getStepValue = function (min, max, steps) {
-    return (max - min) / steps;
-};
-exports.getHourTicks = function (hours, minType, max) {
-    var minValue = exports.getMinValue(minType, hours);
-    var ticks = hours
-        .filter(function (hour) { return hour >= minValue && hour <= max; })
-        .reduce(function (acc, hour) {
-        if (!acc[hour])
-            acc[hour] = 0;
-        acc[hour]++;
-        return acc;
-    }, []);
-    for (var i = minValue; i <= max; i++) {
-        if (!ticks[i])
-            ticks[i] = 0;
-    }
-    return ticks;
-};
-exports.getTicks = function (values, ticksCount) {
-    var min = null;
-    var max = null;
-    values.forEach(function (value) {
-        if (min === null || min > value)
-            min = value;
-        if (max === null || max < value)
-            max = value;
-    });
-    var step = exports.getStepValue(min, max, ticksCount);
-    var tickLimits = Array(ticksCount - 1)
-        .fill(null)
-        .map(function (v, index) { return min + (step * index); });
-    tickLimits.push(max);
-    var output = tickLimits
-        .map(function (tickLimit, index, array) {
-        var from = index === 0 ? 0 : array[index - 1];
-        var to = tickLimit;
-        return values.filter(function (value) { return value > from && value < to + 1; }).length;
-    });
-    return output;
-};
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -742,6 +675,107 @@ var StatsBar = /** @class */ (function (_super) {
     return StatsBar;
 }(React.Component));
 exports.StatsBar = StatsBar;
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var interfaces_1 = __webpack_require__(2);
+var StatsHelper = /** @class */ (function () {
+    function StatsHelper() {
+        var _this = this;
+        this.inputData = null;
+        this.outputMin = null;
+        this.outputMax = null;
+        this.outputIntegerTicks = null;
+        this.outputFloatGroupTicks = []; // per ticksCount
+        this.getMinValue = function (minType) {
+            if (minType === interfaces_1.EMin.ZERO)
+                return 0;
+            if (_this.outputMin !== null)
+                return _this.outputMin;
+            _this.outputMin = _this.inputData.reduce(function (acc, value) {
+                if (acc === null || value < acc)
+                    acc = value;
+                return acc;
+            }, null);
+            return _this.outputMin;
+        };
+        this.getIntegerTicks = function (minType) {
+            if (_this.outputIntegerTicks !== null)
+                return _this.outputIntegerTicks;
+            var ticks = _this.inputData
+                .filter(function (hour) { return hour >= _this.getMinValue(minType) && hour <= _this.getMaxValue(); })
+                .reduce(function (acc, hour) {
+                if (!acc[hour])
+                    acc[hour] = 0;
+                acc[hour]++;
+                return acc;
+            }, []);
+            for (var i = _this.getMinValue(minType); i <= _this.getMaxValue(); i++) {
+                if (!ticks[i])
+                    ticks[i] = 0;
+            }
+            _this.outputIntegerTicks = ticks;
+            return _this.outputIntegerTicks;
+        };
+    }
+    StatsHelper.prototype.setData = function (data) {
+        if (!this.isInputSame(data)) {
+            this.inputData = data;
+            this.outputMin = null;
+            this.outputMax = null;
+            this.outputIntegerTicks = null;
+            this.outputFloatGroupTicks = [];
+        }
+    };
+    StatsHelper.prototype.isInputSame = function (inputData) {
+        // not the best comparison to find this, lodash is a nice solution, but this is fast
+        return inputData === this.inputData && inputData.length === this.inputData.length;
+    };
+    StatsHelper.prototype.getMaxValue = function () {
+        if (this.outputMax !== null)
+            return this.outputMax;
+        this.outputMax = this.inputData.reduce(function (acc, value) {
+            if (acc === null || value > acc)
+                acc = value;
+            return acc;
+        }, null);
+        return this.outputMax;
+    };
+    StatsHelper.prototype.getFloatGroupTicks = function (ticksCount) {
+        var _this = this;
+        if (this.outputFloatGroupTicks[ticksCount])
+            return this.outputFloatGroupTicks[ticksCount];
+        var min = null;
+        var max = null;
+        this.inputData.forEach(function (value) {
+            if (min === null || min > value)
+                min = value;
+            if (max === null || max < value)
+                max = value;
+        });
+        var step = (max - min) / ticksCount;
+        var tickLimits = Array(ticksCount - 1)
+            .fill(null)
+            .map(function (v, index) { return min + (step * index); });
+        tickLimits.push(max);
+        var output = tickLimits
+            .map(function (tickLimit, index, array) {
+            var from = index === 0 ? 0 : array[index - 1];
+            var to = tickLimit;
+            return _this.inputData.filter(function (value) { return value > from && value < to + 1; }).length;
+        });
+        this.outputFloatGroupTicks[ticksCount] = output;
+        return this.outputFloatGroupTicks[ticksCount];
+    };
+    return StatsHelper;
+}());
+exports.StatsHelper = StatsHelper;
 
 
 /***/ }),
@@ -1103,22 +1137,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(3);
 var dyna_class_name_1 = __webpack_require__(5);
 var dyna_ui_styles_1 = __webpack_require__(4);
-var DynaInputRangeSlider_1 = __webpack_require__(10);
 var interfaces_1 = __webpack_require__(2);
-var utils_1 = __webpack_require__(7);
-var StatsBar_1 = __webpack_require__(8);
+var DynaInputRangeSlider_1 = __webpack_require__(10);
+var StatsBar_1 = __webpack_require__(7);
 var Daylight_1 = __webpack_require__(24);
+var StatsHelper_1 = __webpack_require__(8);
 __webpack_require__(27);
 var DynaInput0024Slider = /** @class */ (function (_super) {
     __extends(DynaInput0024Slider, _super);
-    function DynaInput0024Slider() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
+    function DynaInput0024Slider(props) {
+        var _this = _super.call(this, props) || this;
         _this.className = dyna_class_name_1.dynaClassName("dyna-input-0024-slider");
+        _this.statsHelper = new StatsHelper_1.StatsHelper();
+        _this.statsHelper.setData(props.hours);
         return _this;
     }
+    DynaInput0024Slider.prototype.componentWillReceiveProps = function (nextProps) {
+        this.statsHelper.setData(nextProps.hours);
+    };
     DynaInput0024Slider.prototype.getStatTicks = function () {
-        var statsHours = this.props.statsHours;
-        return utils_1.getHourTicks(statsHours, interfaces_1.EMin.ZERO, 24);
+        return this.statsHelper.getIntegerTicks(interfaces_1.EMin.ZERO);
     };
     DynaInput0024Slider.prototype.handleChange = function (name, values) {
         var onChange = this.props.onChange;
@@ -1328,33 +1366,38 @@ var dyna_class_name_1 = __webpack_require__(5);
 var dyna_ui_styles_1 = __webpack_require__(4);
 var interfaces_1 = __webpack_require__(2);
 var DynaInputSlider_1 = __webpack_require__(6);
-var StatsBar_1 = __webpack_require__(8);
-var utils_1 = __webpack_require__(7);
+var StatsBar_1 = __webpack_require__(7);
+var StatsHelper_1 = __webpack_require__(8);
 __webpack_require__(30);
 var DynaInputDurationSlider = /** @class */ (function (_super) {
     __extends(DynaInputDurationSlider, _super);
-    function DynaInputDurationSlider() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
+    function DynaInputDurationSlider(props) {
+        var _this = _super.call(this, props) || this;
         _this.className = dyna_class_name_1.dynaClassName("dyna-input-duration-slider");
+        _this.statsHelper = new StatsHelper_1.StatsHelper();
+        _this.statsHelper.setData(props.hours);
         return _this;
     }
+    DynaInputDurationSlider.prototype.componentWillReceiveProps = function (nextProps) {
+        this.statsHelper.setData(nextProps.hours);
+    };
     DynaInputDurationSlider.prototype.handleChange = function (name, value) {
         var onChange = this.props.onChange;
         onChange(name, value);
     };
     DynaInputDurationSlider.prototype.getStatTicks = function () {
-        var _a = this.props, hours = _a.hours, minType = _a.minType, max = _a.max;
-        return utils_1.getHourTicks(hours, minType, max);
+        var minType = this.props.minType;
+        return this.statsHelper.getIntegerTicks(minType);
     };
     DynaInputDurationSlider.prototype.renderTopBackground = function () {
         return React.createElement(StatsBar_1.StatsBar, { ticks: this.getStatTicks() });
     };
     DynaInputDurationSlider.prototype.renderBottomBackground = function () {
-        var _a = this.props, minType = _a.minType, max = _a.max, suffix = _a.suffix, hours = _a.hours;
+        var _a = this.props, minType = _a.minType, suffix = _a.suffix, hours = _a.hours;
         var csMinMax = dyna_class_name_1.dynaClassName(this.className("__min-max-container"));
         return (React.createElement("div", { className: csMinMax("") },
-            React.createElement("div", { className: csMinMax("__min") }, "" + utils_1.getMinValue(minType, hours) + suffix),
-            React.createElement("div", { className: csMinMax("__max") }, "" + max + suffix)));
+            React.createElement("div", { className: csMinMax("__min") }, "" + this.statsHelper.getMinValue(minType) + suffix),
+            React.createElement("div", { className: csMinMax("__max") }, "" + this.statsHelper.getMaxValue() + suffix)));
     };
     DynaInputDurationSlider.prototype.renderLabel = function () {
         var _a = this.props, label = _a.label, suffix = _a.suffix, value = _a.value;
@@ -1363,11 +1406,11 @@ var DynaInputDurationSlider = /** @class */ (function (_super) {
             React.createElement("div", { className: this.className("__label__value") }, "" + value + suffix)));
     };
     DynaInputDurationSlider.prototype.render = function () {
-        var _a = this.props, userClassName = _a.className, name = _a.name, color = _a.color, size = _a.size, minType = _a.minType, max = _a.max, hours = _a.hours, value = _a.value;
+        var _a = this.props, userClassName = _a.className, name = _a.name, color = _a.color, size = _a.size, minType = _a.minType, value = _a.value;
         var className = this.className("", userClassName && "/" + userClassName, "--size-" + size);
         return (React.createElement("div", { className: className },
             this.renderLabel(),
-            React.createElement(DynaInputSlider_1.DynaInputSlider, { name: name, color: color, size: size, min: utils_1.getMinValue(minType, hours), max: max, topBackground: this.renderTopBackground(), bottomBackground: this.renderBottomBackground(), value: value, onChange: this.handleChange.bind(this) })));
+            React.createElement(DynaInputSlider_1.DynaInputSlider, { name: name, color: color, size: size, min: this.statsHelper.getMinValue(minType), max: this.statsHelper.getMaxValue(), topBackground: this.renderTopBackground(), bottomBackground: this.renderBottomBackground(), value: value, onChange: this.handleChange.bind(this) })));
     };
     DynaInputDurationSlider.defaultProps = {
         className: "",
@@ -1378,7 +1421,6 @@ var DynaInputDurationSlider = /** @class */ (function (_super) {
         size: interfaces_1.ESize.PX24,
         hours: [],
         minType: interfaces_1.EMin.ZERO,
-        max: 32,
         value: 0,
         onChange: function (name, value) { return undefined; },
     };
@@ -1455,20 +1497,25 @@ var dyna_ui_styles_1 = __webpack_require__(4);
 var dyna_loops_1 = __webpack_require__(11);
 var interfaces_1 = __webpack_require__(2);
 var DynaInputSlider_1 = __webpack_require__(6);
-var StatsBar_1 = __webpack_require__(8);
-var utils_1 = __webpack_require__(7);
+var StatsBar_1 = __webpack_require__(7);
+var StatsHelper_1 = __webpack_require__(8);
 __webpack_require__(33);
 var DynaInputPriceSlider = /** @class */ (function (_super) {
     __extends(DynaInputPriceSlider, _super);
-    function DynaInputPriceSlider() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
+    function DynaInputPriceSlider(props) {
+        var _this = _super.call(this, props) || this;
         _this.className = dyna_class_name_1.dynaClassName("dyna-input-price-slider");
+        _this.statsHelper = new StatsHelper_1.StatsHelper();
+        _this.statsHelper.setData(props.prices);
         return _this;
     }
+    DynaInputPriceSlider.prototype.componentWillReceiveProps = function (nextProps) {
+        this.statsHelper.setData(nextProps.prices);
+    };
     Object.defineProperty(DynaInputPriceSlider.prototype, "minPrice", {
         get: function () {
             var _a = this.props, minType = _a.minType, prices = _a.prices;
-            return Math.floor(utils_1.getMinValue(minType, prices));
+            return Math.floor(this.statsHelper.getMinValue(minType));
         },
         enumerable: true,
         configurable: true
@@ -1476,7 +1523,7 @@ var DynaInputPriceSlider = /** @class */ (function (_super) {
     Object.defineProperty(DynaInputPriceSlider.prototype, "maxPrice", {
         get: function () {
             var _a = this.props, step = _a.step, prices = _a.prices;
-            return Math.ceil(utils_1.getMaxValue(prices) + step);
+            return Math.ceil(this.statsHelper.getMaxValue() + step);
         },
         enumerable: true,
         configurable: true
@@ -1486,8 +1533,8 @@ var DynaInputPriceSlider = /** @class */ (function (_super) {
         onChange(name, value);
     };
     DynaInputPriceSlider.prototype.renderTopBackground = function () {
-        var _a = this.props, prices = _a.prices, statTicksCount = _a.statTicksCount;
-        return React.createElement(StatsBar_1.StatsBar, { ticks: utils_1.getTicks(prices, statTicksCount) });
+        var statTicksCount = this.props.statTicksCount;
+        return React.createElement(StatsBar_1.StatsBar, { ticks: this.statsHelper.getFloatGroupTicks(statTicksCount) });
     };
     DynaInputPriceSlider.prototype.renderBottomBackground = function () {
         var formatPrice = this.props.formatPrice;
@@ -1497,10 +1544,11 @@ var DynaInputPriceSlider = /** @class */ (function (_super) {
             React.createElement("div", { className: csMinMax("__max") }, formatPrice(this.maxPrice))));
     };
     DynaInputPriceSlider.prototype.renderLabel = function () {
-        var _a = this.props, label = _a.label, formatPrice = _a.formatPrice, value = _a.value;
+        var _a = this.props, label = _a.label, formatPrice = _a.formatPrice, step = _a.step, value = _a.value;
+        var precision = -(step.toString().length - 1) || 0;
         return (React.createElement("div", { className: this.className("__label") },
             React.createElement("div", { className: this.className("__label__content") }, label),
-            React.createElement("div", { className: this.className("__label__value") }, formatPrice(dyna_loops_1.round(value, -1)))));
+            React.createElement("div", { className: this.className("__label__value") }, formatPrice(dyna_loops_1.round(value, precision)))));
     };
     DynaInputPriceSlider.prototype.render = function () {
         var _a = this.props, userClassName = _a.className, name = _a.name, color = _a.color, size = _a.size, step = _a.step, value = _a.value;
@@ -1516,7 +1564,7 @@ var DynaInputPriceSlider = /** @class */ (function (_super) {
         color: dyna_ui_styles_1.EColor.WHITE_BLACK,
         size: interfaces_1.ESize.PX24,
         prices: [],
-        step: 10,
+        step: 1,
         statTicksCount: 24,
         minType: interfaces_1.EMin.ZERO,
         value: 0,

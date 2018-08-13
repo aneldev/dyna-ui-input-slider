@@ -16,7 +16,7 @@ export interface IDynaInput0024SliderProps {
   name?: string;
   color?: EColor;
   size?: ESize;
-  label?: JSX.Element;
+  label?: JSX.Element | string;
   value: IHourRange;        // hour: 00-24
   hours?: number [];        // for stats, numbers 0-24
   onChange?: (name: string, value: IHourRange) => void;

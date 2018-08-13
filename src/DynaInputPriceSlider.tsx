@@ -16,7 +16,7 @@ export interface IDynaInputPriceSliderProps {
   name?: string;
   color?: EColor;
   size?: ESize;
-  label?: JSX.Element;
+  label?: JSX.Element | string;
   prices: number[];
   step?: number;    // integer, >= 1
   statTicksCount?: number;
