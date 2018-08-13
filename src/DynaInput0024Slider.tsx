@@ -71,6 +71,8 @@ export class DynaInput0024Slider extends React.Component<IDynaInput0024SliderPro
   }
 
   private renderTopBackground(): JSX.Element {
+    const {hours} = this.props;
+    if (hours.length < 3) return null;
     return <StatsBar ticks={this.getStatTicks()}/>;
   }
 

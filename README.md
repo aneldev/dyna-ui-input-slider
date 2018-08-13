@@ -59,9 +59,9 @@ IDynaInput0024SliderProps {
   name?: string;
   color?: EColor;
   size?: ESize;
-  label?: JSX.Element;
+  label?: JSX.Element | string;
   value: IHourRange;        // hour: 00-24
-  statsHours?: number [];   // for stats, numbers 0-24
+  hours?: number [];        // for stats, integer numbers 0-24
   onChange?: (name: string, value: IHourRange) => void;
 }
 
@@ -72,36 +72,49 @@ interface IHourRange {
 ```
 
 # DynaInputDurationSlider
+Duration might be in any unit. Use the `unitSuffix` to show the unit of the duration.
+
+The component itself returns only numbers and is unaware of the unit.
+
+If you don't have `values`, in order to set the min/max, apply an array of 2 items with the desired range.
+
+For instance, to set min/max 120/240, apply: `values={[120, 250]}`
 
 ```
 IDynaInputDurationSliderProps {
-  className?: string
+  className?: string;
   name?: string;
+  label?: JSX.Element | string;
   color?: EColor;
   size?: ESize;
-  suffix?: string;
-  label?: JSX.Element;
-  stats?: number[];
-  min: number;
-  max: number;
+  values?: number[];      // for stats and to get the min/max
+  unitSuffix?: string;    // unit suffix, used for ui only
+  minType: EMin;
   value: number;
   onChange: (name: string, value: number) => void;
 }
 ```
 
 # DynaInputPriceSlider
+The component is unaware of the currency.
+
+Implement the `formatPrice` to show the price in the desired currency.
+
+If you don't have `prices`, in order to set the min/max, apply an array of 2 items with the desired range.
+
+For instance, to set min/max 0/2000, apply: `prices={[0, 2000]}`
 
 ```
 IDynaInputPriceSliderProps {
   className?: string
   name?: string;
+  label?: JSX.Element | string;
   color?: EColor;
   size?: ESize;
-  label?: JSX.Element;
-  prices: number[];
-  step?: number;            // integer, >= 1
+  step?: number;      // integer, >= 1
   statTicksCount?: number;
-  min: EMin;
+  minType: EMin;
+  prices: number[];   // for stats and to get the min/max
   value: number;
   formatPrice?: (value: number) => string;
   onChange: (name: string, value: number) => void;

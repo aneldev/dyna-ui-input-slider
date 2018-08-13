@@ -247,7 +247,7 @@ export default {
                 color={EColor.WHITE_ORANGE}
                 size={ESize.PX32}
                 value={this.state.value}
-                hours={myDemoHours}
+                values={myDemoHours}
                 minType={EMin.MIN}
                 onChange={(name: string, value: number) => {
                   console.log('onChange value', name, value);

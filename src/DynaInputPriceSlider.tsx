@@ -14,13 +14,13 @@ import "./DynaInputPriceSlider.less";
 export interface IDynaInputPriceSliderProps {
   className?: string
   name?: string;
+  label?: JSX.Element | string;
   color?: EColor;
   size?: ESize;
-  label?: JSX.Element | string;
-  prices: number[];
-  step?: number;    // integer, >= 1
+  step?: number;      // integer, >= 1
   statTicksCount?: number;
   minType: EMin;
+  prices: number[];   // for stats and to get the min/max
   value: number;
   formatPrice?: (value: number) => string;
   onChange: (name: string, value: number) => void;
@@ -61,7 +61,7 @@ export class DynaInputPriceSlider extends React.Component<IDynaInputPriceSliderP
 
   private get maxPrice(): number {
     const {step, prices} = this.props;
-    return Math.ceil(this.statsHelper.getMaxValue() + step);
+    return Math.ceil(this.statsHelper.getMaxValue());
   }
 
   private handleChange(name: string, value: number): void {
@@ -70,7 +70,8 @@ export class DynaInputPriceSlider extends React.Component<IDynaInputPriceSliderP
   }
 
   private renderTopBackground(): JSX.Element {
-    const {statTicksCount} = this.props;
+    const {prices, statTicksCount} = this.props;
+    if (prices.length < 3) return null;
     return <StatsBar ticks={this.statsHelper.getFloatGroupTicks(statTicksCount)}/>;
   }
 
