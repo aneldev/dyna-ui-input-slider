@@ -28,7 +28,7 @@ export interface IDynaInputPriceSliderProps {
 
 export class DynaInputPriceSlider extends React.Component<IDynaInputPriceSliderProps> {
   static defaultProps: IDynaInputPriceSliderProps = {
-    className: "",
+    className: undefined,
     name: null,
     label: null,
     color: EColor.WHITE_BLACK,

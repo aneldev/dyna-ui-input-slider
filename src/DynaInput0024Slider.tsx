@@ -24,7 +24,7 @@ export interface IDynaInput0024SliderProps {
 
 export class DynaInput0024Slider extends React.Component<IDynaInput0024SliderProps> {
   static defaultProps: IDynaInput0024SliderProps = {
-    className: "",
+    className: undefined,
     name: null,
     label: null,
     color: EColor.WHITE_BLACK,

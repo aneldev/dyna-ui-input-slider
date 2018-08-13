@@ -11,7 +11,7 @@ export interface IStatsBarProps {
 
 export class StatsBar extends React.Component<IStatsBarProps> {
   static defaultProps: IStatsBarProps = {
-    className: "",
+    className: undefined,
     ticks: [],
   };
 

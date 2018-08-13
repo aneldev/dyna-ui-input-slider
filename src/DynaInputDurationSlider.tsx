@@ -25,7 +25,7 @@ export interface IDynaInputDurationSliderProps {
 
 export class DynaInputDurationSlider extends React.Component<IDynaInputDurationSliderProps> {
   static defaultProps: IDynaInputDurationSliderProps = {
-    className: "",
+    className: undefined,
     name: null,
     unitSuffix: 'h',
     label: null,
