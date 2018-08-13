@@ -64,8 +64,8 @@ export class DynaInput0024Slider extends React.Component<IDynaInput0024SliderPro
 
     return (
       <div className={this.className("__label")}>
-        <div className={this.className("__label__content")}>{label}</div>
-        <div className={this.className("__label__value")}>{`${from}:00 - ${to}:00`}</div>
+        <div className={this.className("__label__content /dyna-slider-label")}>{label}</div>
+        <div className={this.className("__label__value /dyna-slider-value")}>{`${from}:00 - ${to}:00`}</div>
       </div>
     );
   }

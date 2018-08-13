@@ -1173,7 +1173,7 @@ var DynaInput0024Slider = /** @class */ (function (_super) {
     };
     DynaInput0024Slider.prototype.renderLabel = function () {
         var _a = this.props, label = _a.label, _b = _a.value, from = _b.from, to = _b.to;
-        return (React.createElement("div", { className: this.className("__label") },
+        return (React.createElement("div", { className: this.className("__label /dyna-slider-label") },
             React.createElement("div", { className: this.className("__label__content") }, label),
             React.createElement("div", { className: this.className("__label__value") }, from + ":00 - " + to + ":00")));
     };
@@ -1414,7 +1414,7 @@ var DynaInputDurationSlider = /** @class */ (function (_super) {
     };
     DynaInputDurationSlider.prototype.renderLabel = function () {
         var _a = this.props, label = _a.label, unitSuffix = _a.unitSuffix, value = _a.value;
-        return (React.createElement("div", { className: this.className("__label") },
+        return (React.createElement("div", { className: this.className("__label  /dyna-slider-label") },
             React.createElement("div", { className: this.className("__label__content") }, label),
             React.createElement("div", { className: this.className("__label__value") }, "" + value + unitSuffix)));
     };
@@ -1561,7 +1561,7 @@ var DynaInputPriceSlider = /** @class */ (function (_super) {
     DynaInputPriceSlider.prototype.renderLabel = function () {
         var _a = this.props, label = _a.label, formatPrice = _a.formatPrice, step = _a.step, value = _a.value;
         var precision = -(step.toString().length - 1) || 0;
-        return (React.createElement("div", { className: this.className("__label") },
+        return (React.createElement("div", { className: this.className("__label  /dyna-slider-label") },
             React.createElement("div", { className: this.className("__label__content") }, label),
             React.createElement("div", { className: this.className("__label__value") }, formatPrice(dyna_loops_1.round(value, precision)))));
     };

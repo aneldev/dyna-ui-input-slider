@@ -84,8 +84,8 @@ export class DynaInputDurationSlider extends React.Component<IDynaInputDurationS
 
     return (
       <div className={this.className("__label")}>
-        <div className={this.className("__label__content")}>{label}</div>
-        <div className={this.className("__label__value")}>{`${value}${unitSuffix}`}</div>
+        <div className={this.className("__label__content  /dyna-slider-label")}>{label}</div>
+        <div className={this.className("__label__value /dyna-slider-value")}>{`${value}${unitSuffix}`}</div>
       </div>
     );
   }
