@@ -1169,6 +1169,9 @@ var DynaInput0024Slider = /** @class */ (function (_super) {
             React.createElement("div", { className: this.className("__label__value") }, from + ":00 - " + to + ":00")));
     };
     DynaInput0024Slider.prototype.renderTopBackground = function () {
+        var hours = this.props.hours;
+        if (hours.length < 3)
+            return null;
         return React.createElement(StatsBar_1.StatsBar, { ticks: this.getStatTicks() });
     };
     DynaInput0024Slider.prototype.renderBottomBackground = function () {
@@ -1375,11 +1378,11 @@ var DynaInputDurationSlider = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.className = dyna_class_name_1.dynaClassName("dyna-input-duration-slider");
         _this.statsHelper = new StatsHelper_1.StatsHelper();
-        _this.statsHelper.setData(props.hours);
+        _this.statsHelper.setData(props.values);
         return _this;
     }
     DynaInputDurationSlider.prototype.componentWillReceiveProps = function (nextProps) {
-        this.statsHelper.setData(nextProps.hours);
+        this.statsHelper.setData(nextProps.values);
     };
     DynaInputDurationSlider.prototype.handleChange = function (name, value) {
         var onChange = this.props.onChange;
@@ -1390,20 +1393,23 @@ var DynaInputDurationSlider = /** @class */ (function (_super) {
         return this.statsHelper.getIntegerTicks(minType);
     };
     DynaInputDurationSlider.prototype.renderTopBackground = function () {
+        var values = this.props.values;
+        if (values.length < 3)
+            return null;
         return React.createElement(StatsBar_1.StatsBar, { ticks: this.getStatTicks() });
     };
     DynaInputDurationSlider.prototype.renderBottomBackground = function () {
-        var _a = this.props, minType = _a.minType, suffix = _a.suffix, hours = _a.hours;
+        var _a = this.props, minType = _a.minType, unitSuffix = _a.unitSuffix;
         var csMinMax = dyna_class_name_1.dynaClassName(this.className("__min-max-container"));
         return (React.createElement("div", { className: csMinMax("") },
-            React.createElement("div", { className: csMinMax("__min") }, "" + this.statsHelper.getMinValue(minType) + suffix),
-            React.createElement("div", { className: csMinMax("__max") }, "" + this.statsHelper.getMaxValue() + suffix)));
+            React.createElement("div", { className: csMinMax("__min") }, "" + this.statsHelper.getMinValue(minType) + unitSuffix),
+            React.createElement("div", { className: csMinMax("__max") }, "" + this.statsHelper.getMaxValue() + unitSuffix)));
     };
     DynaInputDurationSlider.prototype.renderLabel = function () {
-        var _a = this.props, label = _a.label, suffix = _a.suffix, value = _a.value;
+        var _a = this.props, label = _a.label, unitSuffix = _a.unitSuffix, value = _a.value;
         return (React.createElement("div", { className: this.className("__label") },
             React.createElement("div", { className: this.className("__label__content") }, label),
-            React.createElement("div", { className: this.className("__label__value") }, "" + value + suffix)));
+            React.createElement("div", { className: this.className("__label__value") }, "" + value + unitSuffix)));
     };
     DynaInputDurationSlider.prototype.render = function () {
         var _a = this.props, userClassName = _a.className, name = _a.name, color = _a.color, size = _a.size, minType = _a.minType, value = _a.value;
@@ -1415,11 +1421,11 @@ var DynaInputDurationSlider = /** @class */ (function (_super) {
     DynaInputDurationSlider.defaultProps = {
         className: "",
         name: null,
-        suffix: 'h',
+        unitSuffix: 'h',
         label: null,
         color: dyna_ui_styles_1.EColor.WHITE_BLACK,
         size: interfaces_1.ESize.PX24,
-        hours: [],
+        values: [],
         minType: interfaces_1.EMin.ZERO,
         value: 0,
         onChange: function (name, value) { return undefined; },
@@ -1523,7 +1529,7 @@ var DynaInputPriceSlider = /** @class */ (function (_super) {
     Object.defineProperty(DynaInputPriceSlider.prototype, "maxPrice", {
         get: function () {
             var _a = this.props, step = _a.step, prices = _a.prices;
-            return Math.ceil(this.statsHelper.getMaxValue() + step);
+            return Math.ceil(this.statsHelper.getMaxValue());
         },
         enumerable: true,
         configurable: true
@@ -1533,7 +1539,9 @@ var DynaInputPriceSlider = /** @class */ (function (_super) {
         onChange(name, value);
     };
     DynaInputPriceSlider.prototype.renderTopBackground = function () {
-        var statTicksCount = this.props.statTicksCount;
+        var _a = this.props, prices = _a.prices, statTicksCount = _a.statTicksCount;
+        if (prices.length < 3)
+            return null;
         return React.createElement(StatsBar_1.StatsBar, { ticks: this.statsHelper.getFloatGroupTicks(statTicksCount) });
     };
     DynaInputPriceSlider.prototype.renderBottomBackground = function () {

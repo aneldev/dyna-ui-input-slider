@@ -5,13 +5,13 @@ import "./DynaInputPriceSlider.less";
 export interface IDynaInputPriceSliderProps {
     className?: string;
     name?: string;
+    label?: JSX.Element | string;
     color?: EColor;
     size?: ESize;
-    label?: JSX.Element | string;
-    prices: number[];
     step?: number;
     statTicksCount?: number;
     minType: EMin;
+    prices: number[];
     value: number;
     formatPrice?: (value: number) => string;
     onChange: (name: string, value: number) => void;

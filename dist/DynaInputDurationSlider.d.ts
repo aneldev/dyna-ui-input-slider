@@ -5,11 +5,11 @@ import "./DynaInputDurationSlider.less";
 export interface IDynaInputDurationSliderProps {
     className?: string;
     name?: string;
+    label?: JSX.Element | string;
     color?: EColor;
     size?: ESize;
-    suffix?: string;
-    label?: JSX.Element | string;
-    hours?: number[];
+    values?: number[];
+    unitSuffix?: string;
     minType: EMin;
     value: number;
     onChange: (name: string, value: number) => void;
