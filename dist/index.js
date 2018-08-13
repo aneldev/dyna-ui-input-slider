@@ -669,7 +669,7 @@ var StatsBar = /** @class */ (function (_super) {
         return (React.createElement("div", { className: className }, this.percentageTicks.map(function (value, index) { return (React.createElement("div", { key: index, className: _this.className("__item"), style: { minHeight: dyna_loops_1.round(value, 1).toString() + "%" } })); })));
     };
     StatsBar.defaultProps = {
-        className: "",
+        className: undefined,
         ticks: [],
     };
     return StatsBar;
@@ -1187,13 +1187,13 @@ var DynaInput0024Slider = /** @class */ (function (_super) {
     };
     DynaInput0024Slider.prototype.render = function () {
         var _a = this.props, userClassName = _a.className, name = _a.name, color = _a.color, size = _a.size, _b = _a.value, from = _b.from, to = _b.to;
-        var className = this.className("", userClassName && '/' + userClassName || "", "--size-" + size);
+        var className = this.className("", userClassName && '/' + userClassName, "--size-" + size);
         return (React.createElement("div", { className: className },
             this.renderLabel(),
             React.createElement(DynaInputRangeSlider_1.DynaInputRangeSlider, { name: name, color: color, size: size, topBackground: this.renderTopBackground(), bottomBackground: this.renderBottomBackground(), min: 0, max: 24, pushable: true, value: [from, to], onChange: this.handleChange.bind(this) })));
     };
     DynaInput0024Slider.defaultProps = {
-        className: "",
+        className: undefined,
         name: null,
         label: null,
         color: dyna_ui_styles_1.EColor.WHITE_BLACK,
@@ -1426,7 +1426,7 @@ var DynaInputDurationSlider = /** @class */ (function (_super) {
             React.createElement(DynaInputSlider_1.DynaInputSlider, { name: name, color: color, size: size, min: this.statsHelper.getMinValue(minType), max: this.statsHelper.getMaxValue(), topBackground: this.renderTopBackground(), bottomBackground: this.renderBottomBackground(), value: value, onChange: this.handleChange.bind(this) })));
     };
     DynaInputDurationSlider.defaultProps = {
-        className: "",
+        className: undefined,
         name: null,
         unitSuffix: 'h',
         label: null,
@@ -1573,7 +1573,7 @@ var DynaInputPriceSlider = /** @class */ (function (_super) {
             React.createElement(DynaInputSlider_1.DynaInputSlider, { name: name, color: color, size: size, step: step, min: this.minPrice, max: this.maxPrice, topBackground: this.renderTopBackground(), bottomBackground: this.renderBottomBackground(), value: dyna_loops_1.round(value, -1), onChange: this.handleChange.bind(this) })));
     };
     DynaInputPriceSlider.defaultProps = {
-        className: "",
+        className: undefined,
         name: null,
         label: null,
         color: dyna_ui_styles_1.EColor.WHITE_BLACK,
