@@ -7,6 +7,7 @@ export declare class StatsHelper {
     private outputFloatGroupTicks;
     setData(data: number[]): void;
     private isInputSame;
+    readonly hasValues: boolean;
     getMinValue: (minType: EMin) => number;
     getMaxValue(): number;
     getIntegerTicks: (minType: EMin) => number[];

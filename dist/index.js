@@ -735,8 +735,17 @@ var StatsHelper = /** @class */ (function () {
     };
     StatsHelper.prototype.isInputSame = function (inputData) {
         // not the best comparison to find this, lodash is a nice solution, but this is fast
-        return inputData === this.inputData && inputData.length === this.inputData.length;
+        return (inputData === this.inputData &&
+            (!inputData ||
+                (inputData.length === this.inputData.length)));
     };
+    Object.defineProperty(StatsHelper.prototype, "hasValues", {
+        get: function () {
+            return this.inputData && this.inputData.length > 2;
+        },
+        enumerable: true,
+        configurable: true
+    });
     StatsHelper.prototype.getMaxValue = function () {
         if (this.outputMax !== null)
             return this.outputMax;
@@ -1169,8 +1178,7 @@ var DynaInput0024Slider = /** @class */ (function (_super) {
             React.createElement("div", { className: this.className("__label__value") }, from + ":00 - " + to + ":00")));
     };
     DynaInput0024Slider.prototype.renderTopBackground = function () {
-        var hours = this.props.hours;
-        if (!hours || hours.length < 3)
+        if (!this.statsHelper.hasValues)
             return null;
         return React.createElement(StatsBar_1.StatsBar, { ticks: this.getStatTicks() });
     };
@@ -1238,7 +1246,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, ".dyna-slider-stats-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 100%;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end;\n}\n.dyna-slider-stats-bar__item {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1;\n          flex: 1 1;\n  background-color: gray;\n  margin: 0 0.5px;\n}\n", ""]);
+exports.push([module.i, ".dyna-slider-stats-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 100%;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end;\n  -webkit-transition: height 200ms ease-in-out;\n  transition: height 200ms ease-in-out;\n}\n.dyna-slider-stats-bar__item {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1;\n          flex: 1 1;\n  background-color: gray;\n  margin: 0 0.5px;\n}\n", ""]);
 
 // exports
 
@@ -1393,8 +1401,7 @@ var DynaInputDurationSlider = /** @class */ (function (_super) {
         return this.statsHelper.getIntegerTicks(minType);
     };
     DynaInputDurationSlider.prototype.renderTopBackground = function () {
-        var values = this.props.values;
-        if (values.length < 3)
+        if (!this.statsHelper.hasValues)
             return null;
         return React.createElement(StatsBar_1.StatsBar, { ticks: this.getStatTicks() });
     };
@@ -1425,7 +1432,7 @@ var DynaInputDurationSlider = /** @class */ (function (_super) {
         label: null,
         color: dyna_ui_styles_1.EColor.WHITE_BLACK,
         size: interfaces_1.ESize.PX24,
-        values: [],
+        values: [0, 200],
         minType: interfaces_1.EMin.ZERO,
         value: 0,
         onChange: function (name, value) { return undefined; },
@@ -1571,7 +1578,7 @@ var DynaInputPriceSlider = /** @class */ (function (_super) {
         label: null,
         color: dyna_ui_styles_1.EColor.WHITE_BLACK,
         size: interfaces_1.ESize.PX24,
-        prices: [],
+        prices: [0, 2000],
         step: 1,
         statTicksCount: 24,
         minType: interfaces_1.EMin.ZERO,
