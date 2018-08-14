@@ -46,7 +46,9 @@ export class DynaInput0024Slider extends React.Component<IDynaInput0024SliderPro
   }
 
   private getStatTicks(): number[] {
-    return this.statsHelper.getIntegerTicks(EMin.ZERO);
+    const ticks:number[] = this.statsHelper.getIntegerTicks(EMin.ZERO);
+    while (ticks.length<24) ticks.push(0);
+    return ticks;
   }
 
   private handleChange(name: string, values: number[]): void {
