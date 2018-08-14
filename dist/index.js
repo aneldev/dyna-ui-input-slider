@@ -1167,7 +1167,10 @@ var DynaInput0024Slider = /** @class */ (function (_super) {
         this.statsHelper.setData(nextProps.hours);
     };
     DynaInput0024Slider.prototype.getStatTicks = function () {
-        return this.statsHelper.getIntegerTicks(interfaces_1.EMin.ZERO);
+        var ticks = this.statsHelper.getIntegerTicks(interfaces_1.EMin.ZERO);
+        while (ticks.length < 24)
+            ticks.push(0);
+        return ticks;
     };
     DynaInput0024Slider.prototype.handleChange = function (name, values) {
         var onChange = this.props.onChange;
