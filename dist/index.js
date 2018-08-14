@@ -573,26 +573,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(3);
 var rc_slider_1 = __webpack_require__(9);
 var dyna_ui_styles_1 = __webpack_require__(4);
+var dyna_class_name_1 = __webpack_require__(5);
 var interfaces_1 = __webpack_require__(2);
 var DynaInputSlider = /** @class */ (function (_super) {
     __extends(DynaInputSlider, _super);
     function DynaInputSlider() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.className = dyna_class_name_1.dynaClassName("dyna-slider");
+        return _this;
     }
     DynaInputSlider.prototype.handleChange = function (value) {
         var _a = this.props, name = _a.name, onChange = _a.onChange;
         onChange(name, value);
     };
     DynaInputSlider.prototype.render = function () {
-        var _a = this.props, userClassName = _a.className, disabled = _a.disabled, topBackground = _a.topBackground, bottomBackground = _a.bottomBackground, color = _a.color, size = _a.size, min = _a.min, max = _a.max, step = _a.step, value = _a.value;
-        var className = [
-            "dyna-slider",
-            userClassName,
-            "dyna-slider--single-value-mode",
-            color ? "dyna-slider--color-" + color : '',
-            "dyna-slider--size-" + size,
-        ].join(' ').trim();
-        return (React.createElement("div", { className: className },
+        var _a = this.props, disabled = _a.disabled, topBackground = _a.topBackground, bottomBackground = _a.bottomBackground, color = _a.color, size = _a.size, min = _a.min, max = _a.max, step = _a.step, value = _a.value;
+        var classNames = [
+            "--single-value-mode",
+            color ? "--color-" + color : '',
+            "--size-" + size,
+        ];
+        return (React.createElement("div", { className: this.className.root(this.props, classNames) },
             React.createElement("div", { className: "dyna-slider__top-background" }, topBackground),
             React.createElement("div", { className: "dyna-slider__bottom-background" }, bottomBackground),
             React.createElement(rc_slider_1.default, { disabled: disabled, min: min, max: max, step: step, value: value, onChange: this.handleChange.bind(this) })));
@@ -813,25 +814,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(3);
 var rc_slider_1 = __webpack_require__(9);
 var dyna_ui_styles_1 = __webpack_require__(4);
+var dyna_class_name_1 = __webpack_require__(5);
 var interfaces_1 = __webpack_require__(2);
 var DynaInputRangeSlider = /** @class */ (function (_super) {
     __extends(DynaInputRangeSlider, _super);
     function DynaInputRangeSlider() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.className = dyna_class_name_1.dynaClassName("dyna-slider");
+        return _this;
     }
     DynaInputRangeSlider.prototype.handleChange = function (value) {
         var _a = this.props, name = _a.name, onChange = _a.onChange;
         onChange(name, value);
     };
     DynaInputRangeSlider.prototype.render = function () {
-        var _a = this.props, userClassName = _a.className, disabled = _a.disabled, topBackground = _a.topBackground, bottomBackground = _a.bottomBackground, color = _a.color, size = _a.size, min = _a.min, max = _a.max, step = _a.step, pushable = _a.pushable, value = _a.value;
-        var className = [
-            "dyna-slider",
-            userClassName,
-            color ? "dyna-slider--color-" + color : '',
-            "dyna-slider--size-" + size,
-        ].join(' ').trim();
-        return (React.createElement("div", { className: className },
+        var _a = this.props, disabled = _a.disabled, topBackground = _a.topBackground, bottomBackground = _a.bottomBackground, color = _a.color, size = _a.size, min = _a.min, max = _a.max, step = _a.step, pushable = _a.pushable, value = _a.value;
+        var classNames = [
+            color ? "--color-" + color : '',
+            "--size-" + size,
+        ];
+        return (React.createElement("div", { className: this.className.root(this.props, classNames) },
             React.createElement("div", { className: "dyna-slider__top-background" }, topBackground),
             React.createElement("div", { className: "dyna-slider__bottom-background" }, bottomBackground),
             React.createElement(rc_slider_1.Range, { disabled: disabled, min: min, max: max, step: step, pushable: pushable, value: value, count: value.length, onChange: this.handleChange.bind(this) })));
@@ -1187,8 +1189,8 @@ var DynaInput0024Slider = /** @class */ (function (_super) {
     };
     DynaInput0024Slider.prototype.render = function () {
         var _a = this.props, userClassName = _a.className, name = _a.name, color = _a.color, size = _a.size, _b = _a.value, from = _b.from, to = _b.to;
-        var className = this.className("", userClassName && '/' + userClassName, "--size-" + size);
-        return (React.createElement("div", { className: className },
+        var className = "--size-" + size;
+        return (React.createElement("div", { className: this.className.root(this.props, className) },
             this.renderLabel(),
             React.createElement(DynaInputRangeSlider_1.DynaInputRangeSlider, { name: name, color: color, size: size, topBackground: this.renderTopBackground(), bottomBackground: this.renderBottomBackground(), min: 0, max: 24, pushable: true, value: [from, to], onChange: this.handleChange.bind(this) })));
     };
@@ -1420,8 +1422,8 @@ var DynaInputDurationSlider = /** @class */ (function (_super) {
     };
     DynaInputDurationSlider.prototype.render = function () {
         var _a = this.props, userClassName = _a.className, name = _a.name, color = _a.color, size = _a.size, minType = _a.minType, value = _a.value;
-        var className = this.className("", userClassName && "/" + userClassName, "--size-" + size);
-        return (React.createElement("div", { className: className },
+        var className = "--size-" + size;
+        return (React.createElement("div", { className: this.className.root(this.props, className) },
             this.renderLabel(),
             React.createElement(DynaInputSlider_1.DynaInputSlider, { name: name, color: color, size: size, min: this.statsHelper.getMinValue(minType), max: this.statsHelper.getMaxValue(), topBackground: this.renderTopBackground(), bottomBackground: this.renderBottomBackground(), value: value, onChange: this.handleChange.bind(this) })));
     };
@@ -1567,8 +1569,8 @@ var DynaInputPriceSlider = /** @class */ (function (_super) {
     };
     DynaInputPriceSlider.prototype.render = function () {
         var _a = this.props, userClassName = _a.className, name = _a.name, color = _a.color, size = _a.size, step = _a.step, value = _a.value;
-        var className = this.className("", userClassName && "/" + userClassName, "--size-" + size);
-        return (React.createElement("div", { className: className },
+        var className = "--size-" + size;
+        return (React.createElement("div", { className: this.className.root(this.props, className) },
             this.renderLabel(),
             React.createElement(DynaInputSlider_1.DynaInputSlider, { name: name, color: color, size: size, step: step, min: this.minPrice, max: this.maxPrice, topBackground: this.renderTopBackground(), bottomBackground: this.renderBottomBackground(), value: dyna_loops_1.round(value, -1), onChange: this.handleChange.bind(this) })));
     };

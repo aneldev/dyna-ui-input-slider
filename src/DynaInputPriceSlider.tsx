@@ -112,14 +112,10 @@ export class DynaInputPriceSlider extends React.Component<IDynaInputPriceSliderP
       value,
     } = this.props;
 
-    const className: string = this.className(
-      "",
-      userClassName && "/" + userClassName,
-      `--size-${size}`,
-    );
+    const className: string = `--size-${size}`;
 
     return (
-      <div className={className}>
+      <div className={this.className.root(this.props, className)}>
         {this.renderLabel()}
         <DynaInputSlider
           name={name}

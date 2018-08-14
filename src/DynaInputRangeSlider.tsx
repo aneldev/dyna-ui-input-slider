@@ -1,6 +1,7 @@
 import * as React from "react";
 import {Range} from "rc-slider";
 import {EColor} from "dyna-ui-styles";
+import {dynaClassName} from "dyna-class-name";
 import {ESize} from "./interfaces";
 
 // help: https://github.com/react-component/slider
@@ -38,6 +39,8 @@ export class DynaInputRangeSlider extends React.Component<IDynaInputRangeSliderP
     onChange: () => undefined,
   };
 
+  private readonly className = dynaClassName("dyna-slider");
+
   private handleChange(value: number[]): void {
     const {name, onChange} = this.props;
     onChange(name, value);
@@ -45,7 +48,6 @@ export class DynaInputRangeSlider extends React.Component<IDynaInputRangeSliderP
 
   public render(): JSX.Element {
     const {
-      className: userClassName,
       disabled,
       topBackground,
       bottomBackground,
@@ -58,15 +60,13 @@ export class DynaInputRangeSlider extends React.Component<IDynaInputRangeSliderP
       value,
     } = this.props;
 
-    const className: string = [
-      "dyna-slider",
-      userClassName,
-      color ? `dyna-slider--color-${color}` : '',
-      `dyna-slider--size-${size}`,
-    ].join(' ').trim();
+    const classNames: string[] = [
+      color ? `--color-${color}` : '',
+      `--size-${size}`,
+    ];
 
     return (
-      <div className={className}>
+      <div className={this.className.root(this.props, classNames)}>
         <div className="dyna-slider__top-background">{topBackground}</div>
         <div className="dyna-slider__bottom-background">{bottomBackground}</div>
         <Range
