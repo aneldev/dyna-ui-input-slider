@@ -645,9 +645,14 @@ var StatsBar = /** @class */ (function (_super) {
         _this.className = dyna_class_name_1.dynaClassName('dyna-slider-stats-bar');
         return _this;
     }
+    StatsBar.prototype.shouldComponentUpdate = function (newProps) {
+        return newProps.ticks.length !== this.props.ticks.length;
+    };
     Object.defineProperty(StatsBar.prototype, "percentageTicks", {
         get: function () {
             var ticks = this.props.ticks;
+            console.debug('StatsBar ticks', ticks.length);
+            console.time('StatsBar percentageTicks');
             var output = ticks.concat();
             var max = output.reduce(function (acc, value) {
                 if (acc === null || acc < value)
@@ -658,6 +663,7 @@ var StatsBar = /** @class */ (function (_super) {
                 if (!output[i])
                     output[i] = 0;
             output = output.map(function (v) { return 100 * v / max; });
+            console.timeEnd('StatsBar percentageTicks');
             return output;
         },
         enumerable: true,
@@ -699,6 +705,7 @@ var StatsHelper = /** @class */ (function () {
                 return 0;
             if (_this.outputMin !== null)
                 return _this.outputMin;
+            console.debug('getMinValue with calcs');
             _this.outputMin = _this.inputData.reduce(function (acc, value) {
                 if (acc === null || value < acc)
                     acc = value;
@@ -709,24 +716,26 @@ var StatsHelper = /** @class */ (function () {
         this.getIntegerTicks = function (minType) {
             if (_this.outputIntegerTicks !== null)
                 return _this.outputIntegerTicks;
-            var ticks = _this.inputData
-                .filter(function (hour) { return hour >= _this.getMinValue(minType) && hour <= _this.getMaxValue(); })
-                .reduce(function (acc, hour) {
-                if (!acc[hour])
-                    acc[hour] = 0;
-                acc[hour]++;
-                return acc;
-            }, []);
+            console.debug('getIntegerTicks with calcs');
+            _this.outputIntegerTicks =
+                _this.inputData
+                    .filter(function (hour) { return hour >= _this.getMinValue(minType) && hour <= _this.getMaxValue(); })
+                    .reduce(function (acc, hour) {
+                    if (!acc[hour])
+                        acc[hour] = 0;
+                    acc[hour]++;
+                    return acc;
+                }, []);
             for (var i = _this.getMinValue(minType); i <= _this.getMaxValue(); i++) {
-                if (!ticks[i])
-                    ticks[i] = 0;
+                if (!_this.outputIntegerTicks[i])
+                    _this.outputIntegerTicks[i] = 0;
             }
-            _this.outputIntegerTicks = ticks;
             return _this.outputIntegerTicks;
         };
     }
     StatsHelper.prototype.setData = function (data) {
         if (!this.isInputSame(data)) {
+            console.debug("reset data", JSON.parse(JSON.stringify({ new: data, current: this.inputData })));
             this.inputData = data;
             this.outputMin = null;
             this.outputMax = null;
@@ -736,9 +745,9 @@ var StatsHelper = /** @class */ (function () {
     };
     StatsHelper.prototype.isInputSame = function (inputData) {
         // not the best comparison to find this, lodash is a nice solution, but this is fast
-        return (inputData === this.inputData &&
-            (!inputData ||
-                (inputData.length === this.inputData.length)));
+        if (!inputData || !this.inputData)
+            return inputData === this.inputData;
+        return (inputData.length === this.inputData.length);
     };
     Object.defineProperty(StatsHelper.prototype, "hasValues", {
         get: function () {
@@ -750,6 +759,7 @@ var StatsHelper = /** @class */ (function () {
     StatsHelper.prototype.getMaxValue = function () {
         if (this.outputMax !== null)
             return this.outputMax;
+        console.debug('getMaxValue with calcs');
         this.outputMax = this.inputData.reduce(function (acc, value) {
             if (acc === null || value > acc)
                 acc = value;

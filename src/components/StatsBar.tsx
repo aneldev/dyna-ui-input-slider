@@ -15,6 +15,10 @@ export class StatsBar extends React.Component<IStatsBarProps> {
     ticks: [],
   };
 
+  public shouldComponentUpdate(newProps: IStatsBarProps):boolean{
+    return newProps.ticks.length !== this.props.ticks.length;
+  }
+
   private readonly className: DynaClassName = dynaClassName('dyna-slider-stats-bar');
 
   private get percentageTicks(): number[] {

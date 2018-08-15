@@ -6,6 +6,7 @@ export interface IStatsBarProps {
 }
 export declare class StatsBar extends React.Component<IStatsBarProps> {
     static defaultProps: IStatsBarProps;
+    shouldComponentUpdate(newProps: IStatsBarProps): boolean;
     private readonly className;
     private readonly percentageTicks;
     render(): JSX.Element;

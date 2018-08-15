@@ -19,12 +19,9 @@ export class StatsHelper {
 
   private isInputSame(inputData: number[]): boolean {
     // not the best comparison to find this, lodash is a nice solution, but this is fast
+    if (!inputData || !this.inputData) return inputData === this.inputData;
     return (
-      inputData === this.inputData &&
-      (
-        !inputData ||
-        (inputData.length === this.inputData.length)
-      )
+      inputData.length === this.inputData.length
     );
   }
 
@@ -58,7 +55,7 @@ export class StatsHelper {
   public getIntegerTicks = (minType: EMin): number[] => {
     if (this.outputIntegerTicks!==null) return this.outputIntegerTicks;
 
-    const ticks: number[] =
+    this.outputIntegerTicks =
       this.inputData
         .filter((hour: number) => hour >= this.getMinValue(minType) && hour <= this.getMaxValue())
         .reduce((acc: number[], hour: number) => {
@@ -68,10 +65,8 @@ export class StatsHelper {
         }, [])
     ;
     for (let i: number = this.getMinValue(minType); i <= this.getMaxValue(); i++) {
-      if (!ticks[i]) ticks[i] = 0;
+      if (!this.outputIntegerTicks[i]) this.outputIntegerTicks[i] = 0;
     }
-
-    this.outputIntegerTicks=ticks;
 
     return this.outputIntegerTicks;
   };
