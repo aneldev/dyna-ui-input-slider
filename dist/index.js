@@ -1539,7 +1539,7 @@ var DynaInputPriceSlider = /** @class */ (function (_super) {
     Object.defineProperty(DynaInputPriceSlider.prototype, "minPrice", {
         get: function () {
             var _a = this.props, minType = _a.minType, prices = _a.prices;
-            return Math.floor(this.statsHelper.getMinValue(minType));
+            return Math.round(this.statsHelper.getMinValue(minType));
         },
         enumerable: true,
         configurable: true
