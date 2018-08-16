@@ -651,8 +651,6 @@ var StatsBar = /** @class */ (function (_super) {
     Object.defineProperty(StatsBar.prototype, "percentageTicks", {
         get: function () {
             var ticks = this.props.ticks;
-            console.debug('StatsBar ticks', ticks.length);
-            console.time('StatsBar percentageTicks');
             var output = ticks.concat();
             var max = output.reduce(function (acc, value) {
                 if (acc === null || acc < value)
@@ -663,7 +661,6 @@ var StatsBar = /** @class */ (function (_super) {
                 if (!output[i])
                     output[i] = 0;
             output = output.map(function (v) { return 100 * v / max; });
-            console.timeEnd('StatsBar percentageTicks');
             return output;
         },
         enumerable: true,
@@ -705,7 +702,6 @@ var StatsHelper = /** @class */ (function () {
                 return 0;
             if (_this.outputMin !== null)
                 return _this.outputMin;
-            console.debug('getMinValue with calcs');
             _this.outputMin = _this.inputData.reduce(function (acc, value) {
                 if (acc === null || value < acc)
                     acc = value;
@@ -716,10 +712,9 @@ var StatsHelper = /** @class */ (function () {
         this.getIntegerTicks = function (minType) {
             if (_this.outputIntegerTicks !== null)
                 return _this.outputIntegerTicks;
-            console.debug('getIntegerTicks with calcs');
             _this.outputIntegerTicks =
                 _this.inputData
-                    .filter(function (hour) { return hour >= _this.getMinValue(minType) && hour <= _this.getMaxValue(); })
+                    .filter(function (hour) { return hour >= _this.getMinValue(minType); })
                     .reduce(function (acc, hour) {
                     if (!acc[hour])
                         acc[hour] = 0;
@@ -735,7 +730,6 @@ var StatsHelper = /** @class */ (function () {
     }
     StatsHelper.prototype.setData = function (data) {
         if (!this.isInputSame(data)) {
-            console.debug("reset data", JSON.parse(JSON.stringify({ new: data, current: this.inputData })));
             this.inputData = data;
             this.outputMin = null;
             this.outputMax = null;
@@ -759,7 +753,6 @@ var StatsHelper = /** @class */ (function () {
     StatsHelper.prototype.getMaxValue = function () {
         if (this.outputMax !== null)
             return this.outputMax;
-        console.debug('getMaxValue with calcs');
         this.outputMax = this.inputData.reduce(function (acc, value) {
             if (acc === null || value > acc)
                 acc = value;
@@ -767,13 +760,15 @@ var StatsHelper = /** @class */ (function () {
         }, null);
         return this.outputMax;
     };
-    StatsHelper.prototype.getFloatGroupTicks = function (ticksCount) {
+    StatsHelper.prototype.getFloatGroupTicks = function (minType, ticksCount) {
         var _this = this;
         if (this.outputFloatGroupTicks[ticksCount])
             return this.outputFloatGroupTicks[ticksCount];
         var min = null;
         var max = null;
-        this.inputData.forEach(function (value) {
+        this.inputData
+            .filter(function (hour) { return hour >= _this.getMinValue(minType); })
+            .forEach(function (value) {
             if (min === null || min > value)
                 min = value;
             if (max === null || max < value)
@@ -1412,8 +1407,8 @@ var DynaInputDurationSlider = /** @class */ (function (_super) {
         onChange(name, value);
     };
     DynaInputDurationSlider.prototype.getStatTicks = function () {
-        var minType = this.props.minType;
-        return this.statsHelper.getIntegerTicks(minType);
+        var _a = this.props, minType = _a.minType, ticksCount = _a.ticksCount;
+        return this.statsHelper.getFloatGroupTicks(minType, ticksCount);
     };
     DynaInputDurationSlider.prototype.renderTopBackground = function () {
         if (!this.statsHelper.hasValues)
@@ -1447,6 +1442,7 @@ var DynaInputDurationSlider = /** @class */ (function (_super) {
         label: null,
         color: dyna_ui_styles_1.EColor.WHITE_BLACK,
         size: interfaces_1.ESize.PX24,
+        ticksCount: 24,
         values: [0, 200],
         minType: interfaces_1.EMin.ZERO,
         value: 0,
@@ -1564,7 +1560,7 @@ var DynaInputPriceSlider = /** @class */ (function (_super) {
         var _a = this.props, prices = _a.prices, statTicksCount = _a.statTicksCount;
         if (prices.length < 3)
             return null;
-        return React.createElement(StatsBar_1.StatsBar, { ticks: this.statsHelper.getFloatGroupTicks(statTicksCount) });
+        return React.createElement(StatsBar_1.StatsBar, { ticks: this.statsHelper.getFloatGroupTicks(interfaces_1.EMin.ZERO, statTicksCount) });
     };
     DynaInputPriceSlider.prototype.renderBottomBackground = function () {
         var formatPrice = this.props.formatPrice;

@@ -72,7 +72,7 @@ export class DynaInputPriceSlider extends React.Component<IDynaInputPriceSliderP
   private renderTopBackground(): JSX.Element {
     const {prices, statTicksCount} = this.props;
     if (prices.length < 3) return null;
-    return <StatsBar ticks={this.statsHelper.getFloatGroupTicks(statTicksCount)}/>;
+    return <StatsBar ticks={this.statsHelper.getFloatGroupTicks(EMin.ZERO, statTicksCount)}/>;
   }
 
   private renderBottomBackground(): JSX.Element {

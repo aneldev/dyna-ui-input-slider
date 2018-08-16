@@ -41,7 +41,7 @@ export class StatsHelper {
     return this.outputMin;
   };
 
-  public getMaxValue():number{
+  public getMaxValue(): number {
     if (this.outputMax !== null) return this.outputMax;
 
     this.outputMax = this.inputData.reduce((acc: number, value: number) => {
@@ -53,11 +53,11 @@ export class StatsHelper {
   }
 
   public getIntegerTicks = (minType: EMin): number[] => {
-    if (this.outputIntegerTicks!==null) return this.outputIntegerTicks;
+    if (this.outputIntegerTicks !== null) return this.outputIntegerTicks;
 
     this.outputIntegerTicks =
       this.inputData
-        .filter((hour: number) => hour >= this.getMinValue(minType) && hour <= this.getMaxValue())
+        .filter((hour: number) => hour >= this.getMinValue(minType))
         .reduce((acc: number[], hour: number) => {
           if (!acc[hour]) acc[hour] = 0;
           acc[hour]++;
@@ -71,17 +71,19 @@ export class StatsHelper {
     return this.outputIntegerTicks;
   };
 
-  public getFloatGroupTicks(ticksCount:number):number[]{
+  public getFloatGroupTicks(minType: EMin, ticksCount: number): number[] {
     if (this.outputFloatGroupTicks[ticksCount]) return this.outputFloatGroupTicks[ticksCount];
 
     let min: number = null;
     let max: number = null;
-    this.inputData.forEach((value:number) => {
-      if (min === null || min > value) min = value;
-      if (max === null || max < value) max = value;
-    });
+    this.inputData
+      .filter((hour: number) => hour >= this.getMinValue(minType))
+      .forEach((value: number) => {
+        if (min === null || min > value) min = value;
+        if (max === null || max < value) max = value;
+      });
 
-    const step =  (max - min )/ ticksCount;
+    const step = (max - min) / ticksCount;
     const tickLimits =
       Array(ticksCount - 1)
         .fill(null)

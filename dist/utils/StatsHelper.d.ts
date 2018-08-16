@@ -11,5 +11,5 @@ export declare class StatsHelper {
     getMinValue: (minType: EMin) => number;
     getMaxValue(): number;
     getIntegerTicks: (minType: EMin) => number[];
-    getFloatGroupTicks(ticksCount: number): number[];
+    getFloatGroupTicks(minType: EMin, ticksCount: number): number[];
 }

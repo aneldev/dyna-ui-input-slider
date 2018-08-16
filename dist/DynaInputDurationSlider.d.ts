@@ -8,6 +8,7 @@ export interface IDynaInputDurationSliderProps {
     label?: JSX.Element | string;
     color?: EColor;
     size?: ESize;
+    ticksCount?: number;
     values: number[];
     unitSuffix?: string;
     minType: EMin;
