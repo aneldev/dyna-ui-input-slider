@@ -26,7 +26,9 @@ export class StatsHelper {
   }
 
   public get hasValues(): boolean {
-    return this.inputData && this.inputData.length > 2;
+    return this.inputData
+      && this.inputData.length !== 0
+      && this.inputData.length !== 2;
   }
 
   public getMinValue = (minType: EMin) => {

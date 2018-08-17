@@ -29,6 +29,7 @@ export class DynaInput0024Slider extends React.Component<IDynaInput0024SliderPro
     label: null,
     color: EColor.WHITE_BLACK,
     size: ESize.PX24,
+    hours: [],
     value: {from: 0, to: 24},
     onChange: (name: String, value: IHourRange) => undefined,
   };
@@ -73,7 +74,8 @@ export class DynaInput0024Slider extends React.Component<IDynaInput0024SliderPro
   }
 
   private renderTopBackground(): JSX.Element {
-    if (!this.statsHelper.hasValues) return null;
+    const {hours} = this.props;
+    if (!hours) return null;
     return <StatsBar ticks={this.getStatTicks()}/>;
   }
 

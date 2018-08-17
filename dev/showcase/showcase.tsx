@@ -209,7 +209,10 @@ export default {
           props.push({
             slug: `size-${size}`,
             title: `${size.toLowerCase()}`,
-            props: {size} as IDynaInput0024SliderProps,
+            props: {
+              size,
+              hours: null,
+            } as IDynaInput0024SliderProps,
           });
           props.push({
             slug: `size-${size}-with-stats`,

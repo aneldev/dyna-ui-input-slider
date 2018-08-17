@@ -18,7 +18,7 @@ export interface IDynaInputDurationSliderProps {
   size?: ESize;
   ticksCount?: number;
   values: number[];       // for stats and to get the min/max
-  unitSuffix?: string;    // unit suffix, used for ui only
+  unitSuffix?: string;          // unit suffix, used for ui only
   minType: EMin;
   value: number;
   onChange: (name: string, value: number) => void;

@@ -1188,8 +1188,6 @@ var DynaInput0024Slider = /** @class */ (function (_super) {
             React.createElement("div", { className: this.className("__label__value /dyna-slider-value") }, from + ":00 - " + to + ":00")));
     };
     DynaInput0024Slider.prototype.renderTopBackground = function () {
-        if (!this.statsHelper.hasValues)
-            return null;
         return React.createElement(StatsBar_1.StatsBar, { ticks: this.getStatTicks() });
     };
     DynaInput0024Slider.prototype.renderBottomBackground = function () {
