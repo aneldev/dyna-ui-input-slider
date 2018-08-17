@@ -646,7 +646,7 @@ var StatsBar = /** @class */ (function (_super) {
         return _this;
     }
     StatsBar.prototype.shouldComponentUpdate = function (newProps) {
-        return newProps.ticks.length !== this.props.ticks.length;
+        return newProps.ticks.join() !== this.props.ticks.join();
     };
     Object.defineProperty(StatsBar.prototype, "percentageTicks", {
         get: function () {
@@ -745,7 +745,9 @@ var StatsHelper = /** @class */ (function () {
     };
     Object.defineProperty(StatsHelper.prototype, "hasValues", {
         get: function () {
-            return this.inputData && this.inputData.length > 2;
+            return this.inputData
+                && this.inputData.length !== 0
+                && this.inputData.length !== 2;
         },
         enumerable: true,
         configurable: true
@@ -1188,6 +1190,9 @@ var DynaInput0024Slider = /** @class */ (function (_super) {
             React.createElement("div", { className: this.className("__label__value /dyna-slider-value") }, from + ":00 - " + to + ":00")));
     };
     DynaInput0024Slider.prototype.renderTopBackground = function () {
+        var hours = this.props.hours;
+        if (!hours)
+            return null;
         return React.createElement(StatsBar_1.StatsBar, { ticks: this.getStatTicks() });
     };
     DynaInput0024Slider.prototype.renderBottomBackground = function () {
@@ -1206,6 +1211,7 @@ var DynaInput0024Slider = /** @class */ (function (_super) {
         label: null,
         color: dyna_ui_styles_1.EColor.WHITE_BLACK,
         size: interfaces_1.ESize.PX24,
+        hours: [],
         value: { from: 0, to: 24 },
         onChange: function (name, value) { return undefined; },
     };

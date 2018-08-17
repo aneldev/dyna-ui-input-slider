@@ -16,7 +16,7 @@ export class StatsBar extends React.Component<IStatsBarProps> {
   };
 
   public shouldComponentUpdate(newProps: IStatsBarProps):boolean{
-    return newProps.ticks.length !== this.props.ticks.length;
+    return newProps.ticks.join() !== this.props.ticks.join();
   }
 
   private readonly className: DynaClassName = dynaClassName('dyna-slider-stats-bar');
