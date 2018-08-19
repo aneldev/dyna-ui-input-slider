@@ -660,7 +660,11 @@ var StatsBar = /** @class */ (function (_super) {
             for (var i = 0; i < output.length; i++)
                 if (!output[i])
                     output[i] = 0;
-            output = output.map(function (v) { return 100 * v / max; });
+            output = output.map(function (v) {
+                if (max === 0)
+                    return 0;
+                return 100 * v / max;
+            });
             return output;
         },
         enumerable: true,
@@ -670,7 +674,7 @@ var StatsBar = /** @class */ (function (_super) {
         var _this = this;
         var userClassName = this.props.className;
         var className = this.className("", userClassName && "/" + userClassName);
-        return (React.createElement("div", { className: className }, this.percentageTicks.map(function (value, index) { return (React.createElement("div", { key: index, className: _this.className("__item"), style: { minHeight: dyna_loops_1.round(value, 1).toString() + "%" } })); })));
+        return (React.createElement("div", { className: className }, this.percentageTicks.map(function (percentageValue, index) { return (React.createElement("div", { key: index, className: _this.className("__item"), style: { minHeight: dyna_loops_1.round(percentageValue, 1).toString() + "%" } })); })));
     };
     StatsBar.defaultProps = {
         className: undefined,

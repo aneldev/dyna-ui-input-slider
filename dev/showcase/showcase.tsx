@@ -157,9 +157,25 @@ export default {
       },
       component: (
         <StatsBar
-          ticks={[100, 2000, 800, 1300, 1000, 400, 100]}
+          ticks={null}
         />
       ),
+      props: [
+        {
+          slug: "random values",
+          title: "random values",
+          props: {
+            ticks: [100, 2000, 800, 1300, 1000, 400, 100],
+          }
+        },
+        {
+          slug: "all zeros",
+          title: "all zeros",
+          props: {
+            ticks: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          }
+        }
+      ],
     },
     {
       slug: 'DynaInput0024Slider',

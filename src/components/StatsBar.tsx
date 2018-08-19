@@ -30,7 +30,10 @@ export class StatsBar extends React.Component<IStatsBarProps> {
     }, null);
 
     for (let i = 0; i < output.length; i++) if (!output[i]) output[i] = 0;
-    output = output.map((v: number) => 100 * v / max);
+    output = output.map((v: number) => {
+      if (max === 0) return 0;
+      return 100 * v / max;
+    });
 
     return output;
   }
@@ -44,11 +47,11 @@ export class StatsBar extends React.Component<IStatsBarProps> {
 
     return (
       <div className={className}>
-        {this.percentageTicks.map((value: number, index: number) => (
+        {this.percentageTicks.map((percentageValue: number, index: number) => (
           <div
             key={index}
             className={this.className("__item")}
-            style={{minHeight: round(value, 1).toString() + "%"}}
+            style={{minHeight: round(percentageValue, 1).toString() + "%"}}
           />
         ))}
       </div>
