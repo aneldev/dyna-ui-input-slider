@@ -76,7 +76,7 @@ interface IHourRange {
 ```
 
 # DynaInputDurationSlider
-Duration might be in any unit. Use the `unitSuffix` to show the unit of the duration.
+Duration might be in any unit. Use the `formatValue` to show the unit of the duration.
 
 The component itself returns only numbers and is unaware of the unit.
 
@@ -94,7 +94,7 @@ IDynaInputDurationSliderProps {
   color?: EColor;
   size?: ESize;
   values: number[];       // for stats and to get the min/max
-  unitSuffix?: string;    // unit suffix, used for ui only
+  formatValue?: (value: number) => string;
   minType: EMin;
   value: number;
   onChange: (name: string, value: number) => void;

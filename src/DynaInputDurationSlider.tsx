@@ -17,8 +17,8 @@ export interface IDynaInputDurationSliderProps {
   color?: EColor;
   size?: ESize;
   ticksCount?: number;
-  values: number[];       // for stats and to get the min/max
-  unitSuffix?: string;          // unit suffix, used for ui only
+  values: number[];           // for stats and to get the min/max
+  formatValue?: (value: number) => string;
   minType: EMin;
   value: number;
   onChange: (name: string, value: number) => void;
@@ -28,7 +28,7 @@ export class DynaInputDurationSlider extends React.Component<IDynaInputDurationS
   static defaultProps: IDynaInputDurationSliderProps = {
     className: undefined,
     name: null,
-    unitSuffix: 'h',
+    formatValue: (value: number) => value.toString(),
     label: null,
     color: EColor.WHITE_BLACK,
     size: ESize.PX24,
@@ -67,12 +67,15 @@ export class DynaInputDurationSlider extends React.Component<IDynaInputDurationS
   }
 
   private renderBottomBackground(): JSX.Element {
-    const {minType, unitSuffix} = this.props;
+    const {
+      minType,
+      formatValue,
+    } = this.props;
     const csMinMax: DynaClassName = dynaClassName(this.className("__min-max-container"));
     return (
       <div className={csMinMax("")}>
-        <div className={csMinMax("__min")}>{`${this.statsHelper.getMinValue(minType)}${unitSuffix}`}</div>
-        <div className={csMinMax("__max")}>{`${this.statsHelper.getMaxValue()}${unitSuffix}`}</div>
+        <div className={csMinMax("__min")}>{formatValue(this.statsHelper.getMinValue(minType))}}</div>
+        <div className={csMinMax("__max")}>{formatValue(this.statsHelper.getMaxValue())}</div>
       </div>
     );
   }
@@ -80,14 +83,13 @@ export class DynaInputDurationSlider extends React.Component<IDynaInputDurationS
   private renderLabel(): JSX.Element {
     const {
       label,
-      unitSuffix,
+      formatValue,
       value,
     } = this.props;
-
     return (
       <div className={this.className("__label")}>
-        <div className={this.className("__label__content  /dyna-slider-label")}>{label}</div>
-        <div className={this.className("__label__value /dyna-slider-value")}>{`${value}${unitSuffix}`}</div>
+        <div className={this.className("__label__content /dyna-slider-label")}>{label}</div>
+        <div className={this.className("__label__value /dyna-slider-value")}>{formatValue(value)}</div>
       </div>
     );
   }

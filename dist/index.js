@@ -1424,17 +1424,19 @@ var DynaInputDurationSlider = /** @class */ (function (_super) {
         return React.createElement(StatsBar_1.StatsBar, { ticks: this.getStatTicks() });
     };
     DynaInputDurationSlider.prototype.renderBottomBackground = function () {
-        var _a = this.props, minType = _a.minType, unitSuffix = _a.unitSuffix;
+        var _a = this.props, minType = _a.minType, formatValue = _a.formatValue;
         var csMinMax = dyna_class_name_1.dynaClassName(this.className("__min-max-container"));
         return (React.createElement("div", { className: csMinMax("") },
-            React.createElement("div", { className: csMinMax("__min") }, "" + this.statsHelper.getMinValue(minType) + unitSuffix),
-            React.createElement("div", { className: csMinMax("__max") }, "" + this.statsHelper.getMaxValue() + unitSuffix)));
+            React.createElement("div", { className: csMinMax("__min") },
+                formatValue(this.statsHelper.getMinValue(minType)),
+                "}"),
+            React.createElement("div", { className: csMinMax("__max") }, formatValue(this.statsHelper.getMaxValue()))));
     };
     DynaInputDurationSlider.prototype.renderLabel = function () {
-        var _a = this.props, label = _a.label, unitSuffix = _a.unitSuffix, value = _a.value;
+        var _a = this.props, label = _a.label, formatValue = _a.formatValue, value = _a.value;
         return (React.createElement("div", { className: this.className("__label") },
-            React.createElement("div", { className: this.className("__label__content  /dyna-slider-label") }, label),
-            React.createElement("div", { className: this.className("__label__value /dyna-slider-value") }, "" + value + unitSuffix)));
+            React.createElement("div", { className: this.className("__label__content /dyna-slider-label") }, label),
+            React.createElement("div", { className: this.className("__label__value /dyna-slider-value") }, formatValue(value))));
     };
     DynaInputDurationSlider.prototype.render = function () {
         var _a = this.props, userClassName = _a.className, name = _a.name, color = _a.color, size = _a.size, minType = _a.minType, value = _a.value;
@@ -1446,7 +1448,7 @@ var DynaInputDurationSlider = /** @class */ (function (_super) {
     DynaInputDurationSlider.defaultProps = {
         className: undefined,
         name: null,
-        unitSuffix: 'h',
+        formatValue: function (value) { return value.toString(); },
         label: null,
         color: dyna_ui_styles_1.EColor.WHITE_BLACK,
         size: interfaces_1.ESize.PX24,

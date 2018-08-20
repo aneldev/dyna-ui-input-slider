@@ -10,7 +10,7 @@ export interface IDynaInputDurationSliderProps {
     size?: ESize;
     ticksCount?: number;
     values: number[];
-    unitSuffix?: string;
+    formatValue?: (value: number) => string;
     minType: EMin;
     value: number;
     onChange: (name: string, value: number) => void;
