@@ -74,7 +74,7 @@ export class DynaInputDurationSlider extends React.Component<IDynaInputDurationS
     const csMinMax: DynaClassName = dynaClassName(this.className("__min-max-container"));
     return (
       <div className={csMinMax("")}>
-        <div className={csMinMax("__min")}>{formatValue(this.statsHelper.getMinValue(minType))}}</div>
+        <div className={csMinMax("__min")}>{formatValue(this.statsHelper.getMinValue(minType))}</div>
         <div className={csMinMax("__max")}>{formatValue(this.statsHelper.getMaxValue())}</div>
       </div>
     );

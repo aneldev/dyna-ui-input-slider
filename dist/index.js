@@ -1427,9 +1427,7 @@ var DynaInputDurationSlider = /** @class */ (function (_super) {
         var _a = this.props, minType = _a.minType, formatValue = _a.formatValue;
         var csMinMax = dyna_class_name_1.dynaClassName(this.className("__min-max-container"));
         return (React.createElement("div", { className: csMinMax("") },
-            React.createElement("div", { className: csMinMax("__min") },
-                formatValue(this.statsHelper.getMinValue(minType)),
-                "}"),
+            React.createElement("div", { className: csMinMax("__min") }, formatValue(this.statsHelper.getMinValue(minType))),
             React.createElement("div", { className: csMinMax("__max") }, formatValue(this.statsHelper.getMaxValue()))));
     };
     DynaInputDurationSlider.prototype.renderLabel = function () {
