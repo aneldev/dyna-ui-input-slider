@@ -1264,7 +1264,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, ".dyna-slider-stats-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 100%;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end;\n  -webkit-transition: height 200ms ease-in-out;\n  transition: height 200ms ease-in-out;\n}\n.dyna-slider-stats-bar__item {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1;\n          flex: 1 1;\n  background-color: gray;\n  margin: 0 0.5px;\n}\n", ""]);
+exports.push([module.i, ".dyna-slider-stats-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  height: 100%;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end;\n}\n.dyna-slider-stats-bar__item {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1;\n          flex: 1 1;\n  background-color: gray;\n  margin: 0 0.5px;\n  -webkit-transition: min-height 200ms ease-in-out;\n  transition: min-height 200ms ease-in-out;\n}\n", ""]);
 
 // exports
 
