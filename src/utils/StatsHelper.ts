@@ -1,4 +1,5 @@
 import {EMin} from "../interfaces";
+import {compareArrays} from "./compareArrays";
 
 export class StatsHelper {
   private inputData: number[] = null;
@@ -18,11 +19,7 @@ export class StatsHelper {
   }
 
   private isInputSame(inputData: number[]): boolean {
-    // not the best comparison to find this, lodash is a nice solution, but this is fast
-    if (!inputData || !this.inputData) return inputData === this.inputData;
-    return (
-      inputData.length === this.inputData.length
-    );
+    return compareArrays(this.inputData, inputData);
   }
 
   public get hasValues(): boolean {

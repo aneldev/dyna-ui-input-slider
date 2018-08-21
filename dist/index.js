@@ -693,6 +693,7 @@ exports.StatsBar = StatsBar;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var interfaces_1 = __webpack_require__(2);
+var compareArrays_1 = __webpack_require__(27);
 var StatsHelper = /** @class */ (function () {
     function StatsHelper() {
         var _this = this;
@@ -742,10 +743,7 @@ var StatsHelper = /** @class */ (function () {
         }
     };
     StatsHelper.prototype.isInputSame = function (inputData) {
-        // not the best comparison to find this, lodash is a nice solution, but this is fast
-        if (!inputData || !this.inputData)
-            return inputData === this.inputData;
-        return (inputData.length === this.inputData.length);
+        return compareArrays_1.compareArrays(this.inputData, inputData);
     };
     Object.defineProperty(StatsHelper.prototype, "hasValues", {
         get: function () {
@@ -903,9 +901,9 @@ var DynaInputRangeSlider_1 = __webpack_require__(10);
 exports.DynaInputRangeSlider = DynaInputRangeSlider_1.DynaInputRangeSlider;
 var DynaInput0024Slider_1 = __webpack_require__(21);
 exports.DynaInput0024Slider = DynaInput0024Slider_1.DynaInput0024Slider;
-var DynaInputDurationSlider_1 = __webpack_require__(29);
+var DynaInputDurationSlider_1 = __webpack_require__(30);
 exports.DynaInputDurationSlider = DynaInputDurationSlider_1.DynaInputDurationSlider;
-var DynaInputPriceSlider_1 = __webpack_require__(32);
+var DynaInputPriceSlider_1 = __webpack_require__(33);
 exports.DynaInputPriceSlider = DynaInputPriceSlider_1.DynaInputPriceSlider;
 
 
@@ -1164,7 +1162,7 @@ var DynaInputRangeSlider_1 = __webpack_require__(10);
 var StatsBar_1 = __webpack_require__(7);
 var Daylight_1 = __webpack_require__(24);
 var StatsHelper_1 = __webpack_require__(8);
-__webpack_require__(27);
+__webpack_require__(28);
 var DynaInput0024Slider = /** @class */ (function (_super) {
     __extends(DynaInput0024Slider, _super);
     function DynaInput0024Slider(props) {
@@ -1332,10 +1330,37 @@ exports.push([module.i, ".dyna-slider-daylight {\n  height: 100%;\n  background:
 /* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+// based on: https://stackoverflow.com/questions/7837456/how-to-compare-arrays-in-javascript
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.compareArrays = function (arrayA, arrayB) {
+    if (!arrayA || !arrayB)
+        return arrayA === arrayB;
+    if (arrayA.length != arrayB.length)
+        return false;
+    for (var iArrayA = 0; iArrayA < arrayA.length; iArrayA++) {
+        if (arrayA[iArrayA] instanceof Array && arrayB[iArrayA] instanceof Array) {
+            if (!exports.compareArrays(arrayA[iArrayA], arrayB[iArrayA]))
+                return false;
+        }
+        else if (arrayA[iArrayA] != arrayB[iArrayA]) {
+            // note: if here we have objects, the object might be equal!
+            return false;
+        }
+    }
+    return true;
+};
+
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(28);
+var content = __webpack_require__(29);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -1360,7 +1385,7 @@ if(false) {
 }
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -1374,7 +1399,7 @@ exports.push([module.i, ".dyna-input-0024-slider__label {\n  display: -webkit-bo
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1397,7 +1422,7 @@ var interfaces_1 = __webpack_require__(2);
 var DynaInputSlider_1 = __webpack_require__(6);
 var StatsBar_1 = __webpack_require__(7);
 var StatsHelper_1 = __webpack_require__(8);
-__webpack_require__(30);
+__webpack_require__(31);
 var DynaInputDurationSlider = /** @class */ (function (_super) {
     __extends(DynaInputDurationSlider, _super);
     function DynaInputDurationSlider(props) {
@@ -1462,13 +1487,13 @@ exports.DynaInputDurationSlider = DynaInputDurationSlider;
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(31);
+var content = __webpack_require__(32);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -1493,7 +1518,7 @@ if(false) {
 }
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -1507,7 +1532,7 @@ exports.push([module.i, ".dyna-input-duration-slider__label {\n  display: -webki
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1531,7 +1556,7 @@ var interfaces_1 = __webpack_require__(2);
 var DynaInputSlider_1 = __webpack_require__(6);
 var StatsBar_1 = __webpack_require__(7);
 var StatsHelper_1 = __webpack_require__(8);
-__webpack_require__(33);
+__webpack_require__(34);
 var DynaInputPriceSlider = /** @class */ (function (_super) {
     __extends(DynaInputPriceSlider, _super);
     function DynaInputPriceSlider(props) {
@@ -1611,13 +1636,13 @@ exports.DynaInputPriceSlider = DynaInputPriceSlider;
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(34);
+var content = __webpack_require__(35);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -1642,7 +1667,7 @@ if(false) {
 }
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
