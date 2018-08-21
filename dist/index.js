@@ -1345,7 +1345,7 @@ exports.compareArrays = function (arrayA, arrayB) {
                 return false;
         }
         else if (arrayA[iArrayA] != arrayB[iArrayA]) {
-            // note: if here we have objects, the object might be equal!
+            // note: if here we have objects, the object might be equal and this will return false!
             return false;
         }
     }
