@@ -1564,7 +1564,6 @@ var DynaInputPriceSlider = /** @class */ (function (_super) {
         _this.className = dyna_class_name_1.dynaClassName("dyna-input-price-slider");
         _this.statsHelper = new StatsHelper_1.StatsHelper();
         _this.statsHelper.setData(props.prices);
-        console.debug('debug6677');
         return _this;
     }
     DynaInputPriceSlider.prototype.componentWillReceiveProps = function (nextProps) {
