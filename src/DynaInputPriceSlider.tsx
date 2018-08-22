@@ -125,7 +125,7 @@ export class DynaInputPriceSlider extends React.Component<IDynaInputPriceSliderP
           max={this.maxPrice}
           topBackground={this.renderTopBackground()}
           bottomBackground={this.renderBottomBackground()}
-          value={round(value, -1)}
+          value={round(value, 0)}
           onChange={this.handleChange.bind(this)}
         />
       </div>

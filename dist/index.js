@@ -1564,6 +1564,7 @@ var DynaInputPriceSlider = /** @class */ (function (_super) {
         _this.className = dyna_class_name_1.dynaClassName("dyna-input-price-slider");
         _this.statsHelper = new StatsHelper_1.StatsHelper();
         _this.statsHelper.setData(props.prices);
+        console.debug('debug6677');
         return _this;
     }
     DynaInputPriceSlider.prototype.componentWillReceiveProps = function (nextProps) {
@@ -1571,7 +1572,7 @@ var DynaInputPriceSlider = /** @class */ (function (_super) {
     };
     Object.defineProperty(DynaInputPriceSlider.prototype, "minPrice", {
         get: function () {
-            var _a = this.props, minType = _a.minType, prices = _a.prices;
+            var minType = this.props.minType;
             return Math.round(this.statsHelper.getMinValue(minType));
         },
         enumerable: true,
@@ -1579,7 +1580,6 @@ var DynaInputPriceSlider = /** @class */ (function (_super) {
     });
     Object.defineProperty(DynaInputPriceSlider.prototype, "maxPrice", {
         get: function () {
-            var _a = this.props, step = _a.step, prices = _a.prices;
             return Math.ceil(this.statsHelper.getMaxValue());
         },
         enumerable: true,
@@ -1614,7 +1614,7 @@ var DynaInputPriceSlider = /** @class */ (function (_super) {
         var className = "--size-" + size;
         return (React.createElement("div", { className: this.className.root(this.props, className) },
             this.renderLabel(),
-            React.createElement(DynaInputSlider_1.DynaInputSlider, { name: name, color: color, size: size, step: step, min: this.minPrice, max: this.maxPrice, topBackground: this.renderTopBackground(), bottomBackground: this.renderBottomBackground(), value: dyna_loops_1.round(value, -1), onChange: this.handleChange.bind(this) })));
+            React.createElement(DynaInputSlider_1.DynaInputSlider, { name: name, color: color, size: size, step: step, min: this.minPrice, max: this.maxPrice, topBackground: this.renderTopBackground(), bottomBackground: this.renderBottomBackground(), value: dyna_loops_1.round(value, 0), onChange: this.handleChange.bind(this) })));
     };
     DynaInputPriceSlider.defaultProps = {
         className: undefined,
