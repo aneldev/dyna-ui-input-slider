@@ -55,12 +55,11 @@ export class DynaInputPriceSlider extends React.Component<IDynaInputPriceSliderP
   }
 
   private get minPrice(): number {
-    const {minType, prices} = this.props;
+    const {minType} = this.props;
     return Math.round(this.statsHelper.getMinValue(minType))
   }
 
   private get maxPrice(): number {
-    const {step, prices} = this.props;
     return Math.ceil(this.statsHelper.getMaxValue());
   }
 

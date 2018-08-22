@@ -4,18 +4,22 @@ import {IShowcase, IShowcaseViewProps} from "dyna-showcase";
 import {Logo} from "../logo";
 
 import {demoHours, demoPrices} from "./data";
-
 // Components
 import {
-  EColor, ESize, EMin,
-  IHourRange,
+  DynaInput0024Slider,
+  DynaInputDurationSlider,
+  DynaInputPriceSlider,
+  DynaInputRangeSlider,
   DynaInputSlider,
-  DynaInputRangeSlider, IDynaInputRangeSliderProps,
-  DynaInput0024Slider, IDynaInput0024SliderProps,
-  DynaInputDurationSlider, IDynaInputDurationSliderProps,
-  DynaInputPriceSlider, IDynaInputPriceSliderProps,
+  EColor,
+  EMin,
+  ESize,
+  IDynaInput0024SliderProps,
+  IDynaInputDurationSliderProps,
+  IDynaInputPriceSliderProps,
+  IDynaInputRangeSliderProps,
+  IHourRange,
 } from "../../src";
-
 // Internal Helper Components
 import {StatsBar} from "../../src/components/StatsBar";
 
@@ -311,7 +315,10 @@ export default {
       title: 'Dyna input Price slider',
       center: true,
       component: (() => {
-        interface IMyAppProps {
+        interface IMyAppProps{
+          size?: ESize;
+          prices?: number[];           // for stats and to get the min/max
+          minType?: EMin;
         }
 
         interface IMyAppState {
@@ -323,29 +330,33 @@ export default {
             super(props);
 
             this.state = {
-              value: 234.11,
+              value: 314.4,
             }
           }
 
           public render(): JSX.Element {
+            const {
+              size,
+              prices,
+              minType,
+            }= this.props;
             return (
               <DynaInputPriceSlider
                 color={EColor.WHITE_ORANGE}
-                size={ESize.PX32}
-                prices={[0, 533]}
+                size={size || ESize.PX32}
+                prices={prices || [0, 533]}
                 value={this.state.value}
-                minType={EMin.ZERO}
+                minType={minType || EMin.ZERO}
                 onChange={(name: string, value: number) => {
                   console.log('onChange value', name, value);
                   this.setState({value});
                 }}
-                {...this.props}
               />
             );
           }
         }
 
-        return <MyApp/>;
+        return <MyApp />;
       })(),
       wrapperStyle: {
         width: "50%",
@@ -356,7 +367,9 @@ export default {
             props.push({
               slug: `size-${size}`,
               title: `${size.toLowerCase()}`,
-              props: {size},
+              props: {
+                size,
+              } as IDynaInputPriceSliderProps,
           });
           props.push({
             slug: `size-${size}-ws`,
@@ -366,6 +379,15 @@ export default {
               prices: demoPrices.concat(demoPrices, demoPrices, demoPrices, demoPrices, demoPrices),
             } as IDynaInputPriceSliderProps,
           });
+        });
+        props.push({
+          slug: `custom-prices`,
+          title: `custom prices`,
+          props: {
+            minType: EMin.MIN,
+            size: ESize.PX32,
+            prices: JSON.parse("[282.15,213.2745,314.4,245.61]"),
+          } as IDynaInputPriceSliderProps,
         });
         return props;
       })(),
